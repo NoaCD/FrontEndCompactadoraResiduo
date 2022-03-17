@@ -40,6 +40,7 @@ app.UseDirectoryBrowser(new DirectoryBrowserOptions
     RequestPath = requestPath,
 });
 
+
 /// <summary>
 /// Fin  de carpetas dentro wwroot
 /// </summary>

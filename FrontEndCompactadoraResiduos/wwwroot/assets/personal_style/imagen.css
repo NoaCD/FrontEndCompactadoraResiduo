@@ -1,0 +1,32 @@
+﻿
+.titulo1 {
+    font-size: 50PX;
+    float: right;
+    color: white;
+    padding-top: 7rem;
+    font-weight: bold;
+}
+.titulo2 {
+    font-size: 30PX;
+    color: white;
+    font-weight: bold;
+}
+.textopanel {
+    font-size: 100px;
+    font-family: Arial;
+    text-align: center;
+    color: red;
+    position: initial;
+    top: 4.1em;
+    left: 5.85em;
+}
+
+#footer {
+    color: white;
+    background-color: #1A1A1A;
+    width: 100%;
+    height: 81px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}

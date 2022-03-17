@@ -1,24 +1,32 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
+<div class="card bg-dark text-white">
+    <img height="200px" class="card-img" src="~/assets/img/portada.jpg" alt="portada_giotex.png">
+    <div class="card-img-overlay">
+        <h5 class="card-title titulo1">GIOTEX</h5>
+        <h5 class="card-title titulo2">20 ANIVERSARIO</h5>
+    </div>
+</div>
 <div class="row">
     <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card card-stats">
             <div class="card-header card-header-warning card-header-icon">
                 <div class="card-icon">
-                    <i class="material-icons">content_copy</i>
+                    <i class="material-icons">group</i>
                 </div>
-                <p class="card-category">Used Space</p>
+                <p class="card-category">Usuarios </p>
+                <hr />
                 <h3 class="card-title">
-                    49/50
-                    <small>GB</small>
+                    registrados: 47
+                    <small> </small>
+                    <button class="btn btn-warning btn-sm">Ir</button>
                 </h3>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                    <i class="material-icons text-danger">warning</i>
-                    <a href="javascript:;">Get More Space...</a>
+                    <i class="material-icons">group</i> Agrega, edita a tus colaboradores con este modulo
                 </div>
             </div>
         </div>
@@ -27,14 +35,16 @@
         <div class="card card-stats">
             <div class="card-header card-header-success card-header-icon">
                 <div class="card-icon">
-                    <i class="material-icons">store</i>
+                    <i class="material-icons">arrow_upward</i>
                 </div>
-                <p class="card-category">Revenue</p>
-                <h3 class="card-title">$34,245</h3>
+                <p class="card-category">Residuos</p>
+                <hr />
+                <h3 class="card-title">342.45 kg</h3>
+                <button class="btn btn-success btn-sm">Ir</button>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                    <i class="material-icons">date_range</i> Last 24 Hours
+                    <i class="material-icons">arrow_upward</i> Crear, edita o elimina los residuos que necesites
                 </div>
             </div>
         </div>
@@ -43,14 +53,16 @@
         <div class="card card-stats">
             <div class="card-header card-header-danger card-header-icon">
                 <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
+                    <i class="material-icons">all_inclusive</i>
                 </div>
-                <p class="card-category">Fixed Issues</p>
-                <h3 class="card-title">75</h3>
+                <p class="card-category">Cargas</p>
+                <hr />
+                <h3 class="card-title">+1200</h3>
+                <button class="btn btn-danger btn-sm">Ir</button>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                    <i class="material-icons">local_offer</i> Tracked from Github
+                    <i class="material-icons">all_inclusive</i> Observa todas las cargas que se realizan en tiempo real
                 </div>
             </div>
         </div>
@@ -59,14 +71,16 @@
         <div class="card card-stats">
             <div class="card-header card-header-info card-header-icon">
                 <div class="card-icon">
-                    <i class="fa fa-twitter"></i>
+                    <i class="material-icons">trending_up</i>
                 </div>
-                <p class="card-category">Followers</p>
+                <p class="card-category">Reportes</p>
+                <hr />
                 <h3 class="card-title">+245</h3>
+                <button class="btn btn-info btn-sm">Ir</button>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                    <i class="material-icons">update</i> Just Updated
+                    <i class="material-icons">trending_up</i> Imprime y observa el trabajo de tus colaboradores
                 </div>
             </div>
         </div>
