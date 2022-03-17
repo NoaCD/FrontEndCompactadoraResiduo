@@ -1,8 +1,78 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Usuarios";
 }
 
 <div class="container-fluid">
-    hola
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-dark">Agregue nuevo usuarios </h5>
+                <i class="material-icons float-right">create</i>
+                <br />
+                <hr />
+                <p class="card-text">Con este modulo podras agregar nuevos usuarios al sistema, asignarles un rol y mucho mas</p>
+                <button class="btn btn-block btn-outline-primary">Agregar</button>
+
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-dark">Modifique a los usuarios</h5>
+                <i class="material-icons float-right">spellcheck</i>
+                <br />
+                <hr />
+                <p class="card-text">Con este modulo podras modificar nuevos usuarios al sistema, asignarles un rol y mucho mas></p>
+                <button class="btn btn-block btn-outline-info">Modificar</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-dark">Elimine a los usuarios</h5>
+                <i class="material-icons float-right">delete_forever</i>
+                <br />
+                <hr />
+                <p class="card-text">Con este modulo podras eliminar nuevos usuarios al sistema, asignarles un rol y mucho mas</p>
+                <button class="btn btn-block btn-outline-danger">Eliminar</button>
+            </div>
+        </div>
+    </div>
+    <!--Fin de los CARDS-->
+    <div class="container"> <br /> </div> @*espacio*@
+    <div class="card">
+        <div class="col-md-12"> 
+            <br />
+            <h1 class="text-center display-4">Todos los Usuarios</h1>
+            <br />
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
