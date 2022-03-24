@@ -11,7 +11,11 @@
                 <br />
                 <hr />
                 <p class="card-text">Con este modulo podras agregar nuevos usuarios al sistema, asignarles un rol y mucho mas</p>
-                <button class="btn btn-block btn-outline-primary"> <a href="@Url.Action("Usuarios","disparador")"> Agregar </a> </button>
+                <div class="card-footer">
+                    <a class="btn btn-block btn-outline-primary text-center" href="@Url.Action("CatalogoUsuarios","Usuarios")">
+                        Agregar
+                    </a>
+                </div>
 
             </div>
         </div>
@@ -22,7 +26,11 @@
                 <br />
                 <hr />
                 <p class="card-text">Con este modulo podras modificar a los usuarios del sistema, asignarles un rol y mucho mas></p>
-                <button class="btn btn-block btn-outline-info">Modificar</button>
+                <div class="card-footer">
+                    <a class="btn btn-block btn-outline-info  text-center" href="@Url.Action("CatalogoUsuarios","Usuarios")">
+                        Editar
+                    </a>
+                </div>
             </div>
         </div>
         <div class="card">
@@ -32,59 +40,66 @@
                 <br />
                 <hr />
                 <p class="card-text">Con este modulo podras eliminar nuevos usuarios al sistema, asignarles un rol y mucho mas</p>
-                <button class="btn btn-block btn-outline-danger">Eliminar</button>
+                <div class="card-footer">
+                    <a class="btn btn-block btn-outline-danger text-center" href="@Url.Action("CatalogoUsuarios","Usuarios")">
+                        Eliminar
+                    </a>
+                </div>
+
             </div>
         </div>
-           <div class="card">
+        <div class="card">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">Vea a los usuarios</h5>
                 <i class="material-icons float-right">remove_red_eye</i>
                 <br />
                 <hr />
                 <p class="card-text">Con este modulo podras tener un panorama de los usuarios que estan registrado en el sistema</p>
-                <a class="btn btn-block btn-outline-warning" href="@Url.Action("CatalogoUsuarios","Usuarios")">
-                   Ver
-                </a>
+                <div class="card-footer">
+                    <a class="btn btn-block btn-outline-warning text-center" href="@Url.Action("CatalogoUsuarios","Usuarios")">
+                        Ver
+                    </a>
+                </div>
             </div>
         </div>
     </div>
     <!--Fin de los CARDS-->
     <div class="container"> <br /> </div> @*espacio*@
-@*    <div class="card">
-        <div class="col-md-12"> 
-            <br />
-            <h1 class="text-center display-4">Todos los Usuarios</h1>
-            <br />
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
+    @*    <div class="card">
+        <div class="col-md-12">
+        <br />
+        <h1 class="text-center display-4">Todos los Usuarios</h1>
+        <br />
+        <table class="table">
+        <thead class="thead-dark">
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
 
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
+        </tr>
+        <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
 
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
+        </tr>
+        <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
 
-                    </tr>
-                </tbody>
-            </table>
+        </tr>
+        </tbody>
+        </table>
         </div>
-    </div>*@
+        </div>*@
 </div>

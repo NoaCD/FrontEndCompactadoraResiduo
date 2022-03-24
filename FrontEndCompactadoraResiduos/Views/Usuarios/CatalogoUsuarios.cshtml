@@ -3,13 +3,13 @@
     ViewData["Title"] = "Usuarios Registrados";
 }
 @section Styles{
-<link rel="stylesheet" type="text/css" href="~/assets/datatables/datatables.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/datatables/DataTables-1.11.4/css/jquery.dataTables.css" />
+
 }
 
 @section Scripts{
+<script type="text/javascript" src="~/assets/datatables/DataTables-1.11.4/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="~/scripts/UsuariosController/CatalogoUsuarios.js"></script>
-<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
-<script type="text/javascript" src="~/assets/datatables/datatables.js"></script>
 }
 
 <div class="container"> <br /> </div> @*espacio*@
@@ -46,7 +46,9 @@
                         @foreach (var usuario in Model.Usuarios)
                         {
                             <tr>
-                                <td> @usuario.iId </td>
+                                <td>
+                                     @usuario.iId
+                                </td>
                                 <td> @usuario.iNumeroEmpleado</td>
                                 <td> @usuario.cNombre </td>
                                 <td> @usuario.cApellidoPaterno </td>
