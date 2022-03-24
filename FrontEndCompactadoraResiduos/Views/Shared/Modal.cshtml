@@ -1,0 +1,29 @@
+﻿<div class="modal-dialog">
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <!--Aqui es el cabecero del modal, uds tienen que ponerlo en su vista que van a meter al modal-->
+        <div class="modal-header">
+            @RenderSection("header", required: false)
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+
+
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            @RenderBody()
+
+            <!--Aqui va los formularios que van a ingresar mediante una consulta ajax de la vista que requieren el formulario-->
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            @RenderSection("footer", required: false)
+
+        </div>
+    </div>
+</div>

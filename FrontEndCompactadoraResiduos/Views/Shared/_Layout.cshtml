@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FrontEndCompactadoraResiduos.styles.css" asp-append-version="true" />
     <link href="~/assets/personal_style/imagen.css" rel="stylesheet" />
-
+    @await RenderSectionAsync("Styles", required: false)
 
     @*LINK DE LA PLANTILLA*@
 
@@ -52,7 +52,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="javascript:;" id="navbarDropdownUsuarios" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="material-icons">person</i>
-                             <p>Usuarios</p>    
+                            <p>Usuarios</p>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownUsuarios">
                             <a class="dropdown-item" href="@Url.Action("Index","Usuarios")">Principal</a>
@@ -91,7 +91,11 @@
             <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
-                        <a class="navbar-brand" href="javascript:;"> <h1 class="display-4 py-4">@ViewData["Title"]</h1> </a>
+                        <a class="navbar-brand" href="javascript:;">
+                            <h1 class="display-4 py-4">
+                                @ViewData["Title"]   
+                            </h1>
+                        </a>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="sr-only">Toggle navigation</span>

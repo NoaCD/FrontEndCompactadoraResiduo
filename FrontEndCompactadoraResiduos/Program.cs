@@ -41,6 +41,7 @@ app.UseDirectoryBrowser(new DirectoryBrowserOptions
 });
 
 
+
 /// <summary>
 /// Fin  de carpetas dentro wwroot
 /// </summary>
@@ -48,14 +49,14 @@ app.UseDirectoryBrowser(new DirectoryBrowserOptions
 
 
 
-//Dar de alta una carpeta fuera de lib
+//Damos de alta la carpeta fuera del wwwroot
 
-//app.UseStaticFiles(new StaticFileOptions
-//{
-//    FileProvider = new PhysicalFileProvider(
-//           Path.Combine(builder.Environment.ContentRootPath, "img")),
-//    RequestPath = "/img"
-//});
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(builder.Environment.ContentRootPath, "Scripts")),
+    RequestPath = "/scripts"
+});
 
 app.UseRouting();
 

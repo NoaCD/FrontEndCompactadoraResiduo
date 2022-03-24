@@ -6,28 +6,28 @@
     <div class="card-deck">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title text-dark">Agregue nuevo usuarios </h5>
+                <h5 class="card-title font-weight-bold">Agregue nuevo usuarios </h5>
                 <i class="material-icons float-right">create</i>
                 <br />
                 <hr />
                 <p class="card-text">Con este modulo podras agregar nuevos usuarios al sistema, asignarles un rol y mucho mas</p>
-                <button class="btn btn-block btn-outline-primary">Agregar</button>
+                <button class="btn btn-block btn-outline-primary"> <a href="@Url.Action("Usuarios","disparador")"> Agregar </a> </button>
 
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title text-dark">Modifique a los usuarios</h5>
+                <h5 class="card-title font-weight-bold font-weight-bold">Modifique a los usuarios</h5>
                 <i class="material-icons float-right">spellcheck</i>
                 <br />
                 <hr />
-                <p class="card-text">Con este modulo podras modificar nuevos usuarios al sistema, asignarles un rol y mucho mas></p>
+                <p class="card-text">Con este modulo podras modificar a los usuarios del sistema, asignarles un rol y mucho mas></p>
                 <button class="btn btn-block btn-outline-info">Modificar</button>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title text-dark">Elimine a los usuarios</h5>
+                <h5 class="card-title font-weight-bold">Elimine a los usuarios</h5>
                 <i class="material-icons float-right">delete_forever</i>
                 <br />
                 <hr />
@@ -35,10 +35,22 @@
                 <button class="btn btn-block btn-outline-danger">Eliminar</button>
             </div>
         </div>
+           <div class="card">
+            <div class="card-body">
+                <h5 class="card-title font-weight-bold">Vea a los usuarios</h5>
+                <i class="material-icons float-right">remove_red_eye</i>
+                <br />
+                <hr />
+                <p class="card-text">Con este modulo podras tener un panorama de los usuarios que estan registrado en el sistema</p>
+                <a class="btn btn-block btn-outline-warning" href="@Url.Action("CatalogoUsuarios","Usuarios")">
+                   Ver
+                </a>
+            </div>
+        </div>
     </div>
     <!--Fin de los CARDS-->
     <div class="container"> <br /> </div> @*espacio*@
-    <div class="card">
+@*    <div class="card">
         <div class="col-md-12"> 
             <br />
             <h1 class="text-center display-4">Todos los Usuarios</h1>
@@ -74,5 +86,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>*@
 </div>
