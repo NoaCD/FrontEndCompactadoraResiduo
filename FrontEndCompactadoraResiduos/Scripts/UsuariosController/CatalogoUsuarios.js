@@ -1,8 +1,16 @@
-﻿const { ajax } = require("jquery");
+﻿/***************************************
+ * 
+ * 
+ * 
+ * 
+ * ***************************************/
+
 
 $(document).ready(function () {
     var table = $('#tableUsers').DataTable(
         {
+            //Configuracion de datatables
+
             language:
             {
                 "decimal": "",
@@ -28,6 +36,7 @@ $(document).ready(function () {
         }
     );
 
+
     $('#tableUsers tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
@@ -41,10 +50,33 @@ $(document).ready(function () {
     /* Boton dispara un evento para hacer una peticion
      *
      */
-    $('#btn-see').click(function () {
-        var arrayUsuario = table.row('.selected').data();
+    $('#btn-edit-user').click(function () {
 
-        obtenerUsuario(_oUsuario); //funcion llamar a un usuario
+        var arrayUsuario = table.row('.selected').data();
+        // Verificamos quue este seleccionado una fila
+        if (arrayUsuario.length > 0) {
+
+            var Data = {};
+            var id = arrayUsuario[0];
+            var datos = {
+                iId : id
+            }
+            Data["datos"] = JSON.stringify(datos);
+            console.log(Data);
+
+
+            var ruta =  "/Usuarios/VerUsuario";
+         
+            showModal("POST", ruta, Data, null);//mandamos llamar el modal
+
+        } else {
+            Swal.fire(
+                'Good job!',
+                'You clicked the button!',
+                'success'
+            );
+        }
+      
     });
 
 
@@ -55,69 +87,6 @@ $(document).ready(function () {
         });
     }).draw();
 
-
 });
 
-/*COnvertimos el array a un objeto de*/
-var obtenerUsuario = function (_oUsuario) {
 
-  
-
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function LlamarMetodo(cTipo, cUrl, Data, Funcion) {
-    $.ajax({
-        type: cTipo,
-        url: cUrl,
-        async: false,
-        data: Data,
-        dataType: "JSON",
-        success: function (response) {
-            if (response != true) {
-                const Toast = Swal.mixin({
-                    Toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    icon: 'error'
-                })
-                Toast.fire({
-                    type: response.cEstatus,
-                    title: response.cMensaje
-                })
-            }
-            else {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-
-                })
-                Toast.fire({
-                    icon: 'success',
-                    type: 'success',
-                    title: 'Bienvenido a GioContX'
-                })
-                window.location.replace(ruta + "Inicio/Inicio");
-            }
-            if (Funcion)
-                window[Funcion]();
-        }
-    });
-}

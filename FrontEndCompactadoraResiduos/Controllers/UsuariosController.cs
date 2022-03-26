@@ -1,6 +1,7 @@
 ﻿using FrontEndCompactadoraResiduos.Bussiness.Usuarios;
 using FrontEndCompactadoraResiduos.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
@@ -25,6 +26,25 @@ namespace FrontEndCompactadoraResiduos.Controllers
             return View(modelo);
         }
 
+
+
+        /// <summary>
+        /// Este metodo devuelve un modal
+        /// </summary>
+        /// <returns></returns>
+        ///
+        public IActionResult VerUsuario()
+        {
+
+            string id = Request.Form["datos"];
+            var _oUsuario = JsonConvert.DeserializeObject<UsuarioDTO>(id);
+
+            var usuario =  usuarioBussiness.obtenerElemento(_oUsuario.iId);
+            var modelo = new ItemUsuarioViewModel() { itemUsuario = usuario.Result };
+
+            return View(modelo);
+
+        }
 
         public JsonResult disparador()
         {
