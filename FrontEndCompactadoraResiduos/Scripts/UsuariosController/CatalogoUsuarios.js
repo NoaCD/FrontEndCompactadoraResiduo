@@ -1,6 +1,6 @@
 ﻿/***************************************
  * 
- * 
+ * Javascript que controla la tabla de los usuarios
  * 
  * 
  * ***************************************/
@@ -10,7 +10,6 @@ $(document).ready(function () {
     var table = $('#tableUsers').DataTable(
         {
             //Configuracion de datatables
-
             language:
             {
                 "decimal": "",
@@ -47,38 +46,142 @@ $(document).ready(function () {
         }
     });
 
-    /* Boton dispara un evento para hacer una peticion
-     *
-     */
-    $('#btn-edit-user').click(function () {
 
-        var arrayUsuario = table.row('.selected').data();
-        // Verificamos quue este seleccionado una fila
-        if (arrayUsuario.length > 0) {
+    var filaSeleccionada = function () {
+        var arrayUsuario = table.row('.selected').data(); //Solo va a existir el array si se selecciona
+        if (arrayUsuario != null) {
+            return true;
+        } else {
+            return false
+        }
+    }
 
+    /*********************************
+     * Declaramos una tostada flotante 
+     * para que la podamos usar luego
+     *********************************/
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+
+    /**************************************************************
+     * Controla el boton agregar
+     * abre un modal que lleva a un form para enviar datos
+     * *************************************************************/
+    $("#btn-add-user").click(function () {
+        var ruta = "/Usuarios/CrearUsuario";
+        showModal("POST", ruta, null, null);//mandamos llamar el modal
+
+
+    });
+
+
+    /*******************************************************************
+     *  Metodo que controla el 
+     *  boton ver 
+     * ******************************************************************/
+
+    $("#btn-see-user").click(function () {
+
+        if (filaSeleccionada() == true) {
+            var arrayUsuario = table.row('.selected').data(); //Solo va a existir el array si se selecciona
             var Data = {};
             var id = arrayUsuario[0];
             var datos = {
-                iId : id
+                iId: id
             }
             Data["datos"] = JSON.stringify(datos);
             console.log(Data);
 
+            var ruta = "/Usuarios/VerUsuario";
+            showModal("POST", ruta, Data, null);//mandamos llamar el modal
 
-            var ruta =  "/Usuarios/VerUsuario";
-         
+
+        } else {
+            //Tostada de error
+            Toast.fire({
+                icon: 'error',
+                title: '¡Seleccione un elemento para observarlo!'
+            });
+        }
+
+    });
+
+    /***********************************************************************************
+     *
+     * funcion para el boton de editar 
+     * 
+     * *********************************************************************************
+     * */
+    $('#btn-edit-user').click(function () {
+        if (filaSeleccionada() == true) {
+            var arrayUsuario = table.row('.selected').data(); //Solo va a existir el array si se selecciona
+            var Data = {};
+            var id = arrayUsuario[0];
+            var datos = {
+                iId: id
+            }
+            Data["datos"] = JSON.stringify(datos);
+            console.log(Data);
+
+            var ruta = "/Usuarios/EditarUsuario";
             showModal("POST", ruta, Data, null);//mandamos llamar el modal
 
         } else {
-            Swal.fire(
-                'Good job!',
-                'You clicked the button!',
-                'success'
-            );
+
+            Toast.fire({
+                icon: 'error',
+                title: '¡Seleccione un elemento para editarlo!'
+            });
         }
-      
+
     });
 
+    /***********************
+     * Metodo que controla el 
+     * boton eliminar
+     ************************/
+
+    $('#btn-delete-user').click(function () {
+        if (filaSeleccionada() == true) {
+            Swal.fire({
+                title: '¿Estas seguro que deseas eliminar a este usuario?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: "Cancelar",
+                confirmButtonText: 'Si, si estoy seguro!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    //Funcion eliminar en la API
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        } else {
+            Toast.fire({
+                icon: 'error',
+                title: '¡Seleccione un elemento para eliminarlo!'
+            });
+        }
+
+
+
+    })
 
     /*Agregamos enumeraciones a la primera columna */
     table.on('order.dt search.dt', function () {

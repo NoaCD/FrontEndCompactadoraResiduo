@@ -1,40 +1,75 @@
 ﻿@model ItemUsuarioViewModel;
-@{
-    Layout = "~/Views/Shared/_Modal.cshtml";
-}
 
+@{
+    Layout = "~/Views/Shared/Modal.cshtml";
+}
 
 @section header{
-<h1 class="display-4">Editar usuario</h1>
+<h1 class="display-4 text-center">Datos</h1>
 }
+@if (Model.itemUsuario is not null)
+{
 
-<div class="form-group">
-    <label for="nombre">Nombre</label>
-    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" 
-    placeholder="Escribe un nuevo nombre" value="@Model.itemUsuario.cNombre">
-    
-</div>
-<div class="form-group">
-    <label for="apellido_paterno"> Apellido paterno  </label>
-    <input type="text" class="form-control" id="apellido_materno" 
-    placeholder="Cambiar el apellido paterno" value="@Model.itemUsuario.cApellidoPaterno" >
-</div>
-<div class="form-group">
-    <label for="apellido_materno"> Apellido Materno  </label>
-    <input type="text" class="form-control" id="apellido_materno" 
-    placeholder="Cambiar el apellido materno" value="@Model.itemUsuario.cApellidoMaterno">
-</div>
-<div class="form-group">
-    <label for="apellido_materno"> Fecha de creacion  </label>
-    <input type="text" class="form-control" id="apellido_materno" 
-    placeholder="Cambiar el apellido materno" value="@Model.itemUsuario.dtFechaCreacion">
-</div>
+    <div class="col-sm-12">
+        <div class="card shadow p-3 bg-primary" style="20rem;">
+            <div class="card-header text-center"> <h4> <b>@Model.itemUsuario.nombre @Model.itemUsuario.apellidoPaterno</b></h4> <hr style="background-color:white" /> </div>
+            <div class="container">
+                <h5 class="card-title text-center"><b> Nombre Completo: </b> </h5>
+                <p class="card-text text-center">
+                    @Model.itemUsuario.nombre @Model.itemUsuario.apellidoPaterno @Model.itemUsuario.apellidoMaterno
+                </p>
+                <h5 class="card-title text-center"><b> Numero de empleado: </b> </h5>
+                <p class="card-text text-center">
+                    @Model.itemUsuario.numeroEmpleado
+                </p>
+                <h5 class="card-title text-center"><b> Tipo de usuario: </b> </h5>
+                <p class="card-text text-center">
+                    @Model.itemUsuario.tipoUsuarioDTO.cNombre
+                </p>
+
+                <h5 class="card-title text-center"><b> Estatus : </b> </h5>
+                <p class="card-text text-center">
+                    @Model.itemUsuario.catEstatusDTO.cNombre
+                </p>
+
+                <h5 class="card-title text-center"><b> Fecha de alta: </b></h5>
+                <p class="card-text text-center">
+                    @Model.itemUsuario.fechaCreacion
+                </p>
+                <h5 class="card-title text-center"><b> Fecha de modificacion: </b></h5>
+
+                @if (Model.itemUsuario.dtFechaModificacion is null)
+                {
+                    <p class="card-text text-center">
+                        No se ha modificado
+                    </p>
+
+                }
+                else
+                {
+                    <p class="card-text text-center">
+                        @Model.itemUsuario.dtFechaModificacion
+                    </p>
+                }
 
 
 
+            </div>
+        </div>
+    </div>
 
 
+
+}
+else
+{
+    <div class="alert alert-warning text-center" role="alert">
+        Los datos no se cargaron
+    </div>
+}
 
 @section footer{
-<button class="btn btn-primary" type="button" id="btnGuardar">Guardar</button>
+<button class="btn btn-block btn-primary" type="button" data-dismiss="modal">Ok!</button>
 }
+
+

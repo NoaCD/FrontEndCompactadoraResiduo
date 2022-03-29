@@ -23,6 +23,9 @@
     <link href="~/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/assets/demo/demo.css" rel="stylesheet" />
+    @*SweetAlert2*@
+    <link  href="~/assets/sweetalert2/sweetalert2.min.css" rel="stylesheet"/>
+    @*<link  href="~/assets/bootstrap/bootstrap.css" rel="stylesheet"/>*@
     @*FIN DE LINK PLANTILLA*@
     @await RenderSectionAsync("Styles", required: false)
 
@@ -211,7 +214,7 @@
         <!-- Plugin for the momentJs  -->
         <script src="~/assets/js/plugins/moment.min.js"></script>
         <!--  Plugin for Sweet Alert -->
-        <script src="~/assets/js/plugins/sweetalert2.js"></script>
+        <script src="~/assets/sweetalert2/sweetalert2.all.min.js" ></script>
         <!-- Forms Validations Plugin -->
         <script src="~/assets/js/plugins/jquery.validate.min.js"></script>
         <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
@@ -425,6 +428,7 @@
             });
         </script>
         <script>
+
             var ruta = window.location.protocol + window.location.host;
 
         </script>

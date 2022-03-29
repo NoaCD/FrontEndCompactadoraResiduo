@@ -15,10 +15,10 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
         /// Hace una peticionn get a al api  retorna un json
         /// Cambiar la url para hcer la peticion
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ListUsuarioDTO</returns>
         public async Task<List<UsuarioDTO>> HttpGet()
         {
-            string page = "https://localhost:7022/api/Usuarios/obtener-todo";
+            string page = "https://localhost:44307/api/Usuarios/obtener-todo";
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -54,7 +54,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
         /// <returns></returns>
         public async Task<UsuarioDTO> obtenerElemento(int id)
         {
-            string page = "https://localhost:7022/api/Usuarios/obtener-elemento/" + id;
+            string page = "https://localhost:44307/api/Usuarios/obtener-elemento/" + id;
             try
             {
                 using (HttpClient client = new HttpClient())
