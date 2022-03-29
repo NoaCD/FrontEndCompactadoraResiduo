@@ -1,8 +1,7 @@
-﻿
-@{
-    
+﻿@{
+
 }
-@model ItemEditarUsuarioViewModel;
+@model CatTipoUsuarioViewModel;
 @{
     Layout = "~/Views/Shared/_Modal.cshtml";
 }
@@ -14,23 +13,70 @@
 </div>
 }
 
-<form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+<form id="form-create-user" >
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Nombre</span>
+            </h5>
+        </label>
+        <input type="text" class="form-control" id="nombre">
+    </div>
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Apellido Paterno</span>
+            </h5>
+        </label>
+        <input type="text" class="form-control" id="apellidoPaterno" />
+    </div>
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Apellido Materno</span>
+            </h5>
+        </label>
+        <input type="text" class="form-control" id="apellidoMaterno" />
+    </div>
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Numero de empleado</span>
+            </h5>
+        </label>
+        <input type="number" class="form-control" id="numeroEmpleado">
+    </div>
+    <div class="form-group">
+        <label class="text-dark"><h5> Nombre de usuario</h5></label>
+        <div class="form-group">
+            <label class="bmd-label-floating text-dark">Se usara para acceder al sistema. Ej: noe.couoh</label>
+            <input class="form-control" type="text" id="nombreUsuario" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Contraseña</span>
+            </h5>
+        </label>
+        <input type="password" class="form-control" id="contrasenia">
+    </div>
+    <div class="form-group">
+        <label for="tiposUsuario">Tipo de usuario</label>
+        <select class="form-control" id="tiposUsuario">
+            @foreach (var usuarios in Model.tiposUsuario)
+            {
+                <option> @usuarios.cNombre </option>
+            }
+
+        </select>
+    </div>
 </form>
 
 @section footer{
-<button class="btn btn-primary" type="button" id="btnGuardar">Guardar</button>
+    <button class="btn btn-primary" type="submit" id="btnGuardar">Guardar</button>
+}
+@section scripts{
+    <script type="text/javascript" src="~/scripts/UsuariosController/Api.js"></script>
+
 }

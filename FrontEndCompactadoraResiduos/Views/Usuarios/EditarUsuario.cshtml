@@ -5,31 +5,47 @@
 
 
 @section header{
- <h1 class="display-4 float-right">Editar usuario</h1>
+<h1 class="display-4 float-right">Editar usuario</h1>
 }
 
 @if (Model.itemUsuario is not null)
 {
     <form>
         <div class="form-group">
-            <label for="exampleFormControlInput1">Nombre </label>
+            <label class="bmd-label-floating">
+                <h5>
+                    <span class="tim-note text-dark">Nombre</span>
+                </h5>
+            </label>
             <input type="text" class="form-control" id="exampleFormControlInput1"
-               placeholder="Escriba su nombre" value="@Model.itemUsuario.nombre">
+               value="@Model.itemUsuario.nombre">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlInput1">Apellido Paterno </label>
+            <label class="bmd-label-floating">
+                <h5>
+                    <span class="tim-note text-dark">Apellido Paterno</span>
+                </h5>
+            </label>
             <input type="text" class="form-control" id="exampleFormControlInput1"
                placeholder="Escriba su apellido paterno" value=" @Model.itemUsuario.cApellidoPaterno " />
         </div>
         <div class="form-group">
-            <label for="exampleFormControlInput1">Apellido Materno </label>
+            <label class="bmd-label-floating">
+                <h5>
+                    <span class="tim-note text-dark">Apellido Materno</span>
+                </h5>
+            </label>
             <input type="text" class="form-control" id="exampleFormControlInput1"
-               placeholder="escriba el apellido materno" value=" @Model.itemUsuario.apellidoMaterno ">
+               value=" @Model.itemUsuario.apellidoMaterno ">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlInput1">Numero de empleado </label>
+            <label class="bmd-label-floating">
+                <h5>
+                    <span class="tim-note text-dark">Numero de empleado</span>
+                </h5>
+            </label>
             <input type="number" class="form-control" id="exampleFormControlInput1"
-               placeholder="escriba el numero empleado" value="@Model.itemUsuario.numeroEmpleado">
+               value="@Model.itemUsuario.numeroEmpleado">
         </div>
         <div class="form-group">
 

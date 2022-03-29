@@ -78,7 +78,10 @@ namespace FrontEndCompactadoraResiduos.Controllers
         }
         public ActionResult CrearUsuario()
         {
-            return View();
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+            var catTipoUsuario = tipoUsuarios.todosTipoUsuarios(host);
+            var modelo = new CatTipoUsuarioViewModel() { tiposUsuario = catTipoUsuario.Result };
+            return View(modelo);
         }
 
         #region
