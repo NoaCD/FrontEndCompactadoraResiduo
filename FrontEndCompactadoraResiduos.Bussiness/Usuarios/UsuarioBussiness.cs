@@ -1,8 +1,10 @@
-﻿using FrontEndCompactadoraResiduos.Models;
+﻿using FrontEndCompactadoraResiduos.Model.DTOS;
+using FrontEndCompactadoraResiduos.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,8 +29,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
                     using (HttpContent content = response.Content)
                     {
                         string result = await content.ReadAsStringAsync();
-                         var listaUsuarios = JsonConvert.DeserializeObject<List<UsuarioDTO>>(result);
-                        
+                        var listaUsuarios = JsonConvert.DeserializeObject<List<UsuarioDTO>>(result);
+
                         if (listaUsuarios != null)
                         {
                             return listaUsuarios.ToList();
@@ -36,15 +38,15 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
 
                         return listaUsuarios = new List<UsuarioDTO>();
                     }
-                    
+
                 }
 
             }
             catch (Exception ex)
             {
-              return null;
-            }   
-      
+                return null;
+            }
+
         }
 
 
@@ -70,7 +72,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
                             return listaUsuarios;
                         }
 
-                        return listaUsuarios = new UsuarioDTO ();
+                        return listaUsuarios = new UsuarioDTO();
                     }
 
                 }
@@ -82,5 +84,52 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
             }
         }
 
+
+        public async Task<string> GuardarUsuario(UsuarioCreacionDTO usuario, string host)
+        {
+            try
+            {
+
+                string page = host + "/api/Usuarios";
+                var usuarioJSON = JsonConvert.SerializeObject(usuario);
+                using (HttpClient client = new HttpClient())
+                {
+                    var content = new StringContent(usuarioJSON, System.Text.Encoding.UTF8, "application/json");
+
+                    var response = await client.PostAsync(page, content);
+
+                    var contenido = response.Content.ReadAsStringAsync();
+
+                    try
+                    {
+                        var _oUsuarioCreado = JsonConvert.DeserializeObject<UsuarioDTO>(contenido.Result);
+                        if (_oUsuarioCreado == null)
+                        {
+                            return contenido.Result.ToString();
+
+                        }
+                        else
+                        {
+                            return _oUsuarioCreado.iId.ToString();
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        return ex.Message.ToString();
+
+                    }
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        
     }
 }

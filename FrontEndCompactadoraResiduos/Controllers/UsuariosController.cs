@@ -1,4 +1,5 @@
 ﻿using FrontEndCompactadoraResiduos.Bussiness.Usuarios;
+using FrontEndCompactadoraResiduos.Model.DTOS;
 using FrontEndCompactadoraResiduos.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -17,6 +18,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
 
         private UsuarioBussiness usuarioBussiness = new UsuarioBussiness();
         private TipoUsuarioBussiness tipoUsuarios = new TipoUsuarioBussiness();
+
 
 
 
@@ -68,20 +70,62 @@ namespace FrontEndCompactadoraResiduos.Controllers
         /// <returns></returns>
         public ActionResult VerUsuario()
         {
-
             //Recibimos el objeto que viene del ajax
             string id = Request.Form["datos"]; //tenemos el id
             var _oUsuario = JsonConvert.DeserializeObject<UsuarioDTO>(id); //deserializamos con el dto para tener el id
             var usuario = usuarioBussiness.obtenerElemento(_oUsuario.iId); //hacemos la peticion
-            var modelo = new ItemUsuarioViewModel() {itemUsuario = usuario.Result  };
+            var modelo = new ItemUsuarioViewModel() { itemUsuario = usuario.Result };
             return View(modelo);
         }
+
+        /// <summary>
+        /// Muestra el modal con formulario para su creacion
+        /// </summary>
+        /// <returns></returns>
         public ActionResult CrearUsuario()
         {
             var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
             var catTipoUsuario = tipoUsuarios.todosTipoUsuarios(host);
             var modelo = new CatTipoUsuarioViewModel() { tiposUsuario = catTipoUsuario.Result };
             return View(modelo);
+        }
+    
+
+        /// <summary>
+        /// Se procesa la informacion recibida para que se envie en API
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GuardarUsuario()
+        {
+
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+            string jsonUsuario = Request.Form["datos"];
+            var _oUsuario = JsonConvert.DeserializeObject<UsuarioCreacionDTO>(jsonUsuario); //de
+            var respuesta = usuarioBussiness.GuardarUsuario(_oUsuario, host);
+            if (respuesta.Result.All(char.IsDigit))
+            {
+                try
+                {
+                    int idUsuario = Int32.Parse(respuesta.Result);
+                    //Hacemos una busqeuda al usuairo que se acaba de crear
+                    var usuario = usuarioBussiness.obtenerElemento(idUsuario); //hacemos la peticion
+                    return Json(new { estatus = "success", mensaje = "Usuario creado con exito", titulo = "Existoso!", data= usuario.Result.nombre });
+
+                }
+                catch
+                {
+                    return Json(new { estatus = "error", mensaje = respuesta.Result, titulo = "Fallido" });
+                }
+                
+            }
+            else
+            {
+                //Si se envia el mismo arroja un mensjae de error
+                return Json(new { estatus = "error", mensaje = respuesta.Result, titulo = "Error!"  });
+            }
+
+
+
         }
 
         #region

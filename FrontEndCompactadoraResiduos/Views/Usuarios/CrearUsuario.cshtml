@@ -6,21 +6,22 @@
     Layout = "~/Views/Shared/_Modal.cshtml";
 }
 
-
 @section header{
+<link href="~/assets/personal_style/CrearEmpleadoStylesheet.css" rel="stylesheet" />
+
 <div class="text-center">
     <h1 class="display-4 ">Agregar usuario</h1>
 </div>
 }
 
-<form id="form-create-user" >
+<form id="form-create-user" name="form-create-user">
     <div class="form-group">
         <label class="bmd-label-floating">
             <h5>
                 <span class="tim-note text-dark">Nombre</span>
             </h5>
         </label>
-        <input type="text" class="form-control" id="nombre">
+        <input type="text" class="form-control" id="nombre" name="nombre" />
     </div>
     <div class="form-group">
         <label class="bmd-label-floating">
@@ -28,7 +29,7 @@
                 <span class="tim-note text-dark">Apellido Paterno</span>
             </h5>
         </label>
-        <input type="text" class="form-control" id="apellidoPaterno" />
+        <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" />
     </div>
     <div class="form-group">
         <label class="bmd-label-floating">
@@ -36,7 +37,7 @@
                 <span class="tim-note text-dark">Apellido Materno</span>
             </h5>
         </label>
-        <input type="text" class="form-control" id="apellidoMaterno" />
+        <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" />
     </div>
     <div class="form-group">
         <label class="bmd-label-floating">
@@ -44,13 +45,13 @@
                 <span class="tim-note text-dark">Numero de empleado</span>
             </h5>
         </label>
-        <input type="number" class="form-control" id="numeroEmpleado">
+        <input type="number" class="form-control" id="numeroEmpleado" name="numeroEmpleado" />
     </div>
     <div class="form-group">
         <label class="text-dark"><h5> Nombre de usuario</h5></label>
         <div class="form-group">
             <label class="bmd-label-floating text-dark">Se usara para acceder al sistema. Ej: noe.couoh</label>
-            <input class="form-control" type="text" id="nombreUsuario" />
+            <input class="form-control" type="text" id="nombreUsuario" name="nombreUsuario" />
         </div>
     </div>
     <div class="form-group">
@@ -59,24 +60,25 @@
                 <span class="tim-note text-dark">Contraseña</span>
             </h5>
         </label>
-        <input type="password" class="form-control" id="contrasenia">
+        <input type="password" class="form-control" id="contrasenia" name="contrasenia" />
     </div>
     <div class="form-group">
         <label for="tiposUsuario">Tipo de usuario</label>
-        <select class="form-control" id="tiposUsuario">
+        <select class="form-control" id="tipoUsuario">
             @foreach (var usuarios in Model.tiposUsuario)
             {
-                <option> @usuarios.cNombre </option>
+                <option value="@usuarios.iId"> @usuarios.cNombre </option>
             }
 
         </select>
     </div>
+
+    <br />
+    <button class="btn-block btn btn-success" id="btn-save-user"> Guardar </button>
 </form>
 
-@section footer{
-    <button class="btn btn-primary" type="submit" id="btnGuardar">Guardar</button>
-}
+
 @section scripts{
-    <script type="text/javascript" src="~/scripts/UsuariosController/Api.js"></script>
+<script type="text/javascript" src="~/scripts/UsuariosController/Api.js"></script>
 
 }

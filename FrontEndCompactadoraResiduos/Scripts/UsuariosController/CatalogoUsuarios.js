@@ -103,6 +103,7 @@ $(document).ready(function () {
             console.log(Data);
 
             var ruta = "/Usuarios/VerUsuario";
+            console.log(Data);
             showModal("POST", ruta, Data, null);//mandamos llamar el modal
 
 
