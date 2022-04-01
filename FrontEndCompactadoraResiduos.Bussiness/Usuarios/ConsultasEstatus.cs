@@ -1,4 +1,4 @@
-﻿using FrontEndCompactadoraResiduos.Model.ResiduosDTO;
+﻿using FrontEndCompactadoraResiduos.Model.DTOS;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,18 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
+namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
 {
-    public class ResiduoBussiness
+    public class ConsultasEstatus
     {
         /// <summary>
-        /// Peticion get al api para obtener todos los residuos
+        /// Hacemos una peticion al api para obtener todos los 
+        /// estatus que hay en el sistema
         /// </summary>
-        /// <returns>Task ResiduoDTO o un null</returns>
-        public async Task<List<ResiduoDTO>> HttpGet(string host)
+        /// <param name="host"></param>
+        /// <returns> EstatusDTO, null </returns>
+        public async Task<List<EstatusDTO>> allEstatus(string host)
         {
-            
-            string page = host + "/api/Residuos";
+            string page = host + "/api/Usuarios/todos-estatus";
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -26,14 +27,14 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
                     using (HttpContent content = response.Content)
                     {
                         string result = await content.ReadAsStringAsync();
-                        var listaResiduos = JsonConvert.DeserializeObject<List<ResiduoDTO>>(result);
+                        var listaEstatus = JsonConvert.DeserializeObject<List<EstatusDTO>>(result);
 
-                        if (listaResiduos != null)
+                        if (listaEstatus != null)
                         {
-                            return listaResiduos.ToList();
+                            return listaEstatus;
                         }
 
-                        return listaResiduos = new List<ResiduoDTO>();
+                        return listaEstatus = new List<EstatusDTO>();
                     }
 
                 }
@@ -46,7 +47,6 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
 
         }
 
+
     }
-
-
 }

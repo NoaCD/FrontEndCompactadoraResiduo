@@ -5,19 +5,23 @@
 
 
 @section header{
+<link href="~/assets/personal_style/CrearEmpleadoStylesheet.css" rel="stylesheet" />
+
 <h1 class="display-4 float-right">Editar usuario</h1>
 }
 
 @if (Model.itemUsuario is not null)
 {
-    <form>
+    <form id="form-actualizar-usuario" >
+        <input type="hidden" id="idUsuario" value="@Model.itemUsuario.iId" />
+        <input type="hidden" id="idEstatus" value ="@Model.itemUsuario.catEstatusDTO.iId" />
         <div class="form-group">
             <label class="bmd-label-floating">
                 <h5>
                     <span class="tim-note text-dark">Nombre</span>
                 </h5>
             </label>
-            <input type="text" class="form-control" id="exampleFormControlInput1"
+            <input type="text" class="form-control" id="nombre" name="nombre"
                value="@Model.itemUsuario.nombre">
         </div>
         <div class="form-group">
@@ -26,8 +30,8 @@
                     <span class="tim-note text-dark">Apellido Paterno</span>
                 </h5>
             </label>
-            <input type="text" class="form-control" id="exampleFormControlInput1"
-               placeholder="Escriba su apellido paterno" value=" @Model.itemUsuario.cApellidoPaterno " />
+            <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno"
+                value="@Model.itemUsuario.cApellidoPaterno " />
         </div>
         <div class="form-group">
             <label class="bmd-label-floating">
@@ -35,8 +39,8 @@
                     <span class="tim-note text-dark">Apellido Materno</span>
                 </h5>
             </label>
-            <input type="text" class="form-control" id="exampleFormControlInput1"
-               value=" @Model.itemUsuario.apellidoMaterno ">
+            <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno"
+               value="@Model.itemUsuario.apellidoMaterno">
         </div>
         <div class="form-group">
             <label class="bmd-label-floating">
@@ -44,30 +48,26 @@
                     <span class="tim-note text-dark">Numero de empleado</span>
                 </h5>
             </label>
-            <input type="number" class="form-control" id="exampleFormControlInput1"
+            <input type="number" class="form-control" id="numeroEmpleado" name="numeroEmpleado"
                value="@Model.itemUsuario.numeroEmpleado">
         </div>
         <div class="form-group">
-
-            <label for="exampleFormControlSelect1">Tipo de usuario</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>@Model.itemUsuario.catTipoUsuarioDTO.nombre</option>
+            <label for="tipoUsuario">Tipo de usuario</label>
+            <select class="form-control" id="idTipoUsuario" name="tipoUsuario" >
+                <option value="@Model.itemUsuario.catTipoUsuarioDTO.id" >@Model.itemUsuario.catTipoUsuarioDTO.nombre</option>
                 @foreach (var rol in Model.tiposUsuario)
                 {
-                    <option>@rol.cNombre</option>
+                    <option value="@rol.id" >@rol.nombre</option>
                 }
-
-
             </select>
         </div>
+        
+        <button type="button" class="btn btn-block btn-info" id="btn-actualizar-user">Guardar cambios</button>
     </form>
 
 }
 
 
-
-@section footer{
-<button class="btn btn-primary" type="button" id="btnGuardar">Guardar</button>
+@section scripts{
+    <script type="text/javascript" src="~/scripts/UsuariosController/ApiEdit.js"></script>
 }
-
-

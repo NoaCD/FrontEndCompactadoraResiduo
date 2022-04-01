@@ -18,9 +18,10 @@ namespace FrontEndCompactadoraResiduos.Controllers
 
         private UsuarioBussiness usuarioBussiness = new UsuarioBussiness();
         private TipoUsuarioBussiness tipoUsuarios = new TipoUsuarioBussiness();
+        private ConsultasEstatus estatus = new ConsultasEstatus();
 
 
-
+    
 
         public IActionResult Index()
         {
@@ -56,7 +57,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
             //Pedismo todos los tipos de usuario que existen
 
             var catTipoUsuario = tipoUsuarios.todosTipoUsuarios(host);
-
+        
             var usuario = usuarioBussiness.obtenerElemento(_oUsuario.iId);
             var modelo = new ItemEditarUsuarioViewModel() { itemUsuario = usuario.Result, tiposUsuario = catTipoUsuario.Result };
 
@@ -121,33 +122,72 @@ namespace FrontEndCompactadoraResiduos.Controllers
             else
             {
                 //Si se envia el mismo arroja un mensjae de error
-                return Json(new { estatus = "error", mensaje = respuesta.Result, titulo = "Error!"  });
+                return Json(new { estatus = "error", mensaje ="Error! ya existe un usuario con ese nombre", titulo = "Error!"  });
             }
 
 
 
         }
+        /// <summary>
+        /// Una vez enviado el formulario de edicion se procede a enviarlo para que se guarde
+        /// </summary>
+        /// <returns>mensaje de creado correctamente o mensaje de erorr</returns>
+        public JsonResult ActualizarUsuario()
+        {
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+            var jsonUsuario = Request.Form["datos"];
+            var _oUsuario = JsonConvert.DeserializeObject<UsuarioEdicionDTO>(jsonUsuario); //de
+            var repuesta = usuarioBussiness.ActualizarUsuario(_oUsuario, host);
+            var indicador = repuesta.Result.ToString();
+            
+            if (indicador.ToUpper() == "\"OK\"")
+            {
+                
+                return Json(new { titulo = "Usuario actualizado", mensaje = "Usuario Editado con Exito", estatus = "success" });
+            }
+            else
+            {
+                return Json(new { titulo = "Error", mensaje = repuesta.Result.ToString(), estatus = "error" });
 
-        #region
-        //using(var http = new HttpClient())
-        //{
-        //    http.BaseAddress = new Uri("https://jsonplaceholder.typicode.com");
-        //    http.DefaultRequestHeaders.Accept.Clear();
-        //    http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            }
+            
+        }
 
-        //    //Hacemos la llamada al API
-        //    var response = await http.GetAsync("todos");
+        /// <summary>
+        /// Obtenenos el id del formulario luego se lo enviamos al Bussiness para procesarlo
+        /// El status define el error que va a mostrar
+        /// La respuesta puede tomar 3 o 4 valores 
+        /// 1 ok
+        /// 2 block
+        /// 3 error
+        /// 4 
+        /// </summary>
+        /// <returns>Json</returns>
+        public JsonResult EliminarUsuario()
+        {
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+            var jsonIdUser = Request.Form["datos"];
+            var oUsuario = JsonConvert.DeserializeObject<UsuarioEliminacionDTO>(jsonIdUser);
 
-        //    // Si el servicio responde correctamente
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        // Lee el response y lo deserializa como un Product
-        //        var re = await response.Content.ReadFromJsonAsync<UsuarioDTO>();
-        //        return re;
-        //    }
-        //    // Sino devuelve null
-        //    return await Task.FromResult<UsuarioDTO>(null);
-        #endregion
+            var respuesta = usuarioBussiness.eliminarUsuario(oUsuario, host);
+
+            switch (respuesta.Result)
+            {
+                case "ok":
+                    return Json(new { mensaje = "Usuario eliminado satisfactoriamente", estatus = "succes" });
+                case "block":
+                    return Json(new { mensaje = "Algo anda, mal este usuario ya ha sido eliminado", estatus = "error" });
+                case "error":
+                    return Json(new { mensaje = "Error no se pudo eliminar, error interno", estatus = "error" });
+                default:
+                    return Json(new { mensaje = "Algo anda mal, contacte al admin", estatus = "error" });
+            }
+
+            
+        }
+
+        
+            
 
     }
 

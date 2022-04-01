@@ -1,6 +1,7 @@
 ﻿using FrontEndCompactadoraResiduos.Model.DTOS;
 using FrontEndCompactadoraResiduos.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,7 +85,12 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
             }
         }
 
-
+        /// <summary>
+        /// Funcions que envia un json del usuario a crear
+        /// </summary>
+        /// <param name="usuario"> Objeto UsuarioCreacionDTO </param>
+        /// <param name="host">constante del api</param>
+        /// <returns></returns>
         public async Task<string> GuardarUsuario(UsuarioCreacionDTO usuario, string host)
         {
             try
@@ -130,6 +136,89 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
             }
         }
 
-        
+
+        /// <summary>
+        /// Recibimo un objeto UsuarioEdicionDTO para enviarselo al 
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        public async Task<string> ActualizarUsuario(UsuarioEdicionDTO usuario, string host)
+        {
+            try
+            {
+                string page = host + "/api/Usuarios";
+                var usuarioJSON = JsonConvert.SerializeObject(usuario);
+                using (HttpClient client = new HttpClient())
+                {
+                    var content = new StringContent(usuarioJSON, System.Text.Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync(page, content);
+
+                    var contenido = response.Content.ReadAsStringAsync();
+
+                    try
+                    {
+                        var respuesta = contenido.Result.ToString();
+                        return respuesta;
+
+                    }
+                    catch (Exception)
+                    {
+                        return "Intentar convertir la respuesta del API en un string";
+
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+                return "Fallo al conectarse con la API";
+            }
+        }
+
+        /// <summary>
+        /// La funcion eliminar usuario, se encarga de enviar la solicitud al api para eliminarlo
+        /// </summary>
+        /// <param name="iId">id del usuario a eliminar</param>
+        /// <param name="host"> url base del api </param>
+        /// <returns></returns>
+        public async Task<string> eliminarUsuario(UsuarioEliminacionDTO usuarioEliminacionDTO, string host)
+        {
+
+            try
+            {
+                string page = host + "/api/Usuarios/EliminarUsuario/" + usuarioEliminacionDTO.iId_User;
+                var usuarioJSON = JsonConvert.SerializeObject(usuarioEliminacionDTO);
+                using (HttpClient client = new HttpClient())
+                {
+                    var content = new StringContent(usuarioJSON, System.Text.Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync(page, content);
+
+                    var contenido = response.Content.ReadAsStringAsync();
+
+                    try
+                    {
+                        var respuesta = JsonConvert.DeserializeObject<RespuestaDTO>(contenido.Result);
+                        return respuesta.estatus.ToString();
+
+                    }
+                    catch (Exception)
+                    {
+                        return "Intentar convertir la respuesta del API en un string";
+
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+                return "Fallo al conectarse con la API";
+            }
+
+        }
     }
 }

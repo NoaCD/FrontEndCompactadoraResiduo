@@ -1,34 +1,10 @@
 ﻿/************************************************************
  * Js que controla la vista de crear usuario
- * 
- * 
+ * envia los datos necesarios para crear a los usuarios
  * 
  * ********************************************************/
 
 
-
-
-
-
-
-
-
-
-
-/*
- * Cargamos la tostada
- */
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-})
 
 $(document).ready(function () {
 
@@ -47,6 +23,17 @@ function init() {
             //Una vez validado enviamos el objeto al controlador
             enviarDatos();
         } else {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
             Toast.fire({
                 icon: 'error',
                 title: '¡Completa todos los campos, por favor!'
@@ -108,25 +95,14 @@ function enviarControlador(cTipo, cUrl, Data, Funcion) {
                 })
             }
             else {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-
-                })
-                Toast.fire({
-                    icon: 'success',
-                    type: 'success',
-                    title: 'El usuario' + ' '+ response.data +' ' + 'se ha creado Exitosamente'
-                })
-                setTimeout(() => {
-                    //Esperamos 30 segundoas para que se cambie de vista para que se vea el mensaje de ok
+               
+                Swal.fire(
+                    'El usuario' + ' ' + response.data + ' ' + 'se ha creado Exitosamente',
+                    'Presiona para continuar',
+                    'success',
+                ).then(function () {
                     window.location.replace("/Usuarios/CatalogoUsuarios");
-                
-                }, 2500);
-            
+                });
             }
             if (Funcion)
                 window[Funcion]();
@@ -171,6 +147,7 @@ function validarForm(formulario) {
             'numeroEmpleado': {
                 required: true,
                 number: true,
+
             },
             'contrasenia': {
                 required: true,
@@ -179,7 +156,10 @@ function validarForm(formulario) {
             }
         },
         messages: {
-            'nombre': 'El nombre es obligatorio',
+            'nombre': {
+                required: 'El nombre es obligatorio',
+                maxlength: 'maximo 30 caracteres'
+            }, 
 
             'apellidoPaterno': {
                 required: 'El apellido es obligatorio',
@@ -200,8 +180,8 @@ function validarForm(formulario) {
                 maxlength: 'No debe ser mayor a 15 digitos'
             },
             'numeroEmpleado': {
-                number: "Solo admmite numeros",
-                required:"Es requerido"
+                number: 'Solo admmite numeros',
+                required:'Es requerido'
 
             }
         }

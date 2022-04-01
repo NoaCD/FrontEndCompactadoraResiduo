@@ -166,11 +166,20 @@ $(document).ready(function () {
             }).then((result) => {
                 if (result.isConfirmed) {
                     //Funcion eliminar en la API
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                    var arrayUsuario = table.row('.selected').data(); //Solo va a existir el array si se selecciona
+                    var Data = {};
+                    var id = arrayUsuario[0];
+                    var datos = {
+                        iId_User: id
+                    }
+                    Data["datos"] = JSON.stringify(datos);
+                    console.log(Data);
+
+                    var ruta = "/Usuarios/EliminarUsuario"
+                    var postRuta = "/Usuarios/CatalogoUsuarios"
+                    globalEnviarControlador("POST", ruta, Data, false, postRuta);
+                   
+
                 }
             })
         } else {
