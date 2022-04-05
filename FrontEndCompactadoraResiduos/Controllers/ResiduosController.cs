@@ -1,4 +1,5 @@
 ﻿using FrontEndCompactadoraResiduos.Bussiness.Residuos;
+using FrontEndCompactadoraResiduos.Model.DTOS;
 using FrontEndCompactadoraResiduos.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
 
 
         /// <summary>
-        /// Obtenemos la lista y se lo pasamos al controlador
+        /// Obtenemos la lista de residuos y se lo pasamos al controlador
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
@@ -24,6 +25,23 @@ namespace FrontEndCompactadoraResiduos.Controllers
             var ListResiduos = residuos.HttpGet(host);//Obtenemos una lista de residuos
             var modelo = new ResiduosCatalogoViewModel() { Residuos = ListResiduos.Result };//Retornamos el modelo instancia a la vista
             return View(modelo);
+        }
+
+        /// <summary>
+        /// Retornta el modal para crear un residuo
+        /// </summary>
+        /// <returns>MODAL</returns>
+        public IActionResult CrearResiduo()
+        {
+
+            return View();
+        }
+        
+        public JsonResult GuardarResiduo([FromForm] ResiduoCreacionDTO residuo)
+        {
+            var residuoss = residuo;
+
+            return new JsonResult("d");
         }
 
     }

@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+@section Styles{
+<link href="~/assets/personal_style/CrearEmpleadoStylesheet.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/assets/dropzone/dropzone.min.css" />
+
+}
+
+@section header{
+
+<div class="text-center">
+    <h1 class="display-4 ">Agregar Residuo</h1>
+</div>
+}
+
+<form id="form-create-residuo" name="form-create-residuo">
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Nombre</span>
+            </h5>
+        </label>
+        <input type="text" class="form-control" id="nombre" name="nombre" />
+    </div>
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Descripcion</span>
+            </h5>
+        </label>
+        <input type="text" class="form-control" id="descripcion" name="descripcion" />
+    </div>
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Codigo</span>
+            </h5>
+        </label>
+        <input type="text" class="form-control" id="codigo" name="codigo" />
+    </div>
+    <div class="form-group">
+        <label for="imagenResiduo">Example file input</label>
+        <input type="file" class="form-control-file" id="imagenResiduo">
+    </div>
+    <br />
+    <button id="btn-save-residuo" type="button" class="btn-block btn btn-success"> Guardar </button>
+
+</form>
+
+
+@section Scripts{
+<script type="text/javascript" src="~/assets/dropzone/dropzone.min.js"></script>
+
+<script type="text/javascript" src="~/scripts/ResiduosController/Crear.js"></script>
+}

@@ -1,0 +1,36 @@
+﻿@model ResiduosCatalogoViewModel;
+@{
+    ViewData["Title"] = "Cargas";
+}
+
+@section Styles{
+<link rel="stylesheet" href="~/assets/personal_style/cardsResiduos.css" />
+}
+@if (Model.Residuos is not null)
+{
+    <div class="row">
+
+        @foreach (var residuo in @Model.Residuos)
+        {
+            <!-- the cols in this div change the number of cards per row depending on screen size and the mb-4 adds space below cards if they spill over into the next row-->
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="@residuo.cImagen" alt="Card image cap">
+                    <span class="badge badge-primary">@residuo.cCodigoResiduo</span>
+                    <div class="card-body">
+                        <h3 class="text-center"> @residuo.cNombre</h3>
+                        <p class="card-text">@residuo.cDescripcion</p>
+                    </div>
+                    <button class="btn btn-primary btn-block"><h4><i class="large material-icons">file_upload</i> CARGAR</h4></button>
+                </div>
+            </div>
+        }
+
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Verifique su conexion a internet
+    </div>
+}

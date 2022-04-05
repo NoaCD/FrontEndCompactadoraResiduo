@@ -14,7 +14,7 @@ $(document).ready(function () {
 });
 
 /**
- * Al hacer click 
+ * Al hacer click en guardar
  * */
 function init() {
     $("#btn-save-user").click(function (e) {
