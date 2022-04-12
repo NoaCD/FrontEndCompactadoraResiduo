@@ -69,6 +69,8 @@ $(document).ready(function () {
     })
 
 
+
+
     /**************************************************************
  * Controla el boton agregar
  * abre un modal que lleva a un form para enviar datos
@@ -83,12 +85,35 @@ $(document).ready(function () {
 
 
 
+    /***********************************************************************************
+ *
+ * funcion para el boton de editar 
+ * 
+ * *********************************************************************************
+ * */
+    $("#btn-edit-residuo").click(function () {
+        if (filaSeleccionada() == true) {
+            var arrayResiduo = table.row('.selected').data(); //Solo va a existir el array si se selecciona
+            var Data = {};
+            var id = arrayResiduo[0];
+            var datos = {
+                iId: id
+            }
+            Data["datos"] = JSON.stringify(datos);
+           
 
+            var ruta = "/Residuos/EditarResiduo";
+            showModal("POST", ruta, Data, null);//mandamos llamar el modal
 
+        } else {
 
+            Toast.fire({
+                icon: 'error',
+                title: '¡Seleccione un elemento para editarlo!'
+            });
+        }
 
-
-
+    });
 
 
 

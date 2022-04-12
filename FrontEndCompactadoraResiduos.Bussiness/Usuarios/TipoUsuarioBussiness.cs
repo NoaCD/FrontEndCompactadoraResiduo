@@ -10,11 +10,6 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
 {
     public class TipoUsuarioBussiness
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="host"></param>
-        /// <returns></returns>
         public async Task<List<TiposUsuarioDTO>> todosTipoUsuarios(string host)
         {
 

@@ -1,0 +1,58 @@
+﻿@model ItemResiduoViewModel;
+
+@{
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+@section Styles{
+<link href="~/assets/personal_style/CrearEmpleadoStylesheet.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/assets/dropzone/dropzone.min.css" />
+
+}
+
+@section header{
+
+<div class="text-center">
+    <h1 class="display-4 ">Actualizar Residuo</h1>
+</div>
+}
+
+<form id="form-actualizar-residuo" name="form-actualizar-residuo">
+    <input type="hidden" id="iId" value="@Model.residuo.iId" />
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Nombre</span>
+            </h5>
+        </label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="@Model.residuo.cNombreResiduo" />
+    </div>
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Codigo</span>
+            </h5>
+        </label>
+        <input type="text" class="form-control" id="codigo" name="codigo" value="@Model.residuo.cCodigoResiduo" />
+    </div>
+    <div class="form-group">
+        <label for="descripcion">Descripcion</label>
+        <textarea class="form-control" id="descripcion" rows="3"> @Model.residuo.cDescripcionResiduo </textarea>
+    </div>
+    <div class="form-group text-center">
+        <p> <span class="badge badge-success">Imagen actual</span> </p>
+        <img width="200" height="200" src="@Model.residuo.cImagen" alt="imagen_residuo" class="img-thumbnail">
+    </div>
+  
+    <br />
+    <br />
+    <button id="btn-actualizar-residuo" type="button" class="btn-block btn btn-success"> Actualizar </button>
+
+</form>
+
+
+
+@section Scripts{
+<script type="text/javascript" src="~/assets/dropzone/dropzone.min.js"></script>
+
+<script type="text/javascript" src="~/scripts/ResiduosController/EditarResiduo.js"></script>
+}
