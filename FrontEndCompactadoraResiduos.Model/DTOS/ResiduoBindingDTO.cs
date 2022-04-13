@@ -9,5 +9,7 @@ namespace FrontEndCompactadoraResiduos.Model.DTOS
     public class ResiduoBindingDTO
     {
         public int iId {get; set; }
+
+      
     }
 }

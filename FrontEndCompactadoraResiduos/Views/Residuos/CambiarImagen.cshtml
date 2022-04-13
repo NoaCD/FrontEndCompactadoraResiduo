@@ -1,0 +1,38 @@
+﻿@model ItemResiduoViewModel;
+
+@{
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+@section Styles{
+<link href="~/assets/personal_style/CrearEmpleadoStylesheet.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/assets/dropzone/dropzone.min.css" />
+
+}
+
+@section header{
+
+<div class="text-center">
+    <h1 class="display-4 ">Cambiar Imagen </h1>
+</div>
+}
+
+<input type="hidden" value="@Model.residuo.IdResiduo" id="id" />
+<div class="form-group text-center">
+    <p> <span class="badge badge-success">Imagen actual</span> </p>
+    <img width="200" height="200" src="@Model.residuo.cImagen" alt="imagen_residuo" class="img-thumbnail">
+</div>
+
+<div class="dropzone" style="width:100% !important" id="dropzone" name="mainFileUploader">
+    <div class="fallback">
+        <input name="file" type="file" multiple />
+    </div>
+</div>
+<button id="btn-imgupdate-residuo" type="button" class="btn-block btn btn-success"> Actualizar </button>
+
+
+
+@section Scripts{
+<script type="text/javascript" src="~/assets/dropzone/dropzone.min.js"></script>
+<script type="text/javascript" src="~/scripts/ResiduosController/cambiarImagen.js"></script>
+
+}

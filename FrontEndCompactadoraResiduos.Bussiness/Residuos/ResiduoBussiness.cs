@@ -195,7 +195,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
             }
 
 
-            return "ok";
+            
         }
 
 
@@ -255,6 +255,47 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
                 imagen.CopyTo(stream);
             }
             return fullPath.ToString();
+        }
+
+        /// <summary>
+        /// Metodo para eliminar el residuo que llegue por parametro
+        /// </summary>
+        /// <param name="iId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<string> eliminarResiduo(string host, int idResiduo)
+        {
+
+            try
+            {
+
+                string page = host + "/api/Residuos/" + idResiduo;
+                using (HttpClient client = new HttpClient())
+                {
+                    
+
+                    var response = await client.DeleteAsync(page);
+
+                    var contenido = response.Content.ReadAsStringAsync();
+
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        return "ok";
+
+                    }
+                    else
+                    {
+                        return contenido.Result;
+                    }
+                }
+
+            }
+            catch (Exception )
+            {
+                return "error-request";
+            }
+
+            
         }
 
         /// <summary>
