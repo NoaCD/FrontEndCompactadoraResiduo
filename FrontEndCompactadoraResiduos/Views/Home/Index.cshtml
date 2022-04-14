@@ -1,6 +1,12 @@
-﻿@{
+﻿@model HomeViewModel;
+@{
     ViewData["Title"] = "Inicio";
 }
+
+<input type="hidden" value="@Model.estatus" id="estatus" />
+<input type="hidden" value="@Model.mensaje" id="mensaje" />
+
+
 
 <div class="card bg-dark text-white">
     <img height="200px" class="card-img" src="~/assets/img/portm.jpg" alt="portada.png">
@@ -16,15 +22,19 @@
                 <div class="card-icon">
                     <i class="material-icons">group</i>
                 </div>
-                <p class="card-category text-dark"> Usuarios </p>
+                <p class="card-category text-dark">  </p>
+                <h2 class="text-dark"> @Model.totalUsuarios</h2>
                 <hr />
-                <h3 class="card-title">
-                    registrados: 47
+                <h3 class="card-title text-center">
+                    Usuarios
                     <small> </small>
-                    <a class="btn btn-warning btn-sm" href="@Url.Action("CatalogoUsuarios","Usuarios")"> Ir </a>
                 </h3>
+
             </div>
+            <a class="btn btn-warning btn-sm" href="@Url.Action("CatalogoUsuarios","Usuarios")"> Ir </a>
+
             <div class="card-footer">
+
                 <div class="stats">
                     <i class="material-icons">group</i> Agrega, edita a tus colaboradores con este modulo
                 </div>
@@ -37,10 +47,10 @@
                 <div class="card-icon">
                     <i class="material-icons">arrow_upward</i>
                 </div>
-                <p class="card-category text-dark">Residuos</p>
+                <h3 class="text-dark">Residuos</h3>
                 <hr />
-                <h3 class="card-title">342.45 kg</h3>
-                <a class="btn btn-success btn-sm" href="@Url.Action("Index","Residuos")" >Ir</a>
+                <h3 class="card-title">Elementos: @Model.totalResiduos  </h3>
+                <a class="btn btn-success btn-sm" href="@Url.Action("Index","Residuos")">Ir</a>
             </div>
             <div class="card-footer">
                 <div class="stats">
@@ -57,8 +67,8 @@
                 </div>
                 <p class="card-category text-dark">Cargas</p>
                 <hr />
-                <h3 class="card-title">+1200</h3>
-                <a class="btn btn-danger btn-sm" href="@Url.Action("Index","Carga")" >Ir</a>
+                <h3 class="card-title" id="carga_total"> Hechas: @Model.totalCargas </h3>
+                <a class="btn btn-danger btn-sm" href="@Url.Action("Index","Carga")">Ir</a>
             </div>
             <div class="card-footer">
                 <div class="stats">
@@ -86,3 +96,8 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+
+<script type="text/javascript" src="~/Scripts/HomeController/Home.js"></script>
+}
