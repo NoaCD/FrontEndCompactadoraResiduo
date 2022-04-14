@@ -4,42 +4,53 @@
 }
 
 @section Styles{
-
-<link rel="stylesheet" href="~/assets/datatables/DataTables-1.11.5/css/dataTables.bootstrap5.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/datatables/DataTables-1.11.4/css/jquery.dataTables.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 }
 
+<input id="daterange">
 
-<table id="example" class="display" cellspacing="0" width="75%">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Nombre Residuo</th>
-            <th>Peso</th>
-          
-            <th>Usuario</th>
-            <th>Nombre Equipo</th>
-            <th>Fecha</th>
+<div class="container">
+    <div class="card">
+        <table id="example" class="display" cellspacing="0" width="75%">
 
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre Residuo</th>
+                    <th>Peso</th>
 
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <th>#</th>
-            <th>Nombre Residuo</th>
-            <th>Peso</th>
-         
-            <th>Usuario</th>
-            <th>Nombre Equipo</th>
-            <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th>Nombre Equipo</th>
+                    <th>Fecha</th>
 
 
-        </tr>
-    </tfoot>
-</table>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre Residuo</th>
+                    <th>Peso</th>
 
+                    <th>Usuario</th>
+                    <th>Nombre Equipo</th>
+                    <th>Fecha</th>
+
+
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
 @section Scripts{
-<script type="text/javascript" src="~/assets/datatables/DataTables-1.11.5/js/dataTables.bootstrap5.js"></script>
+<script type="text/javascript" src="~/assets/datatables/DataTables-1.11.4/js/jquery.dataTables.js"></script>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+
 <script type="text/javascript" src="~/Scripts/CargaController/CargaIndex.js"></script>
 
 }
