@@ -1,4 +1,5 @@
-﻿using FrontEndCompactadoraResiduos.Bussiness.Residuos;
+﻿using CompactadoraDeResiduos.Model.DTO;
+using FrontEndCompactadoraResiduos.Bussiness.Residuos;
 using FrontEndCompactadoraResiduos.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,19 +14,28 @@ namespace FrontEndCompactadoraResiduos.Controllers
         {
             _configuration = configuration;
         }
-        private readonly ResiduoBussiness residuos = new ResiduoBussiness();
+        
 
 
         // GET: CargaController
         public ActionResult Index()
         {
-
-            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
-            var ListResiduos = residuos.HttpGet(host);//Obtenemos una lista de residuos
-            var modelo = new ResiduosCatalogoViewModel() { Residuos = ListResiduos.Result };//Retornamos el modelo instancia a la vista
-            return View(modelo);
+           //retorna la vista para observar todas las cargas
+           return View();
 
         }
+
+
+        public JsonResult ApiCargas()
+        {
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+
+            CargaBussiness CargaBuss = new CargaBussiness();
+            var respuesta = CargaBuss.cargasGet(host);
+
+            return new JsonResult(new { data = respuesta.Result } );
+        }
+
 
         // GET: CargaController/Details/5
         public ActionResult Details(int id)
