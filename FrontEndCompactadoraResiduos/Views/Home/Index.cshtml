@@ -9,7 +9,7 @@
 
 
 <div class="card bg-dark text-white">
-    <img height="200px" class="card-img" src="~/assets/img/portm.jpg" alt="portada.png">
+    <img height="200px" class="card-img" src="~/assets/img/2.jpg" alt="portada.png">
     <div class="card-img-overlay">
         <h5 class="card-title titulo1">GIOTEX</h5>
         <h5 class="card-title titulo2">20 ANIVERSARIO</h5>
@@ -23,7 +23,17 @@
                     <i class="material-icons">group</i>
                 </div>
                 <p class="card-category text-dark">  </p>
-                <h2 class="text-dark"> @Model.totalUsuarios</h2>
+
+                @if (Model.totalUsuarios != null)
+                {
+                    <h2 class="text-dark"> @Model.totalUsuarios </h2>
+
+                }
+                else
+                {
+                    <h2 class="text-dark"> 0 </h2>
+
+                }
                 <hr />
                 <h3 class="card-title text-center">
                     Usuarios
@@ -48,10 +58,18 @@
                     <i class="material-icons">arrow_upward</i>
                 </div>
                 <p class="card-category text-dark">  </p>
-                <h2 class="text-dark"> @Model.totalResiduos</h2>
+                @if (Model.totalResiduos != 0)
+                {
+                    <h2 class="text-dark"> @Model.totalResiduos   </h2>
+                }
+                else
+                {
+                    <h2 class="text-dark"> 0 </h2>
+
+                }
                 <hr />
                 <h3 class="card-title text-center">
-                    Elementos
+                    Residuos
                     <small> </small>
                 </h3>
 
@@ -73,7 +91,15 @@
                     <i class="material-icons">all_inclusive</i>
                 </div>
                 <p class="card-category text-dark">  </p>
-                <h2 class="text-dark"> @Model.totalCargas</h2>
+                @if (Model.totalCargas != null)
+                {
+                    <h2 class="text-dark"> @Model.totalCargas</h2>
+                }
+                else
+                {
+                    <h2 class="text-dark"> 0 </h2>
+
+                }
                 <hr />
                 <h3 class="card-title text-center">
                     Cargas
@@ -98,7 +124,15 @@
                     <i class="material-icons">trending_up</i>
                 </div>
                 <p class="card-category text-dark">  </p>
-                <h2 class="text-dark"> @Model.totalCargas</h2>
+                @if (Model.totalCargas != null)
+                {
+                    <h2 class="text-dark"> @Model.totalCargas</h2>
+                }
+                else
+                {
+                    <h2 class="text-dark"> 0 </h2>
+
+                }
                 <hr />
                 <h3 class="card-title text-center">
                     Reportes

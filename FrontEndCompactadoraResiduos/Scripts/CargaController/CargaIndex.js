@@ -1,5 +1,5 @@
 ﻿/********************
- * Funcion de la tabla <
+ * Funcion de la tabla Cargas
  * 
  * **************/
 
@@ -54,6 +54,20 @@ $(document).ready(function () {
         }
     });
 
+
+
+    var filaSeleccionada = function () {
+        var arrayCarga = table.row('.selected').data(); //Solo va a existir el array si se selecciona
+        if (arrayCarga != null) {
+            return true;
+        } else {
+            return false
+        }
+    }
+
+
+    ///Calendario date picker
+
     // Date range vars
     minDateFilter = "";
     maxDateFilter = "";
@@ -80,6 +94,61 @@ $(document).ready(function () {
 
         table.draw();
     });
+
+
+
+
+    /*******************************************************************
+     *  Metodo que controla el 
+     *  boton ver de la carga
+     * ******************************************************************/
+
+    $("#btn-see-carga").click(function () {
+
+        if (filaSeleccionada() == true) {
+            var arrayCarga = table.row('.selected').data(); //Solo va a existir el array si se selecciona
+            console.log(arrayCarga);
+
+            var Data = {};
+            var id = arrayCarga["idCarga"];
+            var datos = {
+                iId: id
+            }
+            Data["datos"] = JSON.stringify(datos);
+            console.log(Data);
+
+            var ruta = "/Carga/DetalleCarga";
+            console.log(Data);
+            showModal("POST", ruta, Data, null);//mandamos llamar el modal
+
+
+        } else {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            //Tostada de error
+            Toast.fire({
+                icon: 'error',
+                title: '¡Seleccione un elemento para observarlo!'
+            });
+        }
+
+    });
+
+
+
+
+
+
 
 
     /*Agregamos enumeraciones a la primera columna */

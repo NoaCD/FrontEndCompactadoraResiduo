@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompactadoraDeResiduos.Model.DTO
+namespace FrontEndCompactadoraResiduos.Model.DTOS
 {
-    public class ShowAllCarga
+    public class MostrarCargaDTO
     {
-
         public int? idCarga { get; set; }
         public DateTime? fechaCreacionCarga { get; set; }
-        public DateTime? fechaModificacionCarga { get; set; }
+        public DateTime? fechaModificacion { get; set; } 
         public DateTime? fechaEliminacionCarga { get; set; }
+        public double pesoBrutoCarga { get; set; }
+        public double? pesoContenedorCarga { get; set; }
         public int? idResiduo { get; set; }
         public string? nombreResiduo { get; set; }
         public string? descripcionResido { get; set; }
@@ -22,7 +23,5 @@ namespace CompactadoraDeResiduos.Model.DTO
         public string apellidoPaterno { get; set; }
         public string apellidoMaterno { get; set; }
         public int numeroEmpleado { get; set; }
-
-
     }
 }
