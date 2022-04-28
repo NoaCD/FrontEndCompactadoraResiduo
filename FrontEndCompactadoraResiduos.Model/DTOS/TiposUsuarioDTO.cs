@@ -9,8 +9,8 @@ namespace FrontEndCompactadoraResiduos.Model.DTOS
     public class TiposUsuarioDTO
     {
         public int iId;
-        public string cNombre;
-        public string cCodigo;
+        public string? cNombre;
+        public string? cCodigo;
 
 
         public int id

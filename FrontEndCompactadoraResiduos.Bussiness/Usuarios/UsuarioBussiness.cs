@@ -36,8 +36,15 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
                         {
                             return listaUsuarios.ToList();
                         }
+                        listaUsuarios = new List<UsuarioDTO>()
+                        {
+                            new UsuarioDTO() {cNombre = "No se encontro informacion ",
+                                               cApellidoPaterno = "Registrar unformacion ",
+                                              cApellidoMaterno = " o contacte a su administrador de TI"
+                            }
 
-                        return listaUsuarios = new List<UsuarioDTO>();
+                        };
+                        return listaUsuarios;
                     }
 
                 }

@@ -35,7 +35,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return null;
             }
