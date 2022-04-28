@@ -1,9 +1,15 @@
-﻿@{
+﻿@model HomeViewModel;
+@{
     ViewData["Title"] = "Inicio";
 }
 
+<input type="hidden" value="@Model.estatus" id="estatus" />
+<input type="hidden" value="@Model.mensaje" id="mensaje" />
+
+
+
 <div class="card bg-dark text-white">
-    <img height="200px" class="card-img" src="~/assets/img/portm.jpg" alt="portada.png">
+    <img height="200px" class="card-img" src="~/assets/img/2.jpg" alt="portada.png">
     <div class="card-img-overlay">
         <h5 class="card-title titulo1">GIOTEX</h5>
         <h5 class="card-title titulo2">20 ANIVERSARIO</h5>
@@ -16,15 +22,29 @@
                 <div class="card-icon">
                     <i class="material-icons">group</i>
                 </div>
-                <p class="card-category text-dark"> Usuarios </p>
+                <p class="card-category text-dark">  </p>
+
+                @if (Model.totalUsuarios != null)
+                {
+                    <h2 class="text-dark"> @Model.totalUsuarios </h2>
+
+                }
+                else
+                {
+                    <h2 class="text-dark"> 0 </h2>
+
+                }
                 <hr />
-                <h3 class="card-title">
-                    registrados: 47
+                <h3 class="card-title text-center">
+                    Usuarios
                     <small> </small>
-                    <a class="btn btn-warning btn-sm" href="@Url.Action("CatalogoUsuarios","Usuarios")"> Ir </a>
                 </h3>
+
             </div>
+            <a class="btn btn-warning btn-sm" href="@Url.Action("CatalogoUsuarios","Usuarios")"> Ir </a>
+
             <div class="card-footer">
+
                 <div class="stats">
                     <i class="material-icons">group</i> Agrega, edita a tus colaboradores con este modulo
                 </div>
@@ -37,12 +57,27 @@
                 <div class="card-icon">
                     <i class="material-icons">arrow_upward</i>
                 </div>
-                <p class="card-category text-dark">Residuos</p>
+                <p class="card-category text-dark">  </p>
+                @if (Model.totalResiduos != 0)
+                {
+                    <h2 class="text-dark"> @Model.totalResiduos   </h2>
+                }
+                else
+                {
+                    <h2 class="text-dark"> 0 </h2>
+
+                }
                 <hr />
-                <h3 class="card-title">342.45 kg</h3>
-                <a class="btn btn-success btn-sm" href="@Url.Action("Index","Residuos")" >Ir</a>
+                <h3 class="card-title text-center">
+                    Residuos
+                    <small> </small>
+                </h3>
+
             </div>
+            <a class="btn btn-success btn-sm" href="@Url.Action("Index","Residuos")"> Ir </a>
+
             <div class="card-footer">
+
                 <div class="stats">
                     <i class="material-icons">arrow_upward</i> Crear, edita o elimina los residuos que necesites
                 </div>
@@ -55,12 +90,27 @@
                 <div class="card-icon">
                     <i class="material-icons">all_inclusive</i>
                 </div>
-                <p class="card-category text-dark">Cargas</p>
+                <p class="card-category text-dark">  </p>
+                @if (Model.totalCargas != null)
+                {
+                    <h2 class="text-dark"> @Model.totalCargas</h2>
+                }
+                else
+                {
+                    <h2 class="text-dark"> 0 </h2>
+
+                }
                 <hr />
-                <h3 class="card-title">+1200</h3>
-                <button class="btn btn-danger btn-sm">Ir</button>
+                <h3 class="card-title text-center">
+                    Cargas
+                    <small> </small>
+                </h3>
+
             </div>
+            <a class="btn btn-danger btn-sm" href="@Url.Action("Index","Carga")"> Ir </a>
+
             <div class="card-footer">
+
                 <div class="stats">
                     <i class="material-icons">all_inclusive</i> Observa todas las cargas que se realizan en tiempo real
                 </div>
@@ -73,16 +123,54 @@
                 <div class="card-icon">
                     <i class="material-icons">trending_up</i>
                 </div>
-                <p class="card-category text-dark">Reportes</p>
+                <p class="card-category text-dark">  </p>
+                @if (Model.totalCargas != null)
+                {
+                    <h2 class="text-dark"> @Model.totalCargas</h2>
+                }
+                else
+                {
+                    <h2 class="text-dark"> 0 </h2>
+
+                }
                 <hr />
-                <h3 class="card-title">+245</h3>
-                <button class="btn btn-info btn-sm">Ir</button>
+                <h3 class="card-title text-center">
+                    Reportes
+                    <small> </small>
+                </h3>
+
             </div>
+            <a class="btn btn-info btn-sm" href="@Url.Action("Index","Carga")"> Ir </a>
+
             <div class="card-footer">
+
                 <div class="stats">
                     <i class="material-icons">trending_up</i> Imprime y observa el trabajo de tus colaboradores
                 </div>
             </div>
         </div>
     </div>
+    @*    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+        <div class="card-header card-header-info card-header-icon">
+        <div class="card-icon">
+        <i class="material-icons">trending_up</i>
+        </div>
+        <p class="card-category text-dark">Reportes</p>
+        <hr />
+        <h3 class="card-title">+245</h3>
+        <button class="btn btn-info btn-sm">Ir</button>
+        </div>
+        <div class="card-footer">
+        <div class="stats">
+        <i class="material-icons">trending_up</i> Imprime y observa el trabajo de tus colaboradores
+        </div>
+        </div>
+        </div>
+        </div>*@
 </div>
+
+@section Scripts{
+
+<script type="text/javascript" src="~/Scripts/HomeController/Home.js"></script>
+}

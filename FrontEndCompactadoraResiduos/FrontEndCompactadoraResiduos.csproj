@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Temp\Residuo\" />
     <Folder Include="wwwroot\assets\datatables\" />
   </ItemGroup>
 

@@ -26,27 +26,34 @@
     <div class="form-group">
         <label class="bmd-label-floating">
             <h5>
-                <span class="tim-note text-dark">Descripcion</span>
-            </h5>
-        </label>
-        <input type="text" class="form-control" id="descripcion" name="descripcion" />
-    </div>
-    <div class="form-group">
-        <label class="bmd-label-floating">
-            <h5>
                 <span class="tim-note text-dark">Codigo</span>
             </h5>
         </label>
         <input type="text" class="form-control" id="codigo" name="codigo" />
     </div>
     <div class="form-group">
-        <label for="imagenResiduo">Example file input</label>
-        <input type="file" class="form-control-file" id="imagenResiduo">
+        <label for="descripcion">
+            <h5>
+                <span class="tim-note text-dark">Descripcion</span>
+            </h5>
+        </label>
+        
+        
+
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" maxlength="195" placeholder="Breve descripcion, maximo 195 caracteres" required></textarea>
+
+    </div>
+  
+    <div class="dropzone" style="width:100% !important" id="dropzone" name="mainFileUploader">
+        <div class="fallback">
+            <input name="file" type="file" multiple />
+        </div>
     </div>
     <br />
     <button id="btn-save-residuo" type="button" class="btn-block btn btn-success"> Guardar </button>
 
 </form>
+
 
 
 @section Scripts{

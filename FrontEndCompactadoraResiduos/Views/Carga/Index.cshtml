@@ -4,33 +4,60 @@
 }
 
 @section Styles{
-<link rel="stylesheet" href="~/assets/personal_style/cardsResiduos.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/datatables/DataTables-1.11.4/css/jquery.dataTables.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/datatables/daterangepicker.css" />
 }
-@if (Model.Residuos is not null)
-{
-    <div class="row">
 
-        @foreach (var residuo in @Model.Residuos)
-        {
-            <!-- the cols in this div change the number of cards per row depending on screen size and the mb-4 adds space below cards if they spill over into the next row-->
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="card">
-                    <img class="card-img-top" src="@residuo.cImagen" alt="Card image cap">
-                    <span class="badge badge-primary">@residuo.cCodigoResiduo</span>
-                    <div class="card-body">
-                        <h3 class="text-center"> @residuo.cNombre</h3>
-                        <p class="card-text">@residuo.cDescripcion</p>
-                    </div>
-                    <button class="btn btn-primary btn-block"><h4><i class="large material-icons">file_upload</i> CARGAR</h4></button>
-                </div>
-            </div>
-        }
+<input id="daterange">
 
+<div class="container">
+     <div class="float-right">
+            <button id="btn-see-carga" type="button" class="btn btn-primary btn-sm">
+                <i class="small material-icons">remove_red_eye</i>
+            </button>
+            <button id="btn-edit-carga" type="button" class="btn btn-info btn-sm">
+                <i class="small material-icons">edit</i>
+            </button>
+            <button id="btn-delete-carga" type="button" class="btn btn-danger btn-sm">
+                <i class="small material-icons">delete</i>
+            </button>
+        </div>
+    <div class="card">
+        <table id="example" class="display" cellspacing="0" width="75%">
+
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre Residuo</th>
+                    <th>Codigo Residuo</th>
+                    <th>Responsable</th>
+                    <th>Peso Bruto</th>
+                    <th>Fecha</th>
+
+
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                   
+                    <th>#</th>
+                    <th>Nombre Residuo</th>
+                    <th>Codigo Residuo</th>
+                    <th>Responsable</th>
+                    <th>Peso Bruto</th>
+                    <th>Fecha</th>
+                </tr>
+            </tfoot>
+        </table>
     </div>
-}
-else
-{
-    <div class="alert alert-warning" role="alert">
-        Verifique su conexion a internet
-    </div>
+</div>
+<div class="modal " id="modal" tabindex="-2" role="dialog" aria-labelledby="myModal" aria-hidden="true"></div>
+
+@section Scripts{
+<script type="text/javascript" src="~/assets/datatables/DataTables-1.11.4/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript" src="~/assets/datatables/daterangepicker.min.js"></script>
+<script type="text/javascript" src="~/assets/datatables/moment.min.js"></script>
+<script type="text/javascript" src="~/Scripts/CargaController/CargaIndex.js"></script>
+<script type ="text/javascript" src="~/Scripts/Modal/Modal.js" ></script>
 }

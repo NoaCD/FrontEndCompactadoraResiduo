@@ -35,7 +35,9 @@ namespace FrontEndCompactadoraResiduos.Controllers
         /// <returns></returns>
         public IActionResult CatalogoUsuarios()
         {
-            var usuarios = usuarioBussiness.HttpGet();//Obtenemos una lista de usuarios
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+
+            var usuarios = usuarioBussiness.HttpGet(host);//Obtenemos una lista de usuarios
             var modelo = new UsuariosCatalogoViewModel() { Usuarios = usuarios.Result };
             return View(modelo);
         }
@@ -58,7 +60,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
 
             var catTipoUsuario = tipoUsuarios.todosTipoUsuarios(host);
         
-            var usuario = usuarioBussiness.obtenerElemento(_oUsuario.iId);
+            var usuario = usuarioBussiness.obtenerElemento(host, _oUsuario.iId);
             var modelo = new ItemEditarUsuarioViewModel() { itemUsuario = usuario.Result, tiposUsuario = catTipoUsuario.Result };
 
             return View(modelo);
@@ -71,10 +73,12 @@ namespace FrontEndCompactadoraResiduos.Controllers
         /// <returns></returns>
         public ActionResult VerUsuario()
         {
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+
             //Recibimos el objeto que viene del ajax
             string id = Request.Form["datos"]; //tenemos el id
             var _oUsuario = JsonConvert.DeserializeObject<UsuarioDTO>(id); //deserializamos con el dto para tener el id
-            var usuario = usuarioBussiness.obtenerElemento(_oUsuario.iId); //hacemos la peticion
+            var usuario = usuarioBussiness.obtenerElemento(host, _oUsuario.iId); //hacemos la peticion
             var modelo = new ItemUsuarioViewModel() { itemUsuario = usuario.Result };
             return View(modelo);
         }
@@ -109,7 +113,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
                 {
                     int idUsuario = Int32.Parse(respuesta.Result);
                     //Hacemos una busqeuda al usuairo que se acaba de crear
-                    var usuario = usuarioBussiness.obtenerElemento(idUsuario); //hacemos la peticion
+                    var usuario = usuarioBussiness.obtenerElemento(host,idUsuario); //hacemos la peticion
                     return Json(new { estatus = "success", mensaje = "Usuario creado con exito", titulo = "Existoso!", data= usuario.Result.nombre });
 
                 }

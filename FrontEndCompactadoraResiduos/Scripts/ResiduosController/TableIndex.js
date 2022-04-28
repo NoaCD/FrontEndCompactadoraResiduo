@@ -69,6 +69,8 @@ $(document).ready(function () {
     })
 
 
+
+
     /**************************************************************
  * Controla el boton agregar
  * abre un modal que lleva a un form para enviar datos
@@ -81,19 +83,110 @@ $(document).ready(function () {
     });
 
 
+    /**************************************************************
+    * Controla el boton imagen 
+    * abre un modal que lleva a un form para enviar datos
+    * *************************************************************/
+    $("#btn-img-residuo").click(function () {
+        if (filaSeleccionada() == true) {
+            var arrayResiduo = table.row('.selected').data(); //Solo va a existir el array si se selecciona
+            var Data = {};
+            var id = arrayResiduo[0];
+            var datos = {
+                iId: id
+            }
+            Data["datos"] = JSON.stringify(datos);
+            var ruta = "/Residuos/CambiarImagen";
+            showModal("POST", ruta, Data, null);//mandamos llamar el modal
+
+
+        } else {
+            Toast.fire({
+                icon: 'error',
+                title: '¡Seleccione un elemento para editarlo!'
+            });
+        }
+    });
+
+
+
+    /***********************************************************************************
+    *
+    * funcion para el boton de editar 
+    * 
+    * *********************************************************************************
+    * */
+    $("#btn-edit-residuo").click(function () {
+        if (filaSeleccionada() == true) {
+            var arrayResiduo = table.row('.selected').data(); //Solo va a existir el array si se selecciona
+            var Data = {};
+            var id = arrayResiduo[0];
+            var datos = {
+                iId: id
+            }
+            Data["datos"] = JSON.stringify(datos);
+
+
+            var ruta = "/Residuos/EditarResiduo";
+            showModal("POST", ruta, Data, null);//mandamos llamar el modal
+
+        } else {
+
+            Toast.fire({
+                icon: 'error',
+                title: '¡Seleccione un elemento para editarlo!'
+            });
+        }
+
+    });
 
 
 
 
+    /***********************
+ * Metodo que controla el 
+ * boton eliminar
+ ************************/
+
+    $('#btn-delete-residuo').click(function () {
+        if (filaSeleccionada() == true) {
+            Swal.fire({
+                title: '¿Estas seguro que deseas eliminar este residuo?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: "Cancelar",
+                confirmButtonText: 'Si, si estoy seguro!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    //Funcion eliminar en la API
+                    var arrayUsuario = table.row('.selected').data(); //Solo va a existir el array si se selecciona
+                    var Data = {};
+                    var id = arrayUsuario[0];
+                    var datos = {
+                        iId: id
+                    }
+                    Data["datos"] = JSON.stringify(datos);
+
+                    var ruta = "/Residuos/EliminarResiduo"
+                    var postRuta = "/Residuos/Index"
+                    globalEnviarControlador("POST", ruta, Data, false, postRuta);
+
+
+                }
+            })
+        } else {
+            Toast.fire({
+                icon: 'error',
+                title: '¡Seleccione un elemento para eliminarlo!'
+            });
+        }
 
 
 
-
-
-
-
-
-
+    });
 
     /*Agregamos enumeraciones a la primera columna */
     table.on('order.dt search.dt', function () {

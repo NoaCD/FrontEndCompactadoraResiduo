@@ -1,3 +1,6 @@
 ﻿.error {
     color: #e74c3c;
 }
+textarea.error {
+    border: .5px solid #FF0000 !important;
+}
