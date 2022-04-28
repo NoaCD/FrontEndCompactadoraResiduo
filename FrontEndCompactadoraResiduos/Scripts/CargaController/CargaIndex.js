@@ -9,38 +9,54 @@ $(document).ready(function () {
         "ajax": "/Carga/ApiCargas",
         "processing": true,
         "columns": [
-            { "data": "numeroEmpleado" },
-            { "data": "nombreResiduo" },
-            { "data": "idEmpleado" },
             { "data": "idCarga" },
             { "data": "nombreResiduo" },
+            { "data": "codigoResiduo" },
+            { "data": "numeroEmpleado" },
+            { "data": "pesoBrutoCarga" } ,
             { "data": "fechaCreacionCarga" }
 
-        ],
-            //Configuracion de datatables lenguaje
-            language:
-            {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "Sin resultados encontrados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            },
 
-        }
+        //  public int ? idCarga { get; set; }
+        //public DateTime ? fechaCreacionCarga { get; set; }
+        //public DateTime ? fechaModificacionCarga { get; set; }   
+        //public DateTime ? fechaEliminacionCarga { get; set; }
+        //public double pesoBrutoCarga { get; set; }
+        //public double ? pesoContenedorCarga { get; set; }
+        //public int ? idResiduo { get; set; }
+        //public string ? nombreResiduo { get; set; }
+        //public string ? descripcionResido { get; set; }
+        //public string codigoResiduo { get; set; }
+        //public int ? idEmpleado { get; set; }
+        //public string nombreEmpleado { get; set; }
+        //public string apellidoPaterno { get; set; }
+        //public string apellidoMaterno { get; set; }
+        //public int numeroEmpleado { get; set; }
+        ],
+        //Configuracion de datatables lenguaje
+        language:
+        {
+            "decimal": "",
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+
+    }
     );
 
 
@@ -107,7 +123,6 @@ $(document).ready(function () {
 
         if (filaSeleccionada() == true) {
             var arrayCarga = table.row('.selected').data(); //Solo va a existir el array si se selecciona
-            console.log(arrayCarga);
 
             var Data = {};
             var id = arrayCarga["idCarga"];
@@ -146,6 +161,46 @@ $(document).ready(function () {
 
 
 
+    /***********************************************************************************
+    *
+    * funcion para el boton de editar 
+    * 
+    * *********************************************************************************
+    * */
+    $('#btn-edit-carga').click(function () {
+        if (filaSeleccionada() == true) {
+            var arrayCarga = table.row('.selected').data(); //Solo va a existir el array si se selecciona
+            var Data = {};
+            var id = arrayCarga["idCarga"];
+            var datos = {
+                iId: id
+            }
+            Data["datos"] = JSON.stringify(datos);
+            
+            var ruta = "/Carga/EditarCarga";
+            
+            showModal("POST", ruta, Data, null);//mandamos llamar el modal
+
+        } else {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'error',
+                title: '¡Seleccione un elemento para editarlo!'
+            });
+        }
+
+    });
 
 
 

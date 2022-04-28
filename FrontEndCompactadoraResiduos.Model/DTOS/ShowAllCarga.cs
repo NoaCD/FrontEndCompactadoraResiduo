@@ -13,6 +13,8 @@ namespace CompactadoraDeResiduos.Model.DTO
         public DateTime? fechaCreacionCarga { get; set; }
         public DateTime? fechaModificacionCarga { get; set; }
         public DateTime? fechaEliminacionCarga { get; set; }
+        public double pesoBrutoCarga { get; set; }
+        public double? pesoContenedorCarga { get; set; }
         public int? idResiduo { get; set; }
         public string? nombreResiduo { get; set; }
         public string? descripcionResido { get; set; }

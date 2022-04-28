@@ -1,0 +1,52 @@
+﻿@model ItemCargaViewModel;
+@{
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+
+@section header{
+<link href="~/assets/personal_style/CrearEmpleadoStylesheet.css" rel="stylesheet" />
+
+<h1 class="display-4 float-right">Editar Carga (SOLO DESARROLLADORES) </h1>
+}
+
+@if (Model.Carga is not null)
+{
+    <form id="form-actualizar-carga">
+        <input type="hidden" id="idCarga" value="@Model.Carga.idCarga" />
+        <input type="hidden" id="idResiduo" value="@Model.Carga.idResiduo" />
+        <input type="hidden" id="idUsuario" value="@Model.Carga.idEmpleado" />
+
+        <div class="form-group">
+            <label class="bmd-label-floating">
+                <h5>
+                    <span class="tim-note text-dark">Peso Bruto</span>
+                </h5>
+            </label>
+            <input type="text" class="form-control" id="pesoBruto" name="pesoBruto"
+               value="@Model.Carga.pesoBrutoCarga">
+        </div>
+        <div class="form-group">
+            <label class="bmd-label-floating">
+                <h5>
+                    <span class="tim-note text-dark">Peso Contenedor </span>
+                </h5>
+            </label>
+            <input type="text" class="form-control" id="pesoContenedor" name="pesoContenedor"
+               value="@Model.Carga.pesoContenedorCarga " />
+        </div>
+
+        <button type="button" class="btn btn-block btn-info" id="btn-actualizar-carga">Guardar cambios</button>
+    </form>
+}
+else
+{
+    <div class="alert alert-warning">
+        Upsss no llego la informacion problema no llego del API
+    </div>
+}
+
+
+@section scripts{
+
+}

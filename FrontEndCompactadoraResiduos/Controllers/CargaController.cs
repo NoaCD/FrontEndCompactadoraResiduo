@@ -17,18 +17,21 @@ namespace FrontEndCompactadoraResiduos.Controllers
         {
             _configuration = configuration;
         }
-        
+
 
 
         // GET: CargaController
         public ActionResult Index()
         {
-           //retorna la vista para observar todas las cargas
-           return View();
+            //retorna la vista para observar todas las cargas
+            return View();
 
         }
 
-
+        /// <summary>
+        /// Retorna todas las cargas ehchas hasta ahora
+        /// </summary>
+        /// <returns></returns>
         public JsonResult ApiCargas()
         {
             var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
@@ -36,7 +39,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
             CargaBussiness CargaBuss = new CargaBussiness();
             var respuesta = CargaBuss.cargasGet(host);
 
-            return new JsonResult(new { data = respuesta.Result } );
+            return new JsonResult(new { data = respuesta.Result });
         }
 
 
@@ -59,7 +62,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
                 }
                 else
                 {
-                    var model = new ItemCargaViewModel { Carga = dataCarga.carga};
+                    var model = new ItemCargaViewModel { Carga = dataCarga.carga };
                     return View(model);
                     //return new JsonResult(new { estatus = "Correcto", mensjae = "carga vacia", codigo = "error" });
 
@@ -72,10 +75,27 @@ namespace FrontEndCompactadoraResiduos.Controllers
             }
         }
 
-        // GET: CargaController/Create
-        public ActionResult Create()
+        // PUT: CargaController/EditarCarga
+        public ActionResult EditarCarga()
         {
-            return View();
+            try
+            {
+                var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+
+                var jsonCarga = Request.Form["datos"];
+                var _idObCarga = JsonConvert.DeserializeObject<CargaBinding>(jsonCarga);//Id Objeto Carga
+                var ObjetoCarga = cargaBus.obtenerElementoCarga(host, _idObCarga.iId);
+
+                var modelo = new ItemCargaViewModel() { Carga = ObjetoCarga.Result.carga };
+                return View(modelo);
+
+
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { estatus = "error", mensjae = "error en el controlador EditarCargfa" });
+            }
+
         }
 
         // POST: CargaController/Create
