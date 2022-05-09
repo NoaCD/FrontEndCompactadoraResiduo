@@ -3,10 +3,7 @@ $(document).ready(function () {
 
     init(); //funcion para iniciar le programa
     validarForm('#form-actualizar-residuo'); //validamos le formulario
-
 });
-
-
 
 function init() {
     $("#btn-actualizar-residuo").click(function (e) {
@@ -23,8 +20,6 @@ function init() {
         }
     })
 }
-
-
 /**
  * Envia al controlador para guardar los cambios
  * @param {any} cTipo Metodo por el cual se va a ejecutar
@@ -32,7 +27,7 @@ function init() {
  * @param {any} Data
  * @param {any} Funcion
  */
-function enviarControlador(cTipo, cUrl, Data, Funcion) {
+function enviarResiduo(cTipo, cUrl, Data, Funcion) {
     $.ajax({
         type: cTipo,
         url: cUrl,
@@ -71,9 +66,6 @@ function enviarControlador(cTipo, cUrl, Data, Funcion) {
 }
 
 
-
-
-
 /**
  *Enviar datos POR IFORM FILE | FORM DATA a nuestro cliente
  * El cliente enviara esta data al API
@@ -94,8 +86,7 @@ function enviarDatos() {
 
     Data["datos"] = JSON.stringify(datos);
     var ruta = "/Residuos/ActualizarResiduo"
-    enviarControlador("POST", ruta, Data, false);
-
+    enviarResiduo("POST", ruta, Data, false);
 
 }
 
@@ -143,7 +134,6 @@ function validarForm(formulario) {
                 minlength: 'Debe ser mayor que 2 caracter',
                 maxlength: 'No debe ser mayor a 20 caracter '
             },
-
         }
     });
 }
