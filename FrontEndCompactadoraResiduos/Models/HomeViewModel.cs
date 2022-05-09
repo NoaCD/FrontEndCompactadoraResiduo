@@ -2,6 +2,7 @@
 {
     public class HomeViewModel
     {
+        public long? totalProveedores { get; set; }
         public long? totalCargas { get; set; }
         public long? totalUsuarios { get; set; }
         public long? totalResiduos { get; set; }

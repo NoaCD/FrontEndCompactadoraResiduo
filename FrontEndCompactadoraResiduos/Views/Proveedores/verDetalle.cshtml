@@ -1,0 +1,54 @@
+﻿@model ProveedorViewModel;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+
+@section header{
+<h1 class="display-4 text-center">Detalle Proveedor</h1>
+}
+
+@if (Model.proveedor is not null)
+{
+    <div class="col-sm-12">
+        <div class="card shadow p-3 bg-primary" style="20rem;">
+            <div class="card-header text-center"> <h4> <b>@Model.proveedor.nombre </b></h4> <hr style="background-color:white" /> </div>
+            <div class="container">
+                <h5 class="card-title text-center"><b> Direccion </b> </h5>
+                <p class="card-text text-center">
+                    @Model.proveedor.direccion
+                </p>
+                <h5 class="card-title text-center"><b> RFC: </b> </h5>
+                <p class="card-text text-center">
+                    @Model.proveedor.rfc
+                </p>
+                <h5 class="card-title text-center"><b> Descripcion</b> </h5>
+                <p class="card-text text-center">
+                    @Model.proveedor.descripcion
+                </p>
+
+                <h5 class="card-title text-center"><b> Fecha de alta: </b></h5>
+                <p class="card-text text-center">
+                    @Model.proveedor.fechaCreacion
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+
+
+}
+else
+{
+    <div class="alert alert-warning text-center" role="alert">
+        Los datos no se cargaron
+    </div>
+}
+
+@section footer{
+<button class="btn btn-block btn-primary" type="button" data-dismiss="modal">Ok!</button>
+}

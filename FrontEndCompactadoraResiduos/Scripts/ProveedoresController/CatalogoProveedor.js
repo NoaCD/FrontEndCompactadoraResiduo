@@ -102,11 +102,9 @@ $(document).ready(function () {
             Data["datos"] = JSON.stringify(datos);
             console.log(Data);
 
-            var ruta = "/Proveedores/VerProveedor";
+            var ruta = "/Proveedores/verDetalle?id=" + id;
             console.log(Data);
             showModal("POST", ruta, Data, null);//mandamos llamar el modal
-
-
         } else {
             //Tostada de error
             Toast.fire({

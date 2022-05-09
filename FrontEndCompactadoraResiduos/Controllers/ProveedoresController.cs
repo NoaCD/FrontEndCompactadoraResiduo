@@ -22,7 +22,6 @@ namespace FrontEndCompactadoraResiduos.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
-
             var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
             ProcesarProveedorBussiness procesarBus = new ProcesarProveedorBussiness();
             var proveedores = procesarBus.GetProveedores(host);
@@ -116,6 +115,21 @@ namespace FrontEndCompactadoraResiduos.Controllers
                 return new JsonResult(new { estatus = "error", mensaje = "llego nulo el formularion, no se puede procesar" });
 
             }
+
+        }
+
+        /// <summary>
+        /// Requiere que le envien el id por la url para poder obtener la informacion del provedor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult verDetalle(int id)
+        {
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+            ProcesarProveedorBussiness procesarBus = new ProcesarProveedorBussiness();
+            var proveedores = procesarBus.GetElementProveedor(id, host);
+            var modelo = new ProveedorViewModel() { proveedor = proveedores.Result };
+            return View(modelo);
 
         }
     }

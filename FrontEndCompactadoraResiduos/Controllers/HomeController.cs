@@ -25,11 +25,13 @@ namespace FrontEndCompactadoraResiduos.Controllers
             var totalResiduos = homeBus.getTotalResiduos(host);
             var totalCargas = homeBus.getTotalCargas(host);
             var totalUsuarios = homeBus.getTotalUsuarios(host);
+            var totalProveedores = homeBus.getTotalProveedores(host);
             var modelo = new HomeViewModel(); 
             if(totalResiduos.Result.estatus == "success" && totalResiduos.Result.codigo == 200 )
             {
                modelo = new HomeViewModel()
                {
+                   totalProveedores = totalProveedores.Result.data,
                    totalCargas = totalCargas.Result.data,
                    totalUsuarios = totalUsuarios.Result.data,
                    totalResiduos = totalResiduos.Result.data,
@@ -42,6 +44,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
             {
                 modelo = new HomeViewModel()
                 {
+                    totalProveedores = totalProveedores.Result.data,
                     totalCargas = totalCargas.Result.data,
                     totalUsuarios = totalUsuarios.Result.data,
                     totalResiduos = totalResiduos.Result.data,

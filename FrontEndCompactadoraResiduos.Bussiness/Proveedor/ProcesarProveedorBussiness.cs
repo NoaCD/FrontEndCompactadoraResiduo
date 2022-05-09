@@ -208,8 +208,6 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
             {
                 return null;
             }
-
-
         }
     }
 }

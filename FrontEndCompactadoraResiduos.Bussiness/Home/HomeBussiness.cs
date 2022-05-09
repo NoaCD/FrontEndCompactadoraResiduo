@@ -52,6 +52,25 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Home
             }
             return data;
         }
+        /// <summary>
+        /// obtenemos el total de Proveedores
+        /// </summary>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        public async Task<ResponseDTO> getTotalProveedores(string host)
+        {
+            var data = new ResponseDTO();
+            var page = host + "/api/totalProveedores";
+
+            var response = await client.GetAsync(page);
+            using (HttpContent content = response.Content)
+            {
+                string result = await content.ReadAsStringAsync();
+                data = JsonConvert.DeserializeObject<ResponseDTO>(result);
+
+            }
+            return data;
+        }
 
 
 
