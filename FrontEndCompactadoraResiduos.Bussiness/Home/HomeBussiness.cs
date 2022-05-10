@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,8 +28,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Home
             using (HttpContent content = response.Content)
             {
                 string result = await content.ReadAsStringAsync();
-                 data = JsonConvert.DeserializeObject<ResponseDTO>(result);
-              
+                data = JsonConvert.DeserializeObject<ResponseDTO>(result);
+
             }
             return data;
         }
@@ -88,13 +89,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Home
             using (HttpContent content = response.Content)
             {
                 string result = await content.ReadAsStringAsync();
-                 data = JsonConvert.DeserializeObject<ResponseDTO>(result);
-        
+                data = JsonConvert.DeserializeObject<ResponseDTO>(result);
+
             }
             return data;
         }
 
-        
+
 
     }
 }

@@ -12,6 +12,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly HomeBussiness homeBus = new HomeBussiness();
 
+
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
@@ -20,38 +21,45 @@ namespace FrontEndCompactadoraResiduos.Controllers
 
         public IActionResult Index()
         {
+
             var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
 
             var totalResiduos = homeBus.getTotalResiduos(host);
             var totalCargas = homeBus.getTotalCargas(host);
             var totalUsuarios = homeBus.getTotalUsuarios(host);
             var totalProveedores = homeBus.getTotalProveedores(host);
-            var modelo = new HomeViewModel(); 
-            if(totalResiduos.Result.estatus == "success" && totalResiduos.Result.codigo == 200 )
+            var modelo = new HomeViewModel();
+            try
             {
-               modelo = new HomeViewModel()
-               {
-                   totalProveedores = totalProveedores.Result.data,
-                   totalCargas = totalCargas.Result.data,
-                   totalUsuarios = totalUsuarios.Result.data,
-                   totalResiduos = totalResiduos.Result.data,
-                   mensaje = totalResiduos.Result.mensaje,
-                   estatus = totalResiduos.Result.estatus
-
-               };
-            }
-            else
-            {
-                modelo = new HomeViewModel()
+                if (totalResiduos.Result.estatus == "success" && totalResiduos.Result.codigo == 200)
                 {
-                    totalProveedores = totalProveedores.Result.data,
-                    totalCargas = totalCargas.Result.data,
-                    totalUsuarios = totalUsuarios.Result.data,
-                    totalResiduos = totalResiduos.Result.data,
-                    mensaje = totalResiduos.Result.mensaje,
-                    estatus = totalResiduos.Result.estatus
+                    modelo = new HomeViewModel()
+                    {
+                        totalProveedores = totalProveedores.Result.data,
+                        totalCargas = totalCargas.Result.data,
+                        totalUsuarios = totalUsuarios.Result.data,
+                        totalResiduos = totalResiduos.Result.data,
+                        mensaje = totalResiduos.Result.mensaje,
+                        estatus = totalResiduos.Result.estatus
 
-                };
+                    };
+                }
+                else
+                {
+                    modelo = new HomeViewModel()
+                    {
+                        totalProveedores = totalProveedores.Result.data,
+                        totalCargas = totalCargas.Result.data,
+                        totalUsuarios = totalUsuarios.Result.data,
+                        totalResiduos = totalResiduos.Result.data,
+                        mensaje = totalResiduos.Result.mensaje,
+                        estatus = totalResiduos.Result.estatus
+
+                    };
+                }
+            }catch(Exception ex)
+            {
+                return View(modelo);
             }
 
             return View(modelo);

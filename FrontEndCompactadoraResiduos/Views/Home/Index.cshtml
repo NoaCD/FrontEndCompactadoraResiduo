@@ -27,22 +27,18 @@
                 @if (Model.totalUsuarios != null)
                 {
                     <h2 class="text-dark"> @Model.totalUsuarios </h2>
-
                 }
                 else
                 {
                     <h2 class="text-dark"> 0 </h2>
-
                 }
                 <hr />
                 <h3 class="card-title text-center">
                     Usuarios
                     <small> </small>
                 </h3>
-
             </div>
             <a class="btn btn-warning btn-sm" href="@Url.Action("CatalogoUsuarios","Usuarios")"> Ir </a>
-
             <div class="card-footer">
 
                 <div class="stats">
@@ -58,7 +54,7 @@
                     <i class="material-icons">arrow_upward</i>
                 </div>
                 <p class="card-category text-dark">  </p>
-                @if (Model.totalResiduos != 0)
+                @if (Model.totalResiduos != null)
                 {
                     <h2 class="text-dark"> @Model.totalResiduos   </h2>
                 }
@@ -135,7 +131,7 @@
                 }
                 <hr />
                 <h3 class="card-title text-center">
-                    Reportes
+                    Proveedores
                     <small> </small>
                 </h3>
 
@@ -145,7 +141,7 @@
             <div class="card-footer">
 
                 <div class="stats">
-                    <i class="material-icons">trending_up</i> Imprime y observa el trabajo de tus colaboradores
+                    <i class="material-icons">trending_up</i> Observa y administra a los proveedores del sistema
                 </div>
             </div>
         </div>

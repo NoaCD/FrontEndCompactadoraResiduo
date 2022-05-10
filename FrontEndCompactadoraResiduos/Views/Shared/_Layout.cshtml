@@ -53,16 +53,11 @@
                             <p>Inicio</p>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="javascript:;" id="navbarDropdownUsuarios" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="@Url.Action("CatalogoUsuarios","Usuarios")">
                             <i class="material-icons">person</i>
                             <p>Usuarios</p>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownUsuarios">
-                            <a class="dropdown-item" href="@Url.Action("CatalogoUsuarios","Usuarios")">Principal</a>
-                            <a class="dropdown-item" href="#">Cambiar contraseña de usuarios</a>
-                            <a class="dropdown-item" href="#">Cambiar nombre usuarios</a>
-                        </div>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="@Url.Action("Index","Residuos")">
@@ -80,6 +75,12 @@
                         <a class="nav-link" href="@Url.Action("Index","Proveedores")">
                             <i class="material-icons">person_add</i>
                             <p>Proveedores</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index","Almacenes")">
+                            <i class="material-icons">home</i>
+                            <p>Almacenes</p>
                         </a>
                     </li>
                 </ul>
