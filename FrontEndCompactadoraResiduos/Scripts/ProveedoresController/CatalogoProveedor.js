@@ -153,7 +153,7 @@ $(document).ready(function () {
     $('#btn-delete-proveedor').click(function () {
         if (filaSeleccionada() == true) {
             Swal.fire({
-                title: '¿Estas seguro que deseas eliminar a este usuario?',
+                title: '¿Estas seguro que deseas eliminar a este proveedor?',
                 text: "¡No podrás revertir esto!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -173,8 +173,8 @@ $(document).ready(function () {
                     Data["datos"] = JSON.stringify(datos);
                     console.log(Data);
 
-                    var ruta = "/Usuarios/EliminarUsuario"
-                    var postRuta = "/Usuarios/CatalogoUsuarios"
+                    var ruta = "/Proveedores/EliminarProveedor?id=" + id;
+                    var postRuta = "/Proveedores/Index";
                     globalEnviarControlador("POST", ruta, Data, false, postRuta);
 
 
@@ -186,9 +186,6 @@ $(document).ready(function () {
                 title: '¡Seleccione un elemento para eliminarlo!'
             });
         }
-
-
-
     })
 
     /*Agregamos enumeraciones a la primera columna */

@@ -16,7 +16,17 @@ function globalEnviarControlador(cTipo, cUrl, Data, Funcion, ruta) {
         data: Data,
         dataType: "JSON",
         success: function (response) {
-            if (response.estatus == "error") {
+            if (response.estatus == "success") {
+                Swal.fire(
+                    response.mensaje,
+                    'Presiona para continuar',
+                    'success',
+                ).then(function () {
+                    window.location.replace(ruta);
+                });
+            }
+            else {
+
                 const Toast = Swal.mixin({
                     Toast: true,
                     position: 'top-end',
@@ -29,15 +39,6 @@ function globalEnviarControlador(cTipo, cUrl, Data, Funcion, ruta) {
                     type: response.estatus,
                     title: response.mensaje
                 })
-            }
-            else {
-                Swal.fire(
-                    response.mensaje,
-                    'Presiona para continuar',
-                    'success',
-                ).then(function () {
-                    window.location.replace(ruta);
-                });
             }
             if (Funcion)
                 window[Funcion]();

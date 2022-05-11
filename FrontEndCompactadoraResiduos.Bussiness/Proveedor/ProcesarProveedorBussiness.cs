@@ -15,23 +15,17 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
         /// </summary>
         /// <param name="proveedorFront"></param>
         /// <returns></returns>
-        public async Task<ResponseDTO> crear(ProveedorFrontDTO proveedorFront, string host)
+        public async Task<ResponseDTO> crear(string proveedorFront, string host)
         {
-            ProveedorDB proveedorDB = new ProveedorDB()
-            {
-                Nombre = proveedorFront.nombre,
-                Descripcion = proveedorFront.descripcion,
-                Direccion = proveedorFront.direccion,
-                Rfc = proveedorFront.rfc,
-            };
+            
             try
             {
 
                 string page = host + "/api/Proveedores";
-                var proveedorJSON = JsonConvert.SerializeObject(proveedorDB);
+                
                 using (HttpClient client = new HttpClient())
                 {
-                    var content = new StringContent(proveedorJSON, System.Text.Encoding.UTF8, "application/json");
+                    var content = new StringContent(proveedorFront, System.Text.Encoding.UTF8, "application/json");
 
                     var response = await client.PostAsync(page, content);
 
@@ -207,6 +201,43 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        public async Task<ResponseDTO> EliminarProveedor(string host, int id)
+        {
+            try
+            {
+                string page = host + "/api/Proveedores/eliminarProveedor/" + id;
+                using (HttpClient client = new HttpClient())
+                {
+
+
+                    var response = await client.DeleteAsync(page);
+                    var contenido = response.Content.ReadAsStringAsync();
+
+                    var respuesta = JsonConvert.DeserializeObject<ResponseDTO>(contenido.Result);
+                    if (respuesta is null || respuesta.estatus is null)
+                    {
+                        return new ResponseDTO()
+                        {
+                            estatus = "error",
+                            mensaje = "LLego nulo la respuesta del api"
+                        };
+                    }
+                    else
+                    {
+                        return respuesta;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return new ResponseDTO()
+                {
+                    estatus = "error",
+                    mensaje = "Error al intentar establecer conexxion con el API"
+                };
             }
         }
     }

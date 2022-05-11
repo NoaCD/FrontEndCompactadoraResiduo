@@ -177,6 +177,51 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
             }
 
         }
+
+        /// <summary>
+        /// Enviamos al API EL ID
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ResponseDTO> eliminarAlmacen(string host, int id)
+        {
+            try
+            {
+                string page = host + "/api/Almacen/eliminarAlmacen/" + id;
+                using (HttpClient client = new HttpClient())
+                {
+
+
+                    var response = await client.DeleteAsync(page);
+                    var contenido = response.Content.ReadAsStringAsync();
+
+                    var respuesta = JsonConvert.DeserializeObject<ResponseDTO>(contenido.Result);
+                    if(respuesta.estatus is null)
+                    {
+                        return new ResponseDTO()
+                        {
+                            estatus="error",
+                            mensaje ="LLego nulo la respuesta del api"
+                        };
+                    }
+                    else
+                    {
+                        return respuesta;
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+                 return new ResponseDTO()
+                {
+                    estatus = "error",
+                    mensaje = "Error al intentar establecer conexxion con el API"
+                };
+            }
+
+        }
     }
 }
 

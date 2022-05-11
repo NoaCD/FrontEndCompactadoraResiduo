@@ -8,10 +8,14 @@
 @section Styles{
 <link rel="stylesheet" href="~/assets/personal_style/cardsResiduos.css" />
 <link rel="stylesheet" type="text/css" href="~/assets/datatables/DataTables-1.11.4/css/jquery.dataTables.css" />
-
 }
+@if (Model.proveedores is null)
+{
+    <div class="alert alert-warning" role="alert">
 
-
+        No hay datos
+    </div>
+}
 <div class="container"> <br /> </div> @*espacio*@
 <div class="container">
     <div class="card">
@@ -42,13 +46,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model.proveedores.Count <= 0)
-                    {
-                        <div class="alert alert-warning" role="alert">|
-                            No hay datos
-                        </div>
-                    }
-                    else
+                    @if (Model.proveedores.Count > 0)
                     {
                         @foreach (var proveedor in Model.proveedores)
                         {
@@ -62,6 +60,7 @@
                         }
                     }
 
+
                 </tbody>
             </table>
         </div>
@@ -71,7 +70,10 @@
 <div class="modal " id="modal" tabindex="-2" role="dialog" aria-labelledby="myModal" aria-hidden="true"></div>
 
 @section Scripts{
+
 <script type="text/javascript" src="~/assets/datatables/DataTables-1.11.4/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="~/scripts/ProveedoresController/CatalogoProveedor.js"></script>
+<script type="text/javascript" src="~/scripts/Helpers/EnviarControlador.js"></script>
 <script type="text/javascript" src="~/scripts/Modal/Modal.js"></script>
+
 }

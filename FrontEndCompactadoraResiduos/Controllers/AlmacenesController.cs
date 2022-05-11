@@ -119,6 +119,19 @@ namespace FrontEndCompactadoraResiduos.Controllers
             }
         }
 
+        /// <summary>
+        /// recibimos el id del almacen que queramos eliminar
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>JSON</returns>
+        public JsonResult eliminarAlmacen(int id)
+        {
+            AlmacenBussiness almaceBuss = new AlmacenBussiness();
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+            var respuesta = almaceBuss.eliminarAlmacen(host, id);
+            return new JsonResult( respuesta.Result );
+        }
+
 
     }
 }

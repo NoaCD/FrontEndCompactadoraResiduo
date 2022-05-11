@@ -46,10 +46,8 @@ namespace FrontEndCompactadoraResiduos.Controllers
             string proveedorJSON = Request.Form["datos"];
             if (proveedorJSON is not null)
             {
-
-                ProveedorFrontDTO _oProveedor = JsonConvert.DeserializeObject<ProveedorFrontDTO>(proveedorJSON);
                 ProcesarProveedorBussiness procesarBus = new ProcesarProveedorBussiness();
-                var respuesta = procesarBus.crear(_oProveedor, host);
+                var respuesta = procesarBus.crear(proveedorJSON, host);
                 if (respuesta.Result != null)
                 {
                     return new JsonResult(new { estatus = respuesta.Result.estatus, mensaje = respuesta.Result.mensaje });
@@ -131,6 +129,21 @@ namespace FrontEndCompactadoraResiduos.Controllers
             var modelo = new ProveedorViewModel() { proveedor = proveedores.Result };
             return View(modelo);
 
+        }
+
+        /// <summary>
+        /// Obtenemos el id del proveedor a eliminar
+        /// 
+        /// </summary>
+        /// <param name="id">idProveedor</param>
+        /// <returns></returns>
+        public JsonResult EliminarProveedor(int id)
+        {
+            string host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+            ProcesarProveedorBussiness procesarBus = new ProcesarProveedorBussiness();
+            var proveedor = procesarBus.EliminarProveedor(host, id);
+
+            return new JsonResult( proveedor.Result );
         }
     }
 }

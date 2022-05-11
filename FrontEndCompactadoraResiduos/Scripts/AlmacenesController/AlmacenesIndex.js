@@ -149,6 +149,57 @@ $(document).ready(function () {
 
     });
 
+
+    /***********************
+ * Metodo que controla el 
+ * boton eliminar
+ ************************/
+
+    $('#btn-delete-almacen').click(function () {
+        if (filaSeleccionada() == true) {
+            Swal.fire({
+                title: '¿Estas seguro que deseas eliminar a este almacen?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: "Cancelar",
+                confirmButtonText: 'Si, si estoy seguro!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    //Funcion eliminar en la API
+                    var arrayUsuario = table.row('.selected').data(); //Solo va a existir el array si se selecciona
+                    var Data = {};
+                    var id = arrayUsuario["id"];
+               
+                    console.log(Data);
+
+                    var ruta = "/Almacenes/eliminarAlmacen?id=" + id
+                    var postRuta = "/Almacenes/Index"
+                    globalEnviarControlador("POST", ruta, Data, false, postRuta);
+
+                }
+            })
+        } else {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'error',
+                title: '¡Seleccione un elemento para eliminarlo!'
+            });
+        }
+    })
+
 });
 
 
