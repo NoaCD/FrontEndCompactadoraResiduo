@@ -16,22 +16,7 @@ $(document).ready(function () {
             { "data": "pesoBrutoCarga" } ,
             { "data": "fechaCreacionCarga" }
 
-
-        //  public int ? idCarga { get; set; }
-        //public DateTime ? fechaCreacionCarga { get; set; }
-        //public DateTime ? fechaModificacionCarga { get; set; }   
-        //public DateTime ? fechaEliminacionCarga { get; set; }
-        //public double pesoBrutoCarga { get; set; }
-        //public double ? pesoContenedorCarga { get; set; }
-        //public int ? idResiduo { get; set; }
-        //public string ? nombreResiduo { get; set; }
-        //public string ? descripcionResido { get; set; }
-        //public string codigoResiduo { get; set; }
-        //public int ? idEmpleado { get; set; }
-        //public string nombreEmpleado { get; set; }
-        //public string apellidoPaterno { get; set; }
-        //public string apellidoMaterno { get; set; }
-        //public int numeroEmpleado { get; set; }
+  
         ],
         //Configuracion de datatables lenguaje
         language:

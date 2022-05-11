@@ -1,0 +1,60 @@
+﻿@model AlmacenViewModel;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+
+@section header{
+<link href="~/assets/personal_style/CrearEmpleadoStylesheet.css" rel="stylesheet" />
+
+<div class="text-center">
+    <h1 class="display-4 ">Editar proveedor</h1>
+</div>
+}
+
+@if (Model.itemAlmacen != null)
+{
+    <form id="form-edit-almacen" name="form-create-almacen">
+        <input type="hidden" value="@Model.itemAlmacen.id" name="idAlmacen" id="idAlmacen">
+        <input type="hidden" value="@Model.itemAlmacen.Default " name="Default" id="Default">
+        
+        <div class="form-group">
+            <label class="bmd-label-floating">
+                <h5>
+                    <span class="tim-note text-dark">Nombre</span>
+                </h5>
+            </label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="@Model.itemAlmacen.nombre" />
+        </div>
+        <div class="form-group">
+            <label class="bmd-label-floating">
+                <h5>
+                    <span class="tim-note text-dark">Clave</span>
+                </h5>
+            </label>
+            <input type="text" class="form-control" id="clave" name="clave" value="@Model.itemAlmacen.clave " />
+        </div>
+        <div class="form-group">
+            <label class="bmd-label-floating">
+                <h5>
+                    <span class="tim-note text-dark"> Ubicacion </span>
+                </h5>
+            </label>
+            <input type="text" class="form-control" id="ubicacion" name="ubicacion" value="@Model.itemAlmacen.ubicacion" />
+        </div>
+        <br />
+        <button id="btn-save-almacen" type="button" class="btn-block btn btn-success"> Guardar </button>
+    </form>
+}
+else
+{
+    <div class="alert alert-danger">
+        LLego vacia la peticion
+    </div>
+}
+@section scripts{
+<script type="text/javascript" src="~/scripts/AlmacenesController/editarAlmacen.js"></script>
+}

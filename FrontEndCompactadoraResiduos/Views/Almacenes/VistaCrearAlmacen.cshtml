@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+@section header{
+<link href="~/assets/personal_style/CrearEmpleadoStylesheet.css" rel="stylesheet" />
+
+<div class="text-center">
+    <h1 class="display-4 ">Agregar Almacen</h1>
+</div>
+}
+
+<form id="form-create-almacen" name="form-create-almacen">
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Nombre</span>
+            </h5>
+        </label>
+        <input type="text" class="form-control" id="nombre" name="nombre" />
+    </div>
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark">Clave</span>
+            </h5>
+        </label>
+        <input type="text" class="form-control" id="clave" name="clave" />
+    </div>
+    <div class="form-group">
+        <label class="bmd-label-floating">
+            <h5>
+                <span class="tim-note text-dark"> Ubicacion </span>
+            </h5>
+        </label>
+        <input type="text" class="form-control" id="ubicacion" name="ubicacion" />
+    </div>
+    <br />
+    <button id="btn-create-almacen" type="button" class="btn-block btn btn-success"> Guardar </button>
+</form>
+
+
+@section scripts{
+<script type="text/javascript" src="~/scripts/AlmacenesController/guardarAlmacen.js"></script>
+}

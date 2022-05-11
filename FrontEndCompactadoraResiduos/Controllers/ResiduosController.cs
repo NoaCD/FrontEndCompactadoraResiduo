@@ -248,7 +248,8 @@ namespace FrontEndCompactadoraResiduos.Controllers
             }
 
 
-            return new JsonResult(new { });
+            return new JsonResult(new { estatus = "error", mensaje = "error al parsear la informacion" });
+
 
         }
 

@@ -10,41 +10,41 @@
 
 
 <div class="container">
-     <div class="float-right">
-            <button id="btn-see-carga" type="button" class="btn btn-primary btn-sm">
+    <div class="card">
+        <div class="container py-4 px-4">
+            <h1 class="display-4 text-center"> Almacenes </h1>
+            <button id="btn-add-almacen" type="button" class="btn btn-success btn-sm">
+                <i class="small material-icons">add</i>
+            </button>
+            <button id="btn-see-almacen" type="button" class="btn btn-primary btn-sm">
                 <i class="small material-icons">remove_red_eye</i>
             </button>
-            <button id="btn-edit-carga" type="button" class="btn btn-info btn-sm">
+            <button id="btn-edit-almacen" type="button" class="btn btn-info btn-sm">
                 <i class="small material-icons">edit</i>
             </button>
-            <button id="btn-delete-carga" type="button" class="btn btn-danger btn-sm">
+            <button id="btn-delete-almacen" type="button" class="btn btn-danger btn-sm">
                 <i class="small material-icons">delete</i>
             </button>
         </div>
-    <div class="card">
-        <table id="example" class="display" cellspacing="0" width="75%">
-
+        <table id="tablaAlmacenes" class="table table-responsive table-striped table-bordered">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nombre Residuo</th>
-                    <th>Codigo Residuo</th>
-                    <th>Responsable</th>
-                    <th>Peso Bruto</th>
-                    <th>Fecha</th>
-
-
+                    <th>Clave</th>
+                    <th>Nombre</th>
+                    <th>Ubicacion</th>
+                    <th>Fecha Creacion</th>
+                    <th>Fecha Modificacion</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                   
                     <th>#</th>
-                    <th>Nombre Residuo</th>
-                    <th>Codigo Residuo</th>
-                    <th>Responsable</th>
-                    <th>Peso Bruto</th>
-                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Clave</th>
+                    <th>Ubicacion</th>
+                    <th>Fecha Creacion</th>
+                    <th>Fecha Modificacion</th>
                 </tr>
             </tfoot>
         </table>
@@ -55,5 +55,5 @@
 @section Scripts{
 <script type="text/javascript" src="~/assets/datatables/DataTables-1.11.4/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="~/Scripts/AlmacenesController/AlmacenesIndex.js"></script>
-<script type ="text/javascript" src="~/Scripts/Modal/Modal.js" ></script>
+<script type="text/javascript" src="~/Scripts/Modal/Modal.js"></script>
 }

@@ -1,0 +1,61 @@
+﻿@model AlmacenViewModel;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+@section header{
+<h1 class="display-4 text-center">Detalle Almacen</h1>
+}
+@if (Model.itemAlmacen is not null)
+{
+    <div class="col-sm-12">
+        <div class="card shadow p-3 bg-primary" style="20rem;">
+            <div class="card-header text-center"> <h4> <b>@Model.itemAlmacen.nombre </b></h4> <hr style="background-color:white" /> </div>
+            <div class="container">
+                <h5 class="card-title text-center"><b> Clave </b> </h5>
+                <p class="card-text text-center">
+                    @Model.itemAlmacen.clave
+                </p>
+                <h5 class="card-title text-center"><b> Ubicacion </b> </h5>
+                <p class="card-text text-center">
+                    @Model.itemAlmacen.ubicacion
+                </p>
+                <h5 class="card-title text-center"><b> Por defecto </b> </h5>
+                <p class="card-text text-center">
+                    @Model.itemAlmacen.Default
+                </p>
+                <h5 class="card-title text-center"><b> Fecha de alta</b> </h5>
+                <p class="card-text text-center">
+                    @Model.itemAlmacen.fechaCreacion
+                </p>
+
+                <h5 class="card-title text-center"><b> Fecha de modificacion: </b></h5>
+                <p class="card-text text-center">
+                    @if (@Model.itemAlmacen.fechaModificacion is not null)
+                    {
+                        @Model.itemAlmacen.fechaModificacion
+                    }
+                    else
+                    {
+                        string mensaje = "No se ha modificado";
+                        @mensaje
+                        ;
+                    }
+                </p>
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning text-center" role="alert">
+        Los datos no se cargaron
+    </div>
+}
+
+@section footer{
+<button class="btn btn-block btn-primary" type="button" data-dismiss="modal">Ok!</button>
+}
