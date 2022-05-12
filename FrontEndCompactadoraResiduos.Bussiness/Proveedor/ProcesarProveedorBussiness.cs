@@ -10,6 +10,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
 {
     public class ProcesarProveedorBussiness
     {
+    
+
         /// <summary>
         /// Pärseamos y enviamos la infromacion al API
         /// </summary>
@@ -17,12 +19,12 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
         /// <returns></returns>
         public async Task<ResponseDTO> crear(string proveedorFront, string host)
         {
-            
+
             try
             {
 
                 string page = host + "/api/Proveedores";
-                
+
                 using (HttpClient client = new HttpClient())
                 {
                     var content = new StringContent(proveedorFront, System.Text.Encoding.UTF8, "application/json");
@@ -79,7 +81,14 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
             string page = host + "/api/Proveedores";
             try
             {
-                using (HttpClient client = new HttpClient())
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                using (HttpClient client = new HttpClient( handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
                     using (HttpContent content = response.Content)
