@@ -10,7 +10,18 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
 {
     public class ProcesarProveedorBussiness
     {
-    
+
+        //private readonly HttpClientHandler _handler = new HttpClientHandler();
+        //public ProcesarProveedorBussiness()
+        //{
+        //    _handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+        //    _handler.ServerCertificateCustomValidationCallback =
+        //        (httpRequestMessage, cert, cetChain, policyErrors) =>
+        //        {
+        //            return true;
+        //        };
+        //}
+
 
         /// <summary>
         /// Pärseamos y enviamos la infromacion al API
@@ -25,7 +36,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
 
                 string page = host + "/api/Proveedores";
 
-                using (HttpClient client = new HttpClient())
+                using (var client = new HttpClient())
                 {
                     var content = new StringContent(proveedorFront, System.Text.Encoding.UTF8, "application/json");
 
@@ -75,7 +86,11 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
 
 
         }
-
+        /// <summary>
+        /// Obtenemos todos los poveedores que nos proprociona el APÍ
+        /// </summary>
+        /// <param name="host"></param>
+        /// <returns></returns>
         public async Task<List<ProveedorFrontDTO>> GetProveedores(string host)
         {
             string page = host + "/api/Proveedores";
@@ -88,7 +103,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
                     {
                         return true;
                     };
-                using (HttpClient client = new HttpClient( handler))
+
+                using (var client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
                     using (HttpContent content = response.Content)
@@ -121,7 +137,14 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
             string page = host + "/api/Proveedores/elementoProveedor/" + id;
             try
             {
-                using (HttpClient client = new HttpClient())
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                using (var client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
                     using (HttpContent content = response.Content)
@@ -164,7 +187,14 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
 
                 string page = host + "/api/Proveedores";
                 var proveedorJSON = JsonConvert.SerializeObject(proveedorDB);
-                using (HttpClient client = new HttpClient())
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                using (var client = new HttpClient(handler))
                 {
                     var content = new StringContent(proveedorJSON, System.Text.Encoding.UTF8, "application/json");
 
@@ -218,7 +248,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
             try
             {
                 string page = host + "/api/Proveedores/eliminarProveedor/" + id;
-                using (HttpClient client = new HttpClient())
+                using (var client = new HttpClient())
                 {
 
 

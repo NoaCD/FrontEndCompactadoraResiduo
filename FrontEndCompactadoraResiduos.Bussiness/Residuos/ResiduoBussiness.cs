@@ -14,6 +14,19 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
 {
     public class ResiduoBussiness
     {
+
+
+        //private readonly HttpClientHandler _handler = new HttpClientHandler();
+        //public ResiduoBussiness()
+        //{
+        //    _handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+        //    _handler.ServerCertificateCustomValidationCallback =
+        //        (httpRequestMessage, cert, cetChain, policyErrors) =>
+        //        {
+        //            return true;
+        //        };
+        //}
+
         /// <summary>
         /// Peticion get al api para obtener todos los residuos
         /// </summary>
@@ -24,7 +37,15 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
             string page = host + "/api/Residuos";
             try
             {
-                using (HttpClient client = new HttpClient())
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+
+                using (HttpClient client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
                     using (HttpContent content = response.Content)
@@ -61,8 +82,14 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
         {
             var filePath = cImagen;
 
-
-            using (HttpClient client = new HttpClient())
+            var handler = new HttpClientHandler();
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            handler.ServerCertificateCustomValidationCallback =
+                (httpRequestMessage, cert, cetChain, policyErrors) =>
+                {
+                    return true;
+                };
+            using (HttpClient client = new HttpClient(handler))
             {
 
                 using (var multipartFormContent = new MultipartFormDataContent())
@@ -87,12 +114,9 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
                         //string page = host + "/api/Residuos" + "";
                         var page = new Uri(string.Concat(host, "/api/Residuos"));
 
-
                         var response = await client.PostAsync(page, multipartFormContent);
-
                         var contenido = response.Content.ReadAsStringAsync();
                         return await contenido;
-
 
                     }
                     catch (Exception ex)
@@ -118,7 +142,14 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
             var filePath = cImagen;
 
 
-            using (HttpClient client = new HttpClient())
+            var handler = new HttpClientHandler();
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            handler.ServerCertificateCustomValidationCallback =
+                (httpRequestMessage, cert, cetChain, policyErrors) =>
+                {
+                    return true;
+                };
+            using (HttpClient client = new HttpClient(handler))
             {
 
                 using (var multipartFormContent = new MultipartFormDataContent())
@@ -164,8 +195,17 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
 
         public async Task<string> enviarActualizacion(ResiduoCreacionDTO residuo, string host, string imagen)
         {
+            var handler = new HttpClientHandler();
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            handler.ServerCertificateCustomValidationCallback =
+                (httpRequestMessage, cert, cetChain, policyErrors) =>
+                {
+                    return true;
+                };
+
+
             string filePath = imagen;
-            using (HttpClient client = new HttpClient())
+            using (HttpClient client = new HttpClient(handler))
             {
 
                 using (var multipartFormContent = new MultipartFormDataContent())
@@ -184,18 +224,18 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
 
                     //Send it
 
-                    var page = host +"/api/residuos/"+ residuo.iId.ToString();
+                    var page = host + "/api/residuos/" + residuo.iId.ToString();
                     var response = await client.PutAsync(page, multipartFormContent);
 
                     var contenido = response.Content.ReadAsStringAsync();
                     return contenido.Result;
-               
+
 
                 }
             }
 
 
-            
+
         }
 
 
@@ -213,7 +253,14 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
 
             string folderName = "Temp/Residuo/";
             string directoryPath = Path.Combine(webRootPath, folderName);
-            using var httpClient = new HttpClient();
+            var handler = new HttpClientHandler();
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            handler.ServerCertificateCustomValidationCallback =
+                (httpRequestMessage, cert, cetChain, policyErrors) =>
+                {
+                    return true;
+                };
+            using var httpClient = new HttpClient(handler);
 
             // Get the file extension
             var uriWithoutQuery = uri.GetLeftPart(UriPartial.Path);
@@ -268,11 +315,16 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
 
             try
             {
-
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
                 string page = host + "/api/Residuos/" + idResiduo;
-                using (HttpClient client = new HttpClient())
+                using (var client = new HttpClient(handler))
                 {
-                    
 
                     var response = await client.DeleteAsync(page);
 
@@ -290,12 +342,12 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
                 }
 
             }
-            catch (Exception )
+            catch (Exception)
             {
                 return "error-request";
             }
 
-            
+
         }
 
         /// <summary>
@@ -320,7 +372,14 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
             string page = host + "/api/Residuos/" + id;
             try
             {
-                using (HttpClient client = new HttpClient())
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                using (var client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
                     using (HttpContent content = response.Content)
@@ -332,7 +391,6 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
                         {
                             return itemResiduo;
                         }
-
                         return itemResiduo = new ResiduoDTO();
                     }
 

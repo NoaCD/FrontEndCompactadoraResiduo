@@ -137,7 +137,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
             }
             catch (Exception ex)
             {
-                return new JsonResult(new { estatus = "error", mensaje = "Error al recibir datos" });
+                return new JsonResult(new { estatus = "error", mensaje = "Error al recibir datos (try)" });
             }
 
         }
@@ -193,16 +193,24 @@ namespace FrontEndCompactadoraResiduos.Controllers
 
                 var respuesta = residuos.enviarActualizacion(_oResiduoCreacion, host, imgSaveLocal);
 
-                if (respuesta.Result.ToString().ToUpper() != "\"OK\"")
+                try
                 {
-                    return new JsonResult(new { estatus = "error", mensaje = "Error al conectar con el servidor" });
+                    if (respuesta.Result.ToString().ToUpper() != "\"OK\"")
+                    {
+                        return new JsonResult(new { estatus = "error", mensaje = "Error al conectar con el servidor" });
 
+                    }
+                    else
+                    {
+                        residuos.eliminarImagen(imgSaveLocal);//funcion void que elimina la imagen que se acaba de crear
+
+                        return new JsonResult(new { estatus = "success", mensaje = "Residuo Creado con exito!!!" });
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    residuos.eliminarImagen(imgSaveLocal);//funcion void que elimina la imagen que se acaba de crear
+                    return new JsonResult(new { estatus = "error", mensaje = "Error al recibir respuesta" });
 
-                    return new JsonResult(new { estatus = "success", mensaje = "Residuo Creado con exito!!!" });
                 }
 
 
@@ -249,7 +257,6 @@ namespace FrontEndCompactadoraResiduos.Controllers
 
 
             return new JsonResult(new { estatus = "error", mensaje = "error al parsear la informacion" });
-
 
         }
 
