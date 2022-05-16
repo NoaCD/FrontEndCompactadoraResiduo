@@ -10,6 +10,7 @@ namespace CompactadoraDeResiduos.Model.DTO
     {
 
         public int? idCarga { get; set; }
+        public int numeroEmpleado { get; set; }
         public DateTime? fechaCreacionCarga { get; set; }
         public DateTime? fechaModificacionCarga { get; set; }
         public DateTime? fechaEliminacionCarga { get; set; }
@@ -23,7 +24,8 @@ namespace CompactadoraDeResiduos.Model.DTO
         public string nombreEmpleado { get; set; }
         public string apellidoPaterno { get; set; }
         public string apellidoMaterno { get; set; }
-        public int numeroEmpleado { get; set; }
+        public string folioCarga { get; set; }
+
 
 
     }

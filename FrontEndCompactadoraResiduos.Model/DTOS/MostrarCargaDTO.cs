@@ -22,6 +22,7 @@ namespace FrontEndCompactadoraResiduos.Model.DTOS
         public string nombreEmpleado { get; set; }
         public string apellidoPaterno { get; set; }
         public string apellidoMaterno { get; set; }
+        public string folioCarga { get; set; }
         public int numeroEmpleado { get; set; }
     }
 }

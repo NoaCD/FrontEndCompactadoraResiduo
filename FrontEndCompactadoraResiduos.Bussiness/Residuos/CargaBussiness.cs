@@ -118,7 +118,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
                                         numeroEmpleado = respuesta.data["numeroEmpleado"],
                                         nombreEmpleado = respuesta.data["nombreEmpleado"],
                                         apellidoPaterno = respuesta.data["apellidoPaterno"],
-                                        apellidoMaterno = respuesta.data["apellidoMaterno"]
+                                        apellidoMaterno = respuesta.data["apellidoMaterno"],
+                                        folioCarga = respuesta.data["folioCarga"]
 
                                     }
                                 };

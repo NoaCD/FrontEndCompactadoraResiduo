@@ -12,15 +12,20 @@
 
     <div class="col-sm-12">
         <div class="card shadow p-3 bg-secondary" style="20rem;">
-            <div class="card-header text-center"> <h4> <b> Folio: @Model.Carga.codigoResiduo </b></h4> <hr style="background-color:white" /> </div>
+            <div class="card-header text-center"> <h4> <b> Residuo: @Model.Carga.nombreResiduo </b></h4> <hr style="background-color:white" /> </div>
             <div class="container">
-                <h5 class="card-title text-center"><b> Residuo: </b></h5>
+                <h5 class="card-title text-center"><b> Folio Carga: </b></h5>
                 <p class="card-text text-center">
-                    @Model.Carga.nombreResiduo
+                    @Model.Carga.folioCarga
                 </p>
                 <h5 class="card-title text-center"><b> Responsable al cargar: </b> </h5>
                 <p class="card-text text-center">
-                    Nombre: @Model.Carga.nombreEmpleado @Model.Carga.apellidoPaterno | Codigo empleado: @Model.Carga.numeroEmpleado
+                    @Model.Carga.nombreEmpleado @Model.Carga.apellidoPaterno
+                </p>
+
+                <h5 class="card-title text-center"><b>   Codigo empleado: </b> </h5>
+                <p class="card-text text-center">
+                    @Model.Carga.numeroEmpleado:
                 </p>
 
                 <h5 class="card-title text-center"><b> Peso : </b> </h5>

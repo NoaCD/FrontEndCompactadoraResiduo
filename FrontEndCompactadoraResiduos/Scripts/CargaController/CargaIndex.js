@@ -10,6 +10,7 @@ $(document).ready(function () {
         "processing": true,
         "columns": [
             { "data": "idCarga" },
+            { "data": "folioCarga" },
             { "data": "nombreResiduo" },
             { "data": "codigoResiduo" },
             { "data": "numeroEmpleado" },

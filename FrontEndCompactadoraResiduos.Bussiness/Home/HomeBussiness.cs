@@ -108,8 +108,6 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Home
             return data;
         }
 
-
-
         /// <summary>
         /// obtenemos el total de Residuos
         /// </summary>
