@@ -16,7 +16,7 @@ function globalEnviarControlador(cTipo, cUrl, Data, Funcion, ruta) {
         data: Data,
         dataType: "JSON",
         success: function (response) {
-            if (response.estatus == "success") {
+            if (response.estatus == "ok") {
                 Swal.fire(
                     response.mensaje,
                     'Presiona para continuar',
@@ -26,7 +26,6 @@ function globalEnviarControlador(cTipo, cUrl, Data, Funcion, ruta) {
                 });
             }
             else {
-
                 const Toast = Swal.mixin({
                     Toast: true,
                     position: 'top-end',

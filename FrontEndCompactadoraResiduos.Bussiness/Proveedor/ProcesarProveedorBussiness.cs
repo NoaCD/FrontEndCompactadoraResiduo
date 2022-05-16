@@ -11,18 +11,6 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
     public class ProcesarProveedorBussiness
     {
 
-        //private readonly HttpClientHandler _handler = new HttpClientHandler();
-        //public ProcesarProveedorBussiness()
-        //{
-        //    _handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-        //    _handler.ServerCertificateCustomValidationCallback =
-        //        (httpRequestMessage, cert, cetChain, policyErrors) =>
-        //        {
-        //            return true;
-        //        };
-        //}
-
-
         /// <summary>
         /// Pärseamos y enviamos la infromacion al API
         /// </summary>
@@ -33,10 +21,22 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
 
             try
             {
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
 
                 string page = host + "/api/Proveedores";
 
-                using (var client = new HttpClient())
+                using (var client = new HttpClient(handler))
                 {
                     var content = new StringContent(proveedorFront, System.Text.Encoding.UTF8, "application/json");
 
@@ -247,10 +247,22 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
         {
             try
             {
-                string page = host + "/api/Proveedores/eliminarProveedor/" + id;
-                using (var client = new HttpClient())
-                {
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
 
+                string page = host + "/api/Proveedores/eliminarProveedor/" + id;
+                using (var client = new HttpClient(handler))
+                {
 
                     var response = await client.DeleteAsync(page);
                     var contenido = response.Content.ReadAsStringAsync();

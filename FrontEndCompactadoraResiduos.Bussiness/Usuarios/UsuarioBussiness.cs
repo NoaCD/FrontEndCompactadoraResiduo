@@ -24,7 +24,19 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
             string page = host + "/api/Usuarios/obtener-todo";
             try
             {
-                using (HttpClient client = new HttpClient())
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+                using (var client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
                     using (HttpContent content = response.Content)
@@ -62,12 +74,25 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
         /// Peticion para obtener un elemento de usuario
         /// </summary>
         /// <returns></returns>
-        public async Task<UsuarioDTO> obtenerElemento(string host ,int id)
+        public async Task<UsuarioDTO> obtenerElemento(string host, int id)
         {
             string page = host + "/api/Usuarios/obtener-elemento/" + id;
             try
             {
-                using (HttpClient client = new HttpClient())
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                //Con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+
+                using (var client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
                     using (HttpContent content = response.Content)
@@ -105,7 +130,21 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
 
                 string page = host + "/api/Usuarios";
                 var usuarioJSON = JsonConvert.SerializeObject(usuario);
-                using (HttpClient client = new HttpClient())
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+
+                using (var client = new HttpClient(handler))
                 {
                     var content = new StringContent(usuarioJSON, System.Text.Encoding.UTF8, "application/json");
 
@@ -156,7 +195,19 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
             {
                 string page = host + "/api/Usuarios";
                 var usuarioJSON = JsonConvert.SerializeObject(usuario);
-                using (HttpClient client = new HttpClient())
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+                using (var client = new HttpClient(handler))
                 {
                     var content = new StringContent(usuarioJSON, System.Text.Encoding.UTF8, "application/json");
 
@@ -198,7 +249,20 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
             {
                 string page = host + "/api/Usuarios/EliminarUsuario/" + usuarioEliminacionDTO.iId_User;
                 var usuarioJSON = JsonConvert.SerializeObject(usuarioEliminacionDTO);
-                using (HttpClient client = new HttpClient())
+
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+                using (HttpClient client = new HttpClient(handler))
                 {
                     var content = new StringContent(usuarioJSON, System.Text.Encoding.UTF8, "application/json");
 

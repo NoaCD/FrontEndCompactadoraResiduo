@@ -20,7 +20,20 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
 
             try
             {
-                using (HttpClient client = new HttpClient())
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+
+                using (var client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
                     using (HttpContent content = response.Content)
@@ -60,7 +73,19 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
             string page = host + "/api/Cargas/obtenerElementoCarga/" + idCarga;
             try
             {
-                using (HttpClient client = new HttpClient())
+                //*****************************************************************
+                //INICIO DE LA FUNCION 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+                using (var client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
                     using (HttpContent content = response.Content)

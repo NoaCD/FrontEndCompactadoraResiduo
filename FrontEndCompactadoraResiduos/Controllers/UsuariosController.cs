@@ -178,7 +178,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
             switch (respuesta.Result)
             {
                 case "ok":
-                    return Json(new { mensaje = "Usuario eliminado satisfactoriamente", estatus = "succes" });
+                    return Json(new { mensaje = "Usuario eliminado satisfactoriamente", estatus = "success" });
                 case "block":
                     return Json(new { mensaje = "Algo anda, mal este usuario ya ha sido eliminado", estatus = "error" });
                 case "error":

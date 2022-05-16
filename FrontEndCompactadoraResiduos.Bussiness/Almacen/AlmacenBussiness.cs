@@ -1,4 +1,5 @@
-﻿using FrontEndCompactadoraResiduos.Model.DTOS;
+﻿using FrontEndCompactadoraResiduos.Bussiness.Servicios;
+using FrontEndCompactadoraResiduos.Model.DTOS;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,27 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
 {
     public class AlmacenBussiness
     {
-        readonly HttpClient client = new HttpClient();
-
 
 
         public async Task<List<AlmacenFrontDTO>> obtenerTodos(string host)
         {
+
+            //*****************************************************************
+            //Inicio de la funcion 
+            var handler = new HttpClientHandler();
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            handler.ServerCertificateCustomValidationCallback =
+                (httpRequestMessage, cert, cetChain, policyErrors) =>
+                {
+                    return true;
+                };
+            var client = new HttpClient(handler);
+            //con esta funcion invalidamos las credenciales SSL
+            // FIN DE LA FUNCION 
+            //**********************************************************************
+
+
+
             var data = new List<AlmacenFrontDTO>();
             var page = host + "/api/Almacen";
             try
@@ -38,6 +54,19 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
 
         public async Task<AlmacenFrontDTO> elemento(int id, string host)
         {
+            //*****************************************************************
+            //Inicio de la funcion 
+            var handler = new HttpClientHandler();
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            handler.ServerCertificateCustomValidationCallback =
+                (httpRequestMessage, cert, cetChain, policyErrors) =>
+                {
+                    return true;
+                };
+            var client = new HttpClient(handler);
+            //con esta funcion invalidamos las credenciales SSL
+            // FIN DE LA FUNCION 
+            //**********************************************************************
 
             var data = new AlmacenFrontDTO();
             var page = host + "/api/Almacen/elementoAlmacen/" + id;
@@ -68,7 +97,20 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
 
             try
             {
-                using (HttpClient client = new HttpClient())
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+                using (var client = new HttpClient(handler))
                 {
                     var content = new StringContent(AlmacenJSON, System.Text.Encoding.UTF8, "application/json");
 
@@ -119,7 +161,19 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
 
             try
             {
-                using (HttpClient client = new HttpClient())
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+                using (var client = new HttpClient(handler))
                 {
                     var content = new StringContent(AlmacenJSON, System.Text.Encoding.UTF8, "application/json");
 
@@ -189,7 +243,19 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
             try
             {
                 string page = host + "/api/Almacen/eliminarAlmacen/" + id;
-                using (HttpClient client = new HttpClient())
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+                using (var client = new HttpClient(handler))
                 {
 
 
@@ -197,12 +263,12 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
                     var contenido = response.Content.ReadAsStringAsync();
 
                     var respuesta = JsonConvert.DeserializeObject<ResponseDTO>(contenido.Result);
-                    if(respuesta.estatus is null)
+                    if (respuesta.estatus is null)
                     {
                         return new ResponseDTO()
                         {
-                            estatus="error",
-                            mensaje ="LLego nulo la respuesta del api"
+                            estatus = "error",
+                            mensaje = "LLego nulo la respuesta del api"
                         };
                     }
                     else
@@ -214,7 +280,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
             }
             catch (Exception)
             {
-                 return new ResponseDTO()
+                return new ResponseDTO()
                 {
                     estatus = "error",
                     mensaje = "Error al intentar establecer conexxion con el API"

@@ -16,7 +16,20 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
             string page = host + "/api/Usuarios/tipos-de-usuarios";
             try
             {
-                using (HttpClient client = new HttpClient())
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handler = new HttpClientHandler();
+                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                handler.ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    };
+
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+                using (HttpClient client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
                     using (HttpContent content = response.Content)
