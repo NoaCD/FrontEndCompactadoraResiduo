@@ -16,7 +16,7 @@ function globalEnviarControlador(cTipo, cUrl, Data, Funcion, ruta) {
         data: Data,
         dataType: "JSON",
         success: function (response) {
-            if (response.estatus == "ok") {
+            if (response.estatus == "ok" || response.estatus == "success") {
                 Swal.fire(
                     response.mensaje,
                     'Presiona para continuar',
