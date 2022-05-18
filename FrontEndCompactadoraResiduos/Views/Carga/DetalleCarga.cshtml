@@ -12,20 +12,29 @@
 
     <div class="col-sm-12">
         <div class="card shadow p-3 bg-secondary" style="20rem;">
-            <div class="card-header text-center"> <h4> <b> Residuo: @Model.Carga.nombreResiduo </b></h4> <hr style="background-color:white" /> </div>
+            @if (Model.Carga.estadoAlmacenCorto == "almacen")
+            {
+                <h4><span class="badge bg-success">@Model.Carga.estadoAlmacenCompleto</span></h4>
+            }
+            else
+            {
+                <h4><span class="badge bg-danger">@Model.Carga.estadoAlmacenCompleto</span></h4>
+
+            }
+            <div class="card-header text-center"><h4><b>Folio:</b></h4> <h4>@Model.Carga.folioCarga</h4> <hr style="background-color:white" /></div>
             <div class="container">
-                <h5 class="card-title text-center"><b> Folio Carga: </b></h5>
+                <h5 class="card-title float-left"><b> Residuo: </b></h5>
                 <p class="card-text text-center">
-                    @Model.Carga.folioCarga
+                    @Model.Carga.nombreResiduo
                 </p>
-                <h5 class="card-title text-center"><b> Responsable al cargar: </b> </h5>
+                <h5 class="card-title float-left"><b> Responsable al cargar: </b> </h5>
                 <p class="card-text text-center">
                     @Model.Carga.nombreEmpleado @Model.Carga.apellidoPaterno
                 </p>
 
-                <h5 class="card-title text-center"><b>   Codigo empleado: </b> </h5>
+                <h5 class="card-title float-left"><b>   Codigo empleado: </b> </h5>
                 <p class="card-text text-center">
-                    @Model.Carga.numeroEmpleado:
+                    @Model.Carga.numeroEmpleado
                 </p>
 
                 <h5 class="card-title text-center"><b> Peso : </b> </h5>
@@ -37,7 +46,7 @@
                     } @pesoNeto kg
                 </p>
 
-                <h5 class="card-title text-center"><b> Fecha en que se cargo: </b></h5>
+                <h5 class="card-title float-left"><b> Fecha en que se cargo: </b></h5>
                 <p class="card-text text-center">
                     @Model.Carga.fechaCreacionCarga
                 </p>
@@ -56,6 +65,36 @@
                         @Model.Carga.fechaModificacion
                     </p>
                 }
+
+                @if (Model.Carga.estadoAlmacenCorto == "enviado")
+                {
+                    <hr style="background-color:white" />
+                    <div class="d-flex justify-content-center">
+                        <div class="card bg-light" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title text-center text-dark">Detalle Envio </h5>
+                                <p class="text-center text-dark">   Recojido por: @Model.Carga.nombreProveedorBasura</p>
+                                <p class="text-center text-dark">   Fecha de envio: <br> @Model.Carga.fechaCreacionCarga </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (Model.Carga.estadoAlmacenCorto == "almacen")
+                {
+                    <hr style="background-color:white" />
+                    <div class="d-flex justify-content-center">
+                        <div class="card bg-success" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title text-center text-dark">Detalle Almacenado</h5>
+                                <p class="text-center">   Esta en almacen: @Model.Carga.nombreAlmacen</p>
+                                <p class="text-center">   Fecha de la carga: <br> @Model.Carga.fechaCreacionCarga </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
 
             </div>
         </div>

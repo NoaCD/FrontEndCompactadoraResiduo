@@ -97,6 +97,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
                         {
                             if (respuesta.estatus == "success")
                             {
+                       
+
                                 var CargaAMostrar = new ResponseCargaDTO()
                                 {
                                     estatus = respuesta.estatus,
@@ -119,8 +121,12 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
                                         nombreEmpleado = respuesta.data["nombreEmpleado"],
                                         apellidoPaterno = respuesta.data["apellidoPaterno"],
                                         apellidoMaterno = respuesta.data["apellidoMaterno"],
-                                        folioCarga = respuesta.data["folioCarga"]
-
+                                        folioCarga = respuesta.data["folioCarga"],
+                                        estadoAlmacenCompleto = respuesta.data["estadoAlmacenCompleto"],
+                                        estadoAlmacenCorto = respuesta.data["estadoAlmacenCorto"],
+                                        fechaEnvio = respuesta.data["fechaEnvio"],
+                                        nombreAlmacen = respuesta.data["nombreAlmacen"],
+                                        nombreProveedorBasura = respuesta.data["nombreProveedorBasura"]
                                     }
                                 };
                                 return CargaAMostrar;
