@@ -43,7 +43,7 @@
                     TARA: @Model.Carga.pesoContenedorCarga kg |
                     NETO: @{
                         var pesoNeto = Model.Carga.pesoBrutoCarga - Model.Carga.pesoContenedorCarga;
-                    } @pesoNeto kg
+                    } @Math.Round(Convert.ToDecimal(pesoNeto),2) kg
                 </p>
 
                 <h5 class="card-title float-left"><b> Fecha en que se cargo: </b></h5>
@@ -70,11 +70,11 @@
                 {
                     <hr style="background-color:white" />
                     <div class="d-flex justify-content-center">
-                        <div class="card bg-light" style="width: 18rem;">
+                        <div class="card bg-danger" style="width: 18rem;">
                             <div class="card-body">
-                                <h5 class="card-title text-center text-dark">Detalle Envio </h5>
-                                <p class="text-center text-dark">   Recojido por: @Model.Carga.nombreProveedorBasura</p>
-                                <p class="text-center text-dark">   Fecha de envio: <br> @Model.Carga.fechaCreacionCarga </p>
+                                <h5 class="card-title text-center text-light">Detalle Envio </h5>
+                                <p class="text-center text-light">   Recojido por: @Model.Carga.nombreProveedorBasura</p>
+                                <p class="text-center text-light">   Fecha de envio: <br> @Model.Carga.fechaEnvio </p>
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                     <div class="d-flex justify-content-center">
                         <div class="card bg-success" style="width: 18rem;">
                             <div class="card-body">
-                                <h5 class="card-title text-center text-dark">Detalle Almacenado</h5>
+                                <h5 class="card-title text-center text-light">Detalle Almacenado</h5>
                                 <p class="text-center">   Esta en almacen: @Model.Carga.nombreAlmacen</p>
                                 <p class="text-center">   Fecha de la carga: <br> @Model.Carga.fechaCreacionCarga </p>
                             </div>

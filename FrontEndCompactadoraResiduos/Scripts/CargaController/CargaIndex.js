@@ -4,20 +4,36 @@
  * **************/
 
 $(document).ready(function () {
+
+    var estado = 'almacen';
+
+    ///esta funcion es para filtro de mostrar cargas dependiento del estado en que este
+    $('#estado').change(function () {
+        var activo = ($(this).prop('checked'));
+        if (activo == true) {
+            estado = "almacen";
+            table.search(estado).draw();
+        } else {
+            estado = "enviado";
+            table.search(estado).draw();
+        }
+    });
+
     //Ajax de Datatables para las cargas
     var table = $('#example').DataTable({
-        "ajax": "/Carga/ApiCargas",
+        "ajax": "/carga/apicargas",
         "processing": true,
         "columns": [
             { "data": "idCarga" },
             { "data": "folioCarga" },
             { "data": "nombreResiduo" },
             { "data": "codigoResiduo" },
-            { "data": "numeroEmpleado" },
-            { "data": "pesoBrutoCarga" } ,
-            { "data": "fechaCreacionCarga" }
+            { "data": "nombreEmpleado" },
+            { "data": "pesoBrutoCarga" },
+            { "data": "fechaCreacionCarga" },
+            { "data": "estadoAlmacenCompleto" }
 
-  
+
         ],
         //Configuracion de datatables lenguaje
         language:
@@ -41,9 +57,9 @@ $(document).ready(function () {
                 "previous": "Anterior"
             }
         },
+    });
 
-    }
-    );
+    //FILTROS 
 
 
     $('#example tbody').on('click', 'tr', function () {
@@ -162,9 +178,9 @@ $(document).ready(function () {
                 iId: id
             }
             Data["datos"] = JSON.stringify(datos);
-            
+
             var ruta = "/Carga/EditarCarga";
-            
+
             showModal("POST", ruta, Data, null);//mandamos llamar el modal
 
         } else {
@@ -201,6 +217,5 @@ $(document).ready(function () {
 
 
 });
-
 
 

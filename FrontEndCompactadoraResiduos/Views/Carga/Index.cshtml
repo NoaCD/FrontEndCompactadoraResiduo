@@ -6,60 +6,78 @@
 @section Styles{
 <link rel="stylesheet" type="text/css" href="~/assets/datatables/DataTables-1.11.4/css/jquery.dataTables.css" />
 <link rel="stylesheet" type="text/css" href="~/assets/datatables/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/switchButton/css/bootstrap4-toggle.min.css" />
 }
-
-<input id="daterange">
-
 <div class="container">
-    <div class="float-right">
-        <button id="btn-see-carga" type="button" class="btn btn-primary btn-sm">
-            <i class="small material-icons">remove_red_eye</i>
-        </button>
-        <button id="btn-edit-carga" type="button" class="btn btn-info btn-sm">
-            <i class="small material-icons">edit</i>
-        </button>
-        <button id="btn-delete-carga" type="button" class="btn btn-danger btn-sm">
-            <i class="small material-icons">delete</i>
-        </button>
-    </div>
+
     <div class="card">
-        <table id="example" class="display" cellspacing="0" width="75%">
+        <h2 class="text-center">Cargas</h2>
+        <div class="container">
+            <div class="float-left">
+                <h5>Rangos :</h5>
+                <input id="daterange">
+            </div>
+            <div class="d-flex justify-content-md-end">
+                <br />
+                <br />
+                <br />
 
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Folio Carga</th>
-                    <th>Nombre Residuo</th>
-                    <th>Codigo Residuo</th>
-                    <th>Responsable</th>
-                    <th>Peso Bruto</th>
-                    <th>Fecha</th>
+                <input id="estado" type="checkbox" checked data-toggle="toggle" data-on=" <i class='material-icons'>home</i><br/> Almacen" data-off="<i class='material-icons'>send</i> <br/> Enviado">
+                <button id="btn-see-carga" type="button" class="btn btn-primary btn-sm ">
+                    <i class="small material-icons">remove_red_eye</i>
+                </button>
+                <button id="btn-edit-carga" type="button" class="btn btn-info btn-sm">
+                    <i class="small material-icons">edit</i>
+                </button>
+                <button id="btn-delete-carga" type="button" class="btn btn-danger btn-sm">
+                    <i class="small material-icons">delete</i>
+                </button>
+            </div>
+        </div>
+        <div class="container py-2">
 
+            <table id="example" class="display" cellspacing="0" width="75%">
 
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Folio Carga</th>
+                        <th>Nombre Residuo</th>
+                        <th>Codigo Residuo</th>
+                        <th>Responsable</th>
+                        <th>Peso Bruto</th>
+                        <th>Fecha</th>
+                        <th>estadoALmacen</th>
 
-                    <th>#</th>
-                    <th>Folio Carga</th>
-                    <th>Nombre Residuo</th>
-                    <th>Codigo Residuo</th>
-                    <th>Responsable</th>
-                    <th>Peso Bruto</th>
-                    <th>Fecha</th>
-                </tr>
-            </tfoot>
-        </table>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+
+                        <th>#</th>
+                        <th>Folio Carga</th>
+                        <th>Nombre Residuo</th>
+                        <th>Codigo Residuo</th>
+                        <th>Responsable</th>
+                        <th>Peso Bruto</th>
+                        <th>Fecha</th>
+                        <th>estadoALmacen</th>
+
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </div>
 <div class="modal " id="modal" tabindex="-2" role="dialog" aria-labelledby="myModal" aria-hidden="true"></div>
 
 @section Scripts{
 <script type="text/javascript" src="~/assets/datatables/DataTables-1.11.4/js/jquery.dataTables.js"></script>
-
+<script type="text/javascript" src="~/assets/switchButton/js/bootstrap4-toggle.min.js"></script>
 <script type="text/javascript" src="~/assets/datatables/daterangepicker.min.js"></script>
 <script type="text/javascript" src="~/assets/datatables/moment.min.js"></script>
 <script type="text/javascript" src="~/Scripts/CargaController/CargaIndex.js"></script>
+<script type="text/javascript" src="~/Scripts/CargaController/jsonCarga.js"></script>
+
 <script type="text/javascript" src="~/Scripts/Modal/Modal.js"></script>
 }
