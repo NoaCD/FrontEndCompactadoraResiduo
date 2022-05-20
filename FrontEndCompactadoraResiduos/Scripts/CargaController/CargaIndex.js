@@ -21,6 +21,7 @@ $(document).ready(function () {
 
     //Ajax de Datatables para las cargas
     var table = $('#example').DataTable({
+        responsive: true,
         "ajax": "/carga/apicargas",
         "processing": true,
         "columns": [
@@ -28,13 +29,17 @@ $(document).ready(function () {
             { "data": "folioCarga" },
             { "data": "nombreResiduo" },
             { "data": "codigoResiduo" },
-            { "data": "nombreEmpleado" },
+            {
+                "data": "nombreEmpleado",
+
+            },
             { "data": "pesoBrutoCarga" },
             { "data": "fechaCreacionCarga" },
             { "data": "estadoAlmacenCompleto" }
 
 
         ],
+        order: [[6, 'desc']],
         //Configuracion de datatables lenguaje
         language:
         {
