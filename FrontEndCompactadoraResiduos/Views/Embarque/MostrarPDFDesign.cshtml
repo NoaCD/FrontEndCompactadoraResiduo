@@ -1,0 +1,164 @@
+﻿@using FrontEndCompactadoraResiduos.Model.DTOS
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+@model EmbarqueDTO;
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Reporte embarque </title>
+    <!-- El script de la librería-->
+    <script src="~/assets/generatePDF/html2pdf.bundle.min.js"></script>
+    <!--Nuestro script, que se encarga de crear el PDF usando la librería-->
+    <script type="text/javascript" src="~/Scripts/PDFConfig/EmbarqueConfigPDF.js"></script>
+    <!-- Algunos estilos -->
+    <link rel="stylesheet" href="~/assets/personal_style/EmbarqueStyle.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
+</head>
+
+
+<body>
+    @if (Model is null)
+    {
+        <div class="alert alert-danger" role="alert">
+            A simple danger alert—check it out!
+        </div>
+    }
+    else
+    {
+        var pesosNetos = new List<Double>();
+        <button id="btnCrearPdf">Click aquí</button>
+        <div class="invoice-box">
+            <table>
+                <tr class="top">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td class="title">
+                                    <img src="~/assets/img/logo_embarque.png" alt="Company logo" style="width: 20%; max-width: 300px" />
+                                </td>
+
+                                <td>
+                                    Folio: @Model.folioEmbarque<br />
+                                    Fecha: @{
+                                        var fechaModelo = Model.fechaEmbarque.ToString(); DateTime fecha = DateTime.Parse(fechaModelo);
+                                    } @fecha.Day/@fecha.Month/@fecha.Year  <br />
+                                    Hora : @fecha.TimeOfDay
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr class="information">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td>
+                                    GIOTEX Sustainable Textiles<br />
+                                    Calle 18 No 163 Carretera Uman-uxmal<br />
+                                    97390 Umán, Yuc.
+                                </td>
+
+                                <td>
+                                    Ing.Alexandra López<br />
+                                    Environmental Management System<br />
+                                    alexandra.l@giotex.com.mx
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr class="information">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td>
+                                    <b> Motivo:</b> <u>Salida de residuos</u><br />
+                                </td>
+                                <td>
+                                    <b>Empresa:</b> <u>@Model.informacionEmbarque.FirstOrDefault().nombreProveedorBasura</u> <br />
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr class="heading">
+                    <td>Concepto</td>
+
+                    <td> Cantidad </td>
+                </tr>
+
+                <tr class="details">
+                    <td>Total de Pacas</td>
+
+                    <td> @Model.informacionEmbarque.Count </td>
+                </tr>
+
+                <tr class="heading">
+                    <td>Items</td>
+                    <td>Peso Neto Kg.</td>
+                </tr>
+                @foreach (var detalle in Model.informacionEmbarque)
+                {
+                    <tr class="item">
+
+                        <td> @detalle.folioCarga </td>
+                        <td>
+                            @{
+                                var pesoNeto = detalle.pesoBrutoCarga - detalle.pesoContenedorCarga; pesosNetos.Add((Double)pesoNeto);
+                            } @pesoNeto KG.
+                        </td>
+
+                    </tr>
+                }
+
+
+                <tr class="total">
+                    <td></td>
+
+                    <td>
+                        @{
+                            var pesoTotal = pesosNetos.Sum();
+                        } Total Neto:  @pesoTotal KG.
+                    </td>
+                </tr>
+                <tr class="information">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td>
+                                    <br />
+                                    <b>Hora Entrada:</b>__________________________<br /><br /><br />
+
+                                </td>
+                                <td>
+                                    <br />
+                                    <b>Hora Salida:</b>__________________________<br /><br /><br />
+                                </td>
+
+                            </tr>
+                        </table>
+
+                        <div class="columna" align="center"> _______________________ <br /><b>Gerente</b> </div>
+                        <div class="columna" align="center">  _______________________<br /><b>Encargado</b></div>
+                        <div class="columna" align="center">  _______________________ <br /><b>Empresa</b></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    }
+
+</body>
+</html>

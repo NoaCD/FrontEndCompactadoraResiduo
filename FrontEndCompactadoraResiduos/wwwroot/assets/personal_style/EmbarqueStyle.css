@@ -106,3 +106,17 @@ body {
         text-align: center;
     }
 }
+
+
+.columna {
+    width: 33%;
+    float: left;
+}
+
+@media (max-width: 500px) {
+
+    .columna {
+        width: auto;
+        float: none;
+    }
+}

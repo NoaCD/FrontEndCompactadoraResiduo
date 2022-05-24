@@ -1,23 +1,56 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FrontEndCompactadoraResiduos.Bussiness.Embarque;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrontEndCompactadoraResiduos.Controllers
 {
     public class EmbarqueController : Controller
     {
+
+        private readonly IConfiguration _configuration;
+        public EmbarqueController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+
         // GET: EmbarqueController
         public ActionResult Index()
         {
-
             return View();
         }
 
+
+        public JsonResult todosEmbarques() {
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+            EmbarqueBussiness  embarqueBuss = new EmbarqueBussiness();
+
+            var resp = embarqueBuss.getAllEmbarques(host);
+
+            return new JsonResult(new {data = resp.Result});
+        
+        }
+
+
+    
+
+        [HttpGet]
+        
         // GET: EmbarqueController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult MostrarPDFDesign(int id)
         {
-            return View();
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+            EmbarqueBussiness embarqueBuss = new EmbarqueBussiness();
+
+            var resp = embarqueBuss.getElementEmbarque(host, id);
+            return View(resp.Result);
         }
 
+
+        /// <summary>
+        /// Diseño de pedf PODEROSO, para usarlo en el futuro, no se usa en el software
+        /// </summary>
+        /// <returns></returns>
         public ActionResult MostrarPDF()
         {
 
