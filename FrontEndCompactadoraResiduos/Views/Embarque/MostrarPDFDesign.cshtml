@@ -117,7 +117,7 @@
                         <td>
                             @{
                                 var pesoNeto = detalle.pesoBrutoCarga - detalle.pesoContenedorCarga; pesosNetos.Add((Double)pesoNeto);
-                            } @pesoNeto KG.
+                            } @Math.Round((double)pesoNeto,2) Kg.
                         </td>
 
                     </tr>
@@ -130,7 +130,7 @@
                     <td>
                         @{
                             var pesoTotal = pesosNetos.Sum();
-                        } Total Neto:  @pesoTotal KG.
+                        } Total Neto: @Math.Round((double)pesoTotal,2) Kg.
                     </td>
                 </tr>
                 <tr class="information">
@@ -150,9 +150,9 @@
                             </tr>
                         </table>
 
-                        <div class="columna" align="center"> _______________________ <br /><b>Gerente</b> </div>
+                        <div class="columna" align="center"> _______________________ <br /><b>Empresa</b> </div>
                         <div class="columna" align="center">  _______________________<br /><b>Encargado</b></div>
-                        <div class="columna" align="center">  _______________________ <br /><b>Empresa</b></div>
+                        <div class="columna" align="center">  _______________________ <br /><b>Gerente</b></div>
                     </td>
                 </tr>
             </table>

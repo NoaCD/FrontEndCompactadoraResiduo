@@ -32,7 +32,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
 
 
 
-            var data = new List<AlmacenFrontDTO>();
+            
             var page = host + "/api/Almacen";
             try
             {
@@ -40,14 +40,23 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
                 using (HttpContent content = response.Content)
                 {
                     string result = await content.ReadAsStringAsync();
-                    data = JsonConvert.DeserializeObject<List<AlmacenFrontDTO>>(result);
+                   var data = JsonConvert.DeserializeObject<List<AlmacenFrontDTO>>(result);
+                    if(data != null)
+                    {
+                        return data;
+                    }
+                    else
+                    {
+                       return null;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                data = new List<AlmacenFrontDTO> { new AlmacenFrontDTO() };
+                return null;
             }
-            return data;
+
+           
         }
 
 

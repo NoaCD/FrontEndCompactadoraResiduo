@@ -20,7 +20,7 @@ function CrearDatatable() {
             { data: 'area' },
             { data: 'fechaEmbarque' },
         ],
-        order: [[2, 'desc']],
+        order: [[3, 'desc']],
     });
 
 
@@ -76,20 +76,7 @@ function filtrarFechas(table) {
     });
 }
 
-function botonreimprimir() {
-    $("#imprimir1").click(function (e) {
 
-        alert("hola");
-        e.preventDefault();
-
-        /*imprimiproceso("POST",url,null,'botonestarjetamodal');
-         from="#nuevatarjeta";
-         validar(form);
-         
-         */
-
-    });
-}
 
 function imprimir(id) {
     window.open('/Embarque/MostrarPDFDesign/' + id);
@@ -103,7 +90,7 @@ function format(d) {
     totalPacas = d.informacionEmbarque.length;
     idEmbarque = d.id;
     d.informacionEmbarque.forEach((element, index, array) => {
-        trs += '<tr><th scope="row"></th><th scope="row">' + (index + 1) + '</th><td>' + element.folioCarga + '</td><td>' + element.nombreResiduo + '</td><td> ' + (element.pesoBrutoCarga - element.pesoContenedorCarga) + ' KG.' + ' </td> ';
+        trs += '<tr><th scope="row"></th><th scope="row">' + (index + 1) + '</th><td>' + element.folioCarga + '</td><td>' + element.nombreResiduo + '</td><td> ' + (element.pesoBrutoCarga - element.pesoContenedorCarga).toFixed(2) + ' Kg.' + ' </td> ';
         proveedorBasura = element.nombreProveedorBasura;
     });
 

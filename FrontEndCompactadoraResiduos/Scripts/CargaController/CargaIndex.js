@@ -5,6 +5,8 @@
 
 $(document).ready(function () {
 
+    ocultarBoton();
+
     var estado = 'almacen';
 
     ///esta funcion es para filtro de mostrar cargas dependiento del estado en que este
@@ -28,18 +30,40 @@ $(document).ready(function () {
             { "data": "idCarga" },
             { "data": "folioCarga" },
             { "data": "nombreResiduo" },
-            { "data": "codigoResiduo" },
             {
                 "data": "nombreEmpleado",
+                render: function (data, type, row) {
+                    // esto es lo que se va a renderizar como html
+                    return `<b>${row.nombreEmpleado}</b> ${row.apellidoPaterno}`;
+                }
 
             },
-            { "data": "pesoBrutoCarga" },
+            {
+                "data": "pesoBrutoCarga",
+                render: function (data, type, row) {
+                    return `<b>${(row.pesoBrutoCarga - row.pesoContenedorCarga).toFixed(2) + ' Kg'}</b>`;
+
+                }
+            },
             { "data": "fechaCreacionCarga" },
-            { "data": "estadoAlmacenCompleto" }
+            {
+                "data": "estadoAlmacenCorto",
+                render: function (data, type, row) {
+                    // esto es lo que se va a renderizar como html
+                    if (row.estadoAlmacenCorto == "almacen") {
+                        return `<span class="badge badge-pill badge-success">${row.estadoAlmacenCompleto}</span>`;
+
+                    } else {
+
+                        return `<span class="badge badge-pill badge-danger">${row.estadoAlmacenCompleto}</span>`;
+
+                    }
+                }
+            }
 
 
         ],
-        order: [[6, 'desc']],
+        order: [[5, 'desc']],
         //Configuracion de datatables lenguaje
         language:
         {
@@ -223,4 +247,8 @@ $(document).ready(function () {
 
 });
 
-
+//Esta funcion oculta los botones que no puede hacer el usuario administraador
+function ocultarBoton() {
+    $('#btn-edit-carga').hide();
+    $('#btn-delete-carga').hide();
+}

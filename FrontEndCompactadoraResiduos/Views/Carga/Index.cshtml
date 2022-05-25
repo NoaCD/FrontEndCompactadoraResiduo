@@ -8,65 +8,61 @@
 <link rel="stylesheet" type="text/css" href="~/assets/datatables/daterangepicker.css" />
 <link rel="stylesheet" type="text/css" href="~/assets/switchButton/css/bootstrap4-toggle.min.css" />
 }
-<div class="container">
 
-    <div class="card">
+<div class="card">
+    <div class="container">
+
         <h2 class="text-center">Cargas</h2>
-        <div class="container">
-            <div class="float-left">
-                <h5>Rangos :</h5>
-                <input id="daterange">
-            </div>
-            <div class="d-flex justify-content-md-end">
-                <br />
-                <br />
-                <br />
-
-                <input id="estado" type="checkbox" checked data-toggle="toggle" data-on=" <i class='material-icons'>home</i><br/> Almacen" data-off="<i class='material-icons'>send</i> <br/> Enviado">
-                <button id="btn-see-carga" type="button" class="btn btn-primary btn-sm ">
-                    <i class="small material-icons">remove_red_eye</i>
-                </button>
-                <button id="btn-edit-carga" type="button" class="btn btn-info btn-sm">
-                    <i class="small material-icons">edit</i>
-                </button>
-                <button id="btn-delete-carga" type="button" class="btn btn-danger btn-sm">
-                    <i class="small material-icons">delete</i>
-                </button>
-            </div>
+        <div class="float-left">
+            <h5>Rangos :</h5>
+            <input id="daterange">
         </div>
-        <div class="container py-2">
+        <div class="d-flex justify-content-md-end">
+            <br />
+            <br />
+            <br />
 
-            <table id="example" class="display" cellspacing="0" width="75%">
-
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Folio Carga</th>
-                        <th>Nombre Residuo</th>
-                        <th>Codigo Residuo</th>
-                        <th>Responsable</th>
-                        <th>Peso Bruto</th>
-                        <th>Fecha</th>
-                        <th>estadoALmacen</th>
-
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-
-                        <th>#</th>
-                        <th>Folio Carga</th>
-                        <th>Nombre Residuo</th>
-                        <th>Codigo Residuo</th>
-                        <th>Responsable</th>
-                        <th>Peso Bruto</th>
-                        <th>Fecha</th>
-                        <th>estadoALmacen</th>
-
-                    </tr>
-                </tfoot>
-            </table>
+            <input id="estado" type="checkbox" checked data-toggle="toggle" data-on=" <i class='material-icons'>home</i><br/> Almacen" data-off="<i class='material-icons'>send</i> <br/> Enviado">
+            <button id="btn-see-carga" type="button" class="btn btn-primary btn-sm ">
+                <i class="small material-icons">remove_red_eye</i>
+            </button>
+            <button id="btn-edit-carga" type="button" class="btn btn-info btn-sm">
+                <i class="small material-icons">edit</i>
+            </button>
+            <button id="btn-delete-carga" type="button" class="btn btn-danger btn-sm">
+                <i class="small material-icons">delete</i>
+            </button>
         </div>
+    </div>
+    <div class="container">
+
+        <table id="example" class="table" cellspacing="0" width="89%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Folio Carga</th>
+                    <th>Residuo</th>
+                    <th>Responsable</th>
+                    <th>Peso Bruto</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+
+                    <th>#</th>
+                    <th>Folio Carga</th>
+                    <th>Residuo</th>
+                    <th>Responsable</th>
+                    <th>Peso Bruto</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+
+                </tr>
+            </tfoot>
+        </table>
     </div>
 </div>
 <div class="modal " id="modal" tabindex="-2" role="dialog" aria-labelledby="myModal" aria-hidden="true"></div>
