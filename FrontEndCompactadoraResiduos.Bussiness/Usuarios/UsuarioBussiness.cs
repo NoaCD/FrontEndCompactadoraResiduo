@@ -1,13 +1,6 @@
 ﻿using FrontEndCompactadoraResiduos.Model.DTOS;
 using FrontEndCompactadoraResiduos.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
 {
@@ -139,7 +132,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
                     {
                         return true;
                     };
-                
+
                 //con esta funcion invalidamos las credenciales SSL
                 // FIN DE LA FUNCION 
                 //**********************************************************************

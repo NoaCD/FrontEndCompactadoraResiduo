@@ -1,17 +1,19 @@
-﻿namespace FrontEndCompactadoraResiduos.Bussiness.Servicios
+﻿namespace CreativeReduction.Bussiness.Handling
 {
-    public class InvalidarCredencialesSSL
+    public class handlingsbussines
     {
 
-        public HttpClientHandler init()
+        public HttpClientHandler hanlingbusines()
         {
+
             var handler = new HttpClientHandler();
             handler.ClientCertificateOptions = ClientCertificateOption.Manual;
             handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
+                (HttpRequestMessage, cert, cetChain, PolicyErrors) =>
                 {
                     return true;
                 };
+
             return handler;
         }
 

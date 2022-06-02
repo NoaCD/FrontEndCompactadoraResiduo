@@ -1,7 +1,6 @@
 ﻿using FrontEndCompactadoraResiduos.Bussiness.Almacen;
 using FrontEndCompactadoraResiduos.Model.DTOS;
 using FrontEndCompactadoraResiduos.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -129,7 +128,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
             AlmacenBussiness almaceBuss = new AlmacenBussiness();
             var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
             var respuesta = almaceBuss.eliminarAlmacen(host, id);
-            return new JsonResult( respuesta.Result );
+            return new JsonResult(respuesta.Result);
         }
 
 

@@ -3,8 +3,6 @@ using FrontEndCompactadoraResiduos.Model.DTOS;
 using FrontEndCompactadoraResiduos.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 
 namespace FrontEndCompactadoraResiduos.Controllers
 {
@@ -21,7 +19,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
         private ConsultasEstatus estatus = new ConsultasEstatus();
 
 
-    
+
 
         public IActionResult Index()
         {
@@ -59,7 +57,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
             //Pedismo todos los tipos de usuario que existen
 
             var catTipoUsuario = tipoUsuarios.todosTipoUsuarios(host);
-        
+
             var usuario = usuarioBussiness.obtenerElemento(host, _oUsuario.iId);
             var modelo = new ItemEditarUsuarioViewModel() { itemUsuario = usuario.Result, tiposUsuario = catTipoUsuario.Result };
 
@@ -94,7 +92,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
             var modelo = new CatTipoUsuarioViewModel() { tiposUsuario = catTipoUsuario.Result };
             return View(modelo);
         }
-    
+
 
         /// <summary>
         /// Se procesa la informacion recibida para que se envie en API
@@ -113,20 +111,20 @@ namespace FrontEndCompactadoraResiduos.Controllers
                 {
                     int idUsuario = Int32.Parse(respuesta.Result);
                     //Hacemos una busqeuda al usuairo que se acaba de crear
-                    var usuario = usuarioBussiness.obtenerElemento(host,idUsuario); //hacemos la peticion
-                    return Json(new { estatus = "success", mensaje = "Usuario creado con exito", titulo = "Existoso!", data= usuario.Result.nombre });
+                    var usuario = usuarioBussiness.obtenerElemento(host, idUsuario); //hacemos la peticion
+                    return Json(new { estatus = "success", mensaje = "Usuario creado con exito", titulo = "Existoso!", data = usuario.Result.nombre });
 
                 }
                 catch
                 {
                     return Json(new { estatus = "error", mensaje = respuesta.Result, titulo = "Fallido" });
                 }
-                
+
             }
             else
             {
                 //Si se envia el mismo arroja un mensjae de error
-                return Json(new { estatus = "error", mensaje ="Error! ya existe un usuario con ese nombre", titulo = "Error!"  });
+                return Json(new { estatus = "error", mensaje = "Error! ya existe un usuario con ese nombre", titulo = "Error!" });
             }
 
 
@@ -143,10 +141,10 @@ namespace FrontEndCompactadoraResiduos.Controllers
             var _oUsuario = JsonConvert.DeserializeObject<UsuarioEdicionDTO>(jsonUsuario); //de
             var repuesta = usuarioBussiness.ActualizarUsuario(_oUsuario, host);
             var indicador = repuesta.Result.ToString();
-            
+
             if (indicador.ToUpper() == "\"OK\"")
             {
-                
+
                 return Json(new { titulo = "Usuario actualizado", mensaje = "Usuario Editado con Exito", estatus = "success" });
             }
             else
@@ -154,7 +152,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
                 return Json(new { titulo = "Error", mensaje = repuesta.Result.ToString(), estatus = "error" });
 
             }
-            
+
         }
 
         /// <summary>
@@ -187,7 +185,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
                     return Json(new { mensaje = "Algo anda mal, contacte al admin", estatus = "error" });
             }
 
-            
+
         }
 
 

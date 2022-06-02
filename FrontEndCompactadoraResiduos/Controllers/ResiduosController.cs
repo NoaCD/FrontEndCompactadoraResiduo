@@ -1,6 +1,5 @@
 ﻿using FrontEndCompactadoraResiduos.Bussiness.Residuos;
 using FrontEndCompactadoraResiduos.Model.DTOS;
-using FrontEndCompactadoraResiduos.Model.ResiduosDTO;
 using FrontEndCompactadoraResiduos.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -207,7 +206,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
                         return new JsonResult(new { estatus = "success", mensaje = "Residuo Creado con exito!!!" });
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return new JsonResult(new { estatus = "error", mensaje = "Error al recibir respuesta" });
 

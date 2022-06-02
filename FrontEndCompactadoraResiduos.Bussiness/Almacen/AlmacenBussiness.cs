@@ -1,11 +1,5 @@
-﻿using FrontEndCompactadoraResiduos.Bussiness.Servicios;
-using FrontEndCompactadoraResiduos.Model.DTOS;
+﻿using FrontEndCompactadoraResiduos.Model.DTOS;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
 {
@@ -32,7 +26,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
 
 
 
-            
+
             var page = host + "/api/Almacen";
             try
             {
@@ -40,14 +34,14 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
                 using (HttpContent content = response.Content)
                 {
                     string result = await content.ReadAsStringAsync();
-                   var data = JsonConvert.DeserializeObject<List<AlmacenFrontDTO>>(result);
-                    if(data != null)
+                    var data = JsonConvert.DeserializeObject<List<AlmacenFrontDTO>>(result);
+                    if (data != null)
                     {
                         return data;
                     }
                     else
                     {
-                       return null;
+                        return null;
                     }
                 }
             }
@@ -56,7 +50,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Almacen
                 return null;
             }
 
-           
+
         }
 
 
