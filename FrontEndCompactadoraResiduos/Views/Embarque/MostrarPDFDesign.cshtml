@@ -22,7 +22,19 @@
     <link rel="stylesheet" href="~/assets/personal_style/EmbarqueStyle.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
 </head>
-
+<style type="text/css">
+    .boton_personalizado {
+        text-align: center;
+        text-decoration: none;
+        padding: 10px;
+        font-weight: 600;
+        font-size: 20px;
+        color: #ffffff;
+        background-color: #1883ba;
+        border-radius: 6px;
+        border: 2px solid #0016b0;
+    }
+</style>
 
 <body>
     @if (Model is null)
@@ -34,11 +46,11 @@
     else
     {
         var pesosNetos = new List<Double>();
-        <button id="btnCrearPdf">Click aquí</button>
+        <button id="btnCrearPdf" class="boton_personalizado">Descargar PDF </button>
         <div class="invoice-box">
             <table>
                 <tr class="top">
-                    <td colspan="2">
+                    <td colspan="4">
                         <table>
                             <tr>
                                 <td class="title">
@@ -59,7 +71,7 @@
                 </tr>
 
                 <tr class="information">
-                    <td colspan="2">
+                    <td colspan="4">
                         <table>
                             <tr>
                                 <td>
@@ -78,7 +90,7 @@
                     </td>
                 </tr>
                 <tr class="information">
-                    <td colspan="2">
+                    <td colspan="4">
                         <table>
                             <tr>
                                 <td>
@@ -95,25 +107,35 @@
 
                 <tr class="heading">
                     <td>Concepto</td>
+                    <td> </td>
+                    <td>  </td>
 
                     <td> Cantidad </td>
                 </tr>
 
                 <tr class="details">
                     <td>Total de Pacas</td>
+                    <td></td>
+                    <td>  </td>
 
                     <td> @Model.informacionEmbarque.Count </td>
                 </tr>
 
                 <tr class="heading">
-                    <td>Items</td>
-                    <td>Peso Neto Kg.</td>
+                    <td>Nombre</td>
+                    <td>  </td>
+
+                    <td style="text-align:left;">Folio Paca</td>
+                    <td style="text-align: start;">Peso Neto Kg.</td>
                 </tr>
                 @foreach (var detalle in Model.informacionEmbarque)
                 {
                     <tr class="item">
+                        <td> @detalle.nombreResiduo </td>
+                        <td>  </td>
 
-                        <td> @detalle.folioCarga </td>
+                        <td style="text-align:left;"> @detalle.folioCarga </td>
+
                         <td>
                             @{
                                 var pesoNeto = detalle.pesoBrutoCarga - detalle.pesoContenedorCarga; pesosNetos.Add((Double)pesoNeto);
@@ -126,15 +148,19 @@
 
                 <tr class="total">
                     <td></td>
+                    <td></td>
+
+                    <td></td>
 
                     <td>
                         @{
                             var pesoTotal = pesosNetos.Sum();
-                        } Total Neto: @Math.Round((double)pesoTotal,2) Kg.
+                        } <b style="font-family:Arial;">Total Neto: </b> <br />  @Math.Round((double)pesoTotal,2) Kg.
                     </td>
+
                 </tr>
                 <tr class="information">
-                    <td colspan="2">
+                    <td colspan="4">
                         <table>
                             <tr>
                                 <td>
@@ -156,8 +182,10 @@
                     </td>
                 </tr>
             </table>
+            <footer>
+                <p style="text-align:right"><small> copia </small></p>
+            </footer>
         </div>
-
     }
 
 </body>
