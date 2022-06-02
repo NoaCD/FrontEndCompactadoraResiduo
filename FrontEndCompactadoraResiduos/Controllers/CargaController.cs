@@ -1,8 +1,6 @@
-﻿using CompactadoraDeResiduos.Model.DTO;
-using FrontEndCompactadoraResiduos.Bussiness.Residuos;
+﻿using FrontEndCompactadoraResiduos.Bussiness.Residuos;
 using FrontEndCompactadoraResiduos.Model.DTOS;
 using FrontEndCompactadoraResiduos.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 

@@ -57,7 +57,8 @@ namespace FrontEndCompactadoraResiduos.Controllers
 
                     };
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return View(modelo);
             }

@@ -1,10 +1,6 @@
-﻿using FrontEndCompactadoraResiduos.Model.DTOS;
+﻿using CreativeReduction.Bussiness.Handling;
+using FrontEndCompactadoraResiduos.Model.DTOS;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
 {
@@ -23,13 +19,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
             {
                 //*****************************************************************
                 //Inicio de la funcion 
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
                 //con esta funcion invalidamos las credenciales SSL
                 // FIN DE LA FUNCION 
                 //**********************************************************************
@@ -96,13 +87,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
             string page = host + "/api/Proveedores";
             try
             {
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
 
                 using (var client = new HttpClient(handler))
                 {
@@ -137,13 +123,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
             string page = host + "/api/Proveedores/elementoProveedor/" + id;
             try
             {
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
                 using (var client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
@@ -187,13 +168,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
 
                 string page = host + "/api/Proveedores";
                 var proveedorJSON = JsonConvert.SerializeObject(proveedorDB);
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
                 using (var client = new HttpClient(handler))
                 {
                     var content = new StringContent(proveedorJSON, System.Text.Encoding.UTF8, "application/json");
@@ -249,13 +225,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Proveedor
             {
                 //*****************************************************************
                 //Inicio de la funcion 
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
                 //con esta funcion invalidamos las credenciales SSL
                 // FIN DE LA FUNCION 
                 //**********************************************************************

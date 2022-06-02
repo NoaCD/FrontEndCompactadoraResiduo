@@ -143,7 +143,7 @@ namespace FrontEndCompactadoraResiduos.Controllers
             ProcesarProveedorBussiness procesarBus = new ProcesarProveedorBussiness();
             var proveedor = procesarBus.EliminarProveedor(host, id);
 
-            return new JsonResult( proveedor.Result );
+            return new JsonResult(proveedor.Result);
         }
     }
 }

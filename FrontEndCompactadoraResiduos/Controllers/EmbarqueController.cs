@@ -1,5 +1,4 @@
 ﻿using FrontEndCompactadoraResiduos.Bussiness.Embarque;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrontEndCompactadoraResiduos.Controllers
@@ -21,21 +20,22 @@ namespace FrontEndCompactadoraResiduos.Controllers
         }
 
 
-        public JsonResult todosEmbarques() {
+        public JsonResult todosEmbarques()
+        {
             var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
-            EmbarqueBussiness  embarqueBuss = new EmbarqueBussiness();
+            EmbarqueBussiness embarqueBuss = new EmbarqueBussiness();
 
             var resp = embarqueBuss.getAllEmbarques(host);
 
-            return new JsonResult(new {data = resp.Result});
-        
+            return new JsonResult(new { data = resp.Result });
+
         }
 
 
-    
+
 
         [HttpGet]
-        
+
         // GET: EmbarqueController/Details/5
         public ActionResult MostrarPDFDesign(int id)
         {
