@@ -12,7 +12,6 @@ namespace FrontEndCompactadoraResiduos.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly HomeBussiness homeBus = new HomeBussiness();
 
-
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;

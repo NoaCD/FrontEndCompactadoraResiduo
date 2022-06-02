@@ -1,4 +1,5 @@
-﻿using FrontEndCompactadoraResiduos.Model.DTOS;
+﻿using CreativeReduction.Bussiness.Handling;
+using FrontEndCompactadoraResiduos.Model.DTOS;
 using FrontEndCompactadoraResiduos.Model.ResiduosDTO;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -32,14 +33,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
             string page = host + "/api/Residuos";
             try
             {
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
-
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
                 using (HttpClient client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
@@ -77,13 +77,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
         {
             var filePath = cImagen;
 
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
+            //*****************************************************************
+            //Inicio de la funcion 
+            var handling = new handlingsbussines();
+            var handler = handling.hanlingbusines();
+            //con esta funcion invalidamos las credenciales SSL
+            // FIN DE LA FUNCION 
+            //**********************************************************************
             using (HttpClient client = new HttpClient(handler))
             {
 
@@ -136,14 +136,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
         {
             var filePath = cImagen;
 
-
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
+            //*****************************************************************
+            //Inicio de la funcion 
+            var handling = new handlingsbussines();
+            var handler = handling.hanlingbusines();
+            //con esta funcion invalidamos las credenciales SSL
+            // FIN DE LA FUNCION 
+            //**********************************************************************
             using (HttpClient client = new HttpClient(handler))
             {
 
@@ -190,14 +189,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
 
         public async Task<string> enviarActualizacion(ResiduoCreacionDTO residuo, string host, string imagen)
         {
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
-
+            //*****************************************************************
+            //Inicio de la funcion 
+            var handling = new handlingsbussines();
+            var handler = handling.hanlingbusines();
+            //con esta funcion invalidamos las credenciales SSL
+            // FIN DE LA FUNCION 
+            //**********************************************************************
 
             string filePath = imagen;
             using (HttpClient client = new HttpClient(handler))
@@ -248,13 +246,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
 
             string folderName = "Temp/Residuo/";
             string directoryPath = Path.Combine(webRootPath, folderName);
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
+            //*****************************************************************
+            //Inicio de la funcion 
+            var handling = new handlingsbussines();
+            var handler = handling.hanlingbusines();
+            //con esta funcion invalidamos las credenciales SSL
+            // FIN DE LA FUNCION 
+            //**********************************************************************
             using var httpClient = new HttpClient(handler);
 
             // Get the file extension
@@ -310,13 +308,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
 
             try
             {
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
                 string page = host + "/api/Residuos/" + idResiduo;
                 using (var client = new HttpClient(handler))
                 {
@@ -367,13 +365,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
             string page = host + "/api/Residuos/" + id;
             try
             {
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
                 using (var client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))

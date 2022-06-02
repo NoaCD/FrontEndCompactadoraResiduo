@@ -1,4 +1,5 @@
-﻿using FrontEndCompactadoraResiduos.Model.DTOS;
+﻿using CreativeReduction.Bussiness.Handling;
+using FrontEndCompactadoraResiduos.Model.DTOS;
 using FrontEndCompactadoraResiduos.Models;
 using Newtonsoft.Json;
 
@@ -19,13 +20,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
             {
                 //*****************************************************************
                 //Inicio de la funcion 
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
                 //con esta funcion invalidamos las credenciales SSL
                 // FIN DE LA FUNCION 
                 //**********************************************************************
@@ -74,14 +70,9 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
             {
                 //*****************************************************************
                 //Inicio de la funcion 
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
-                //Con esta funcion invalidamos las credenciales SSL
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
+                //con esta funcion invalidamos las credenciales SSL
                 // FIN DE LA FUNCION 
                 //**********************************************************************
 
@@ -125,14 +116,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
                 var usuarioJSON = JsonConvert.SerializeObject(usuario);
                 //*****************************************************************
                 //Inicio de la funcion 
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
-
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
                 //con esta funcion invalidamos las credenciales SSL
                 // FIN DE LA FUNCION 
                 //**********************************************************************
@@ -190,13 +175,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
                 var usuarioJSON = JsonConvert.SerializeObject(usuario);
                 //*****************************************************************
                 //Inicio de la funcion 
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
                 //con esta funcion invalidamos las credenciales SSL
                 // FIN DE LA FUNCION 
                 //**********************************************************************
@@ -245,13 +225,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
 
                 //*****************************************************************
                 //Inicio de la funcion 
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
                 //con esta funcion invalidamos las credenciales SSL
                 // FIN DE LA FUNCION 
                 //**********************************************************************

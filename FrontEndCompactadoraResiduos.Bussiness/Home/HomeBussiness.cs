@@ -1,4 +1,5 @@
-﻿using FrontEndCompactadoraResiduos.Model.DTOS;
+﻿using CreativeReduction.Bussiness.Handling;
+using FrontEndCompactadoraResiduos.Model.DTOS;
 using Newtonsoft.Json;
 
 namespace FrontEndCompactadoraResiduos.Bussiness.Home
@@ -18,17 +19,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Home
             var page = host + "/api/TotalCargas";
             //*****************************************************************
             //Inicio de la funcion 
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
-            var client = new HttpClient(handler);
+            var handling = new handlingsbussines();
+            var handler = handling.hanlingbusines();
             //con esta funcion invalidamos las credenciales SSL
             // FIN DE LA FUNCION 
             //**********************************************************************
+            var client = new HttpClient(handler);
+
             var response = await client.GetAsync(page);
             using (HttpContent content = response.Content)
             {
@@ -50,17 +47,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Home
             var page = host + "/api/TotalUsuarios";
             //*****************************************************************
             //Inicio de la funcion 
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
-            var client = new HttpClient(handler);
+            var handling = new handlingsbussines();
+            var handler = handling.hanlingbusines();
             //con esta funcion invalidamos las credenciales SSL
             // FIN DE LA FUNCION 
             //**********************************************************************
+            var client = new HttpClient(handler);
+
             var response = await client.GetAsync(page);
             using (HttpContent content = response.Content)
             {
@@ -81,17 +74,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Home
             var page = host + "/api/totalProveedores";
             //*****************************************************************
             //Inicio de la funcion 
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
-            var client = new HttpClient(handler);
+            var handling = new handlingsbussines();
+            var handler = handling.hanlingbusines();
             //con esta funcion invalidamos las credenciales SSL
             // FIN DE LA FUNCION 
             //**********************************************************************
+            var client = new HttpClient(handler);
+   
             var response = await client.GetAsync(page);
             using (HttpContent content = response.Content)
             {
@@ -113,17 +102,13 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Home
             var page = host + "/api/TotalResiduos";
             //*****************************************************************
             //Inicio de la funcion 
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
-            var client = new HttpClient(handler);
+            var handling = new handlingsbussines();
+            var handler = handling.hanlingbusines();
             //con esta funcion invalidamos las credenciales SSL
             // FIN DE LA FUNCION 
             //**********************************************************************
+            var client = new HttpClient(handler);
+
             var response = await client.GetAsync(page);
             using (HttpContent content = response.Content)
             {

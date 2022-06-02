@@ -1,4 +1,5 @@
 ﻿using CompactadoraDeResiduos.Model.DTO;
+using CreativeReduction.Bussiness.Handling;
 using FrontEndCompactadoraResiduos.Model.DTOS;
 using Newtonsoft.Json;
 
@@ -17,13 +18,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
             {
                 //*****************************************************************
                 //Inicio de la funcion 
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
                 //con esta funcion invalidamos las credenciales SSL
                 // FIN DE LA FUNCION 
                 //**********************************************************************
@@ -69,14 +65,9 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
             try
             {
                 //*****************************************************************
-                //INICIO DE LA FUNCION 
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    };
+                //Inicio de la funcion 
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
                 //con esta funcion invalidamos las credenciales SSL
                 // FIN DE LA FUNCION 
                 //**********************************************************************

@@ -1,4 +1,5 @@
-﻿using FrontEndCompactadoraResiduos.Model.DTOS;
+﻿using CreativeReduction.Bussiness.Handling;
+using FrontEndCompactadoraResiduos.Model.DTOS;
 using Newtonsoft.Json;
 
 namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
@@ -16,7 +17,14 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Usuarios
             string page = host + "/api/Usuarios/todos-estatus";
             try
             {
-                using (HttpClient client = new HttpClient())
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+                using (HttpClient client = new HttpClient(handler))
                 {
                     using (HttpResponseMessage response = await client.GetAsync(page))
                     using (HttpContent content = response.Content)
