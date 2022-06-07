@@ -18,6 +18,7 @@
         public string apellidoPaterno { get; set; }
         public string apellidoMaterno { get; set; }
         public string folioCarga { get; set; }
+        public string? comentarioCarga { get; set; }
         public int numeroEmpleado { get; set; }
         public string? nombreAlmacen { get; set; }
         public string? nombreProveedorBasura { get; set; }

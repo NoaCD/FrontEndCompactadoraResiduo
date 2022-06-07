@@ -21,7 +21,7 @@ try {
         dictResponseError: 'Error mientras e subio la Imagen!',
         dictInvalidFileType: 'Solo se adminte archos de imagen',
 
-        dictFileTooBig: "El archivo es demasiado grande no puede excederter de 1 MB",
+        dictFileTooBig: "El archivo es demasiado grande no puede excederse de 1 MB",
 
         init: function () {
             var submitButton = document.querySelector("#btn-imgupdate-residuo")
@@ -41,7 +41,15 @@ try {
 
             });
 
-            this.on("queuecomplete", function () { msjok(); });
+            this.on("success", function (file, responseText) {
+
+                msjok();
+            });
+            this.on('error', function (file, errorMessage) {
+                msjError(errorMessage);
+                myDropzone.removeFile(file);
+
+            });
 
         }
     });
@@ -49,8 +57,17 @@ try {
     //  alert('Dropzone.js does not support older browsers!');
 }
 
-
-
+/**
+ * MFuncion para mostrar error
+ * @param {any} errorMessage el mensjae string
+ */
+function msjError(errorMessage = "") {
+    Swal.fire(
+        errorMessage,
+        'Presiona para continuar',
+        'info',
+    );
+}
 ///Mensaje de OK 
 function msjok() {
     Swal.fire(

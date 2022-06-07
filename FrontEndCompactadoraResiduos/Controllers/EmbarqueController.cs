@@ -35,13 +35,11 @@ namespace FrontEndCompactadoraResiduos.Controllers
 
 
         [HttpGet]
-
         // GET: EmbarqueController/Details/5
         public ActionResult MostrarPDFDesign(int id)
         {
             var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
             EmbarqueBussiness embarqueBuss = new EmbarqueBussiness();
-
             var resp = embarqueBuss.getElementEmbarque(host, id);
             return View(resp.Result);
         }
