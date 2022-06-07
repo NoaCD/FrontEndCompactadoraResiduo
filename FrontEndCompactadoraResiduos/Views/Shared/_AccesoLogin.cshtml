@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!--Boostrap-->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!--Login Stiles-->
+    <link href="~/assets/Logins/Loginstyle.css" rel="stylesheet" />
+    <!--Sweet Alert-->
+    <link href="~/Assets/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+
+    @RenderSection("css", required: false)
+</head>
+
+
+
+<body>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <script>
+
+        function getAbsolutePath() {
+            var loc = window.location;
+            var patchName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+            return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathname.length));
+        }
+
+    </script>
+
+
+    <script src="~/assets/Logins/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/datatables/Bootstrap-4-4.6.0/js/bootstrap.min.js"></script>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

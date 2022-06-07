@@ -5,6 +5,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddSession(options =>
+{
+    //  options.Cookie.Name = ".Wordcreative.Session";
+    options.IdleTimeout = TimeSpan.FromHours(8);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddMvc();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -41,14 +51,6 @@ app.UseDirectoryBrowser(new DirectoryBrowserOptions
 });
 
 
-
-/// <summary>
-/// Fin  de carpetas dentro wwroot
-/// </summary>
-
-
-
-
 //Damos de alta la carpeta fuera del wwwroot
 
 app.UseStaticFiles(new StaticFileOptions
@@ -61,6 +63,8 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
