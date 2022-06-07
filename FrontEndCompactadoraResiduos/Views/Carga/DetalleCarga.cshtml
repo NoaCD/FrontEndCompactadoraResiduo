@@ -36,6 +36,7 @@
                 <p class="card-text text-center">
                     @Model.Carga.numeroEmpleado
                 </p>
+                <hr style="background-color:white" />
 
                 <h5 class="card-title text-center"><b> Peso : </b> </h5>
                 <p class="card-text text-center">
@@ -45,6 +46,14 @@
                         var pesoNeto = Model.Carga.pesoBrutoCarga - Model.Carga.pesoContenedorCarga;
                     } @Math.Round(Convert.ToDecimal(pesoNeto),2) kg
                 </p>
+                <hr style="background-color:white" />
+                @if (Model.Carga.comentarioCarga != ""  )
+                {
+                    <h5 class="card-title float-left"><b> Comentario: </b> </h5>
+                    <p class="card-text text-center">
+                        @Model.Carga.comentarioCarga
+                    </p>
+                }
 
                 <h5 class="card-title float-left"><b> Fecha en que se cargo: </b></h5>
                 <p class="card-text text-center">

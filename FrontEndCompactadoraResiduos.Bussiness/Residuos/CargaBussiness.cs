@@ -112,7 +112,8 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
                                         estadoAlmacenCorto = respuesta.data["estadoAlmacenCorto"],
                                         fechaEnvio = respuesta.data["fechaEnvio"],
                                         nombreAlmacen = respuesta.data["nombreAlmacen"],
-                                        nombreProveedorBasura = respuesta.data["nombreProveedorBasura"]
+                                        nombreProveedorBasura = respuesta.data["nombreProveedorBasura"],
+                                        comentarioCarga = respuesta.data["comentarioCarga"]
                                     }
                                 };
                                 return CargaAMostrar;

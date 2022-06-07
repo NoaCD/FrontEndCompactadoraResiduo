@@ -29,16 +29,16 @@ try {
         dictResponseError: 'Error mientras e subio la Imagen!',
         dictInvalidFileType: 'Solo se adminte archos de imagen',
 
-        dictFileTooBig: "El archivo es demasiado grande no puede excederter de 1 MB",
+        dictFileTooBig: "El archivo es demasiado grande no puede excederse de 1 MB",
 
-        init: function() {
+        init: function () {
             //    //myDropzone.processQueue();
             //var submitButton = document.querySelector("#form-create-residuo")
             //myDropzone = this;//clausula
             //submitButton.addEventListener("click", function (e) {
             //    e.preventDefault();
             //    e.stopPropagation();
-               
+
 
 
             //});
@@ -51,14 +51,31 @@ try {
 
 
             });
-            this.on("queuecomplete", function () { msjok(); });
+            this.on("success", function (file, responseText) {
+
+                msjok();
+            });
+            this.on('error', function (file, errorMessage) {
+                msjError(errorMessage);
+                myDropzone.removeFile(file);
+
+            });
+
 
         }
     });
-}catch (e) {
+} catch (e) {
+    alert("Dropzone.js does not support older browsers");
     //  alert('Dropzone.js does not support older browsers!');
 }
-
+//Funcion mensaje de error
+function msjError(errorMessage = "") {
+    Swal.fire(
+        errorMessage,
+        'Presiona para continuar',
+        'info',
+    );
+}
 
 ///Mensaje de OK 
 function msjok() {
@@ -78,8 +95,8 @@ function init() {
         e.preventDefault();
         if ($("#form-create-residuo").valid() == true) {
             //Una vez validado enviamos el objeto al controlador
-             myDropzone.processQueue(); //va al controlador y devuelve algo
-                        
+            myDropzone.processQueue(); //va al controlador y devuelve algo
+
         } else {
             const Toast = Swal.mixin({
                 toast: true,
@@ -99,6 +116,8 @@ function init() {
         }
     })
 }
+
+
 
 
 
@@ -165,7 +184,7 @@ function validarForm(formulario) {
                 required: true,
                 minlength: 2,
                 maxlength: 30,
-                
+
             },
 
             'descripcion': {
@@ -188,12 +207,12 @@ function validarForm(formulario) {
             },
 
             'descripcion': {
-                required:  'La descripcion es obligatorio',
+                required: 'La descripcion es obligatorio',
                 minlength: 'Debe ser mayor que 2 letras',
                 maxlength: 'No de excederse de 195 caracteres'
             },
             'codigo': {
-                required : 'El codigo es obligatorio',
+                required: 'El codigo es obligatorio',
                 minlength: 'Debe ser mayor que 2 letras',
                 maxlength: 'No debe excederse de 25 caracteres'
             }
