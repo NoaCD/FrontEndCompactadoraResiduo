@@ -4,40 +4,22 @@
 
 <head>
     <meta name="viewport" content="width=device-width" />
+    @*<title>@ViewBag.Title</title>*@
 
     <!--Boostrap-->
-    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/lib/bootstrap/dist/css/bootstrap.min.css.map" rel="stylesheet" />
-
+    <link href="/assets/bootstrap/bootstrap.css" rel="stylesheet" />
     <!--Login Stiles-->
     <link href="~/assets/Logins/Loginstyle.css" rel="stylesheet" />
     <!--Sweet Alert-->
 
+
     @RenderSection("css", required: false)
 </head>
-
-
-
 <body>
 
     <div>
         @RenderBody()
     </div>
-
-    <script>
-
-        function getAbsolutePath() {
-            var loc = window.location;
-            var patchName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
-            return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathname.length));
-        }
-
-    </script>
-
-
-    <script src="~/assets/Logins/jquery-3.6.0.min.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-
 
     @RenderSection("scripts", required: false)
 </body>
