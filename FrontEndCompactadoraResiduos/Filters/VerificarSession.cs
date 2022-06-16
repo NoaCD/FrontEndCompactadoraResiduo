@@ -13,15 +13,15 @@ namespace FrontEndCompactadoraResiduos.Filters
 
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            try
-            {
-                //base.OnActionExecuting(filterContext);
-                //string oUsuarios = HttpContext.Session.GetString(SessionKeyNombre);
-            }
-            catch
-            {
+            //try
+            //{
+            //    base.OnActionExecuting(filterContext);
+            //    string oUsuarios = HttpContext.Session.GetString(SessionKeyNombre);
+            //}
+            //catch
+            //{
 
-            }
+            //}
         }
 
     }
