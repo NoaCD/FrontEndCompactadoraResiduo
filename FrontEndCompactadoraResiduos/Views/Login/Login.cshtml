@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Views/Shared/_AccesoLogin.cshtml";
+}
+
+
+<!-- Jumbotron -->
+
+<form id="FrmAcceso">
+
+    <div class="login">
+        <img src="~/assets/img/logo.png" class="img-rounded" alt="logo" width="255" height="75" />
+        <h1>LOGIN</h1>
+        <form method="post">
+            <input type="text" name="user" placeholder="Usuario" required="required" id="cUser" />
+            <input type="password" name="password" placeholder="Contraseña" required="required" id="cPassword" />
+            <button type="submit" id="btnIniciar" class="btn btn-primary btn-block btn-large">Iniciar</button>
+        </form>
+    </div>
+
+</form>
+
+@section scripts{
+
+<script src="~/assets/Logins/jquery.validate.min.js"></script>
+<script src="~/assets/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="~/assets/Logins/Login.js"></script>
+}
+
+<!-- Jumbotron -->
+<!-- Section: Design Block -->
