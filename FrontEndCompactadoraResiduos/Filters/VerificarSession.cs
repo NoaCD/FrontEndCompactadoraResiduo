@@ -15,8 +15,8 @@ namespace FrontEndCompactadoraResiduos.Filters
         {
             try
             {
-                base.OnActionExecuting(filterContext);
-                string oUsuarios = HttpContext.Session.GetString(SessionKeyNombre);
+                //base.OnActionExecuting(filterContext);
+                //string oUsuarios = HttpContext.Session.GetString(SessionKeyNombre);
             }
             catch
             {

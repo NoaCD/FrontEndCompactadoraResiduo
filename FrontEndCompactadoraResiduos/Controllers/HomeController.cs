@@ -1,10 +1,12 @@
 ﻿using FrontEndCompactadoraResiduos.Bussiness.Home;
 using FrontEndCompactadoraResiduos.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace FrontEndCompactadoraResiduos.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
 

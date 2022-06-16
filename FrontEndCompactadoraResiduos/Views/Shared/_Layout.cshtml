@@ -40,10 +40,14 @@
 
                 Tip 2: you can also add an image using data-image tag
             -->
-            <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-                    BIENVENIDO CARLOS
-                </a>
+            <div class="logo text-center">
+                <h4>
+                    BIENVENIDO
+                </h4>
+                <i>@User.Identity.Name  @User.Claims.Where(x => x.Type == "apellidoPaterno").FirstOrDefault().Value</i>
+                      
+
+                
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
@@ -168,7 +172,7 @@
                                     <a class="dropdown-item" href="#">Perfil</a>
                                     <a class="dropdown-item" href="#">Ajustes</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Cerrar Sesión</a>
+                                    <a class="dropdown-item" asp-action="salir" asp-controller="Login" >Cerrar Sesión</a>
                                 </div>
                             </li>
                         </ul>

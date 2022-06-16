@@ -1,11 +1,13 @@
 ﻿using FrontEndCompactadoraResiduos.Bussiness.Proveedor;
 using FrontEndCompactadoraResiduos.Model.DTOS;
 using FrontEndCompactadoraResiduos.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace FrontEndCompactadoraResiduos.Controllers
 {
+    [Authorize]
     public class ProveedoresController : Controller
     {
         private readonly IConfiguration _configuration;

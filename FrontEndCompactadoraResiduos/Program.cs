@@ -1,6 +1,18 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option =>
+    {
+        option.LoginPath = "/Login/Login";
+        option.ExpireTimeSpan = TimeSpan.FromHours(2);
+        option.AccessDeniedPath = "/Home/Privacy";
+    });
+
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -61,16 +73,14 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-
+    pattern: "{controller=Login}/{action=Login}/{id?}");
 
 
 app.Run();

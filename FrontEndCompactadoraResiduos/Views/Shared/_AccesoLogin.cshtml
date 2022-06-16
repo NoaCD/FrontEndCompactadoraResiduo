@@ -4,14 +4,14 @@
 
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
 
     <!--Boostrap-->
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css.map" rel="stylesheet" />
+
     <!--Login Stiles-->
     <link href="~/assets/Logins/Loginstyle.css" rel="stylesheet" />
     <!--Sweet Alert-->
-    <link href="~/Assets/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
 
     @RenderSection("css", required: false)
 </head>
@@ -36,7 +36,7 @@
 
 
     <script src="~/assets/Logins/jquery-3.6.0.min.js"></script>
-    <script src="~/assets/datatables/Bootstrap-4-4.6.0/js/bootstrap.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
 
     @RenderSection("scripts", required: false)

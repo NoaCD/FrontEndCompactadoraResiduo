@@ -1,30 +1,30 @@
-﻿@{
+﻿@using CreativeReduction.Model.DTOS
+@{
     Layout = "~/Views/Shared/_AccesoLogin.cshtml";
 }
-
+@model LoginerDTO
 
 <!-- Jumbotron -->
 
-<form id="FrmAcceso">
+<form asp-controller="Login" asp-action="Acceso" method="post">
 
     <div class="login">
-        <img src="~/assets/img/logo.png" class="img-rounded" alt="logo" width="255" height="75" />
-        <h1>LOGIN</h1>
+        <div class="text-center">
+            <img src="/assets/img/logo_embarque.png" class="img-rounded" alt="logo" height="80px" />
+        </div>
+        <div class="py-2"></div>
         <form method="post">
-            <input type="text" name="user" placeholder="Usuario" required="required" id="cUser" />
-            <input type="password" name="password" placeholder="Contraseña" required="required" id="cPassword" />
+            <input type="text" name="Usuario" placeholder="Usuario" required="required" asp-for="Usuario" />
+            <input type="password" name="Password" placeholder="Contraseña" required="required" asp-for="Password" />
             <button type="submit" id="btnIniciar" class="btn btn-primary btn-block btn-large">Iniciar</button>
+            <h4 class="text-center text-white">@Html.ValidationMessage("Login")</h4>
+
         </form>
     </div>
 
 </form>
 
-@section scripts{
 
-<script src="~/assets/Logins/jquery.validate.min.js"></script>
-<script src="~/assets/sweetalert2/sweetalert2.all.min.js"></script>
-<script src="~/assets/Logins/Login.js"></script>
-}
 
 <!-- Jumbotron -->
 <!-- Section: Design Block -->

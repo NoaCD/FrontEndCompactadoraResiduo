@@ -1,8 +1,10 @@
 ﻿using FrontEndCompactadoraResiduos.Bussiness.Embarque;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrontEndCompactadoraResiduos.Controllers
 {
+    [Authorize]
     public class EmbarqueController : Controller
     {
 
