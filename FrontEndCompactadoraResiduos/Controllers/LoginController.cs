@@ -1,6 +1,9 @@
 ﻿using CreativeReduction.Model.DTOS;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace FrontEndCompactadoraResiduos.Controllers
 {
@@ -34,15 +37,15 @@ namespace FrontEndCompactadoraResiduos.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult Acceso()
+        public async Task<ActionResult> Acceso(LoginerDTO logindto)
         {
-            LoginerDTO _cuentaDeUsuario = JsonConvert.DeserializeObject<LoginerDTO>(Request.Form["datos"]);
+
 
             var host = _configuration.GetValue<string>("HostAPI");
             var respuesta = new LoginBussiness();
-            if (_cuentaDeUsuario.cNombreUsuario != null && _cuentaDeUsuario.cContrasenia != null)
+            if (logindto.cNombreUsuario != null && logindto.cContrasenia != null)
             {
-                var response = respuesta.IniciarSecionAdministrativo(_cuentaDeUsuario.cNombreUsuario, _cuentaDeUsuario.cContrasenia, host);
+                var response = respuesta.IniciarSecionAdministrativo(logindto.cNombreUsuario, logindto.cContrasenia, host);
                 response.Wait();
 
                 if (response.Result.estatus == "success")
@@ -53,45 +56,82 @@ namespace FrontEndCompactadoraResiduos.Controllers
                     switch (elementosLogin.Result.Nombre)
                     {
                         case "contactoServidor":
-                            return new JsonResult(new { estatus = "warning", mensaje = "no se pudo establecer contacto con el servidor", codigo = 202 });
+                            //return new JsonResult(new { estatus = "warning", mensaje = "no se pudo establecer contacto con el servidor", codigo = 202 });
+                            ModelState.AddModelError("Login", "no se pudo establecer contacto con el servidor");
+                            return View("Login", logindto);
                             break;
 
                         case "noInformacion":
-                            return new JsonResult(new { estatus = "warning", mensaje = "No se pudo obtener informacion contacte a su desarrollador", codigo = 202 });
+                            //return new JsonResult(new { estatus = "warning", mensaje = "No se pudo obtener informacion contacte a su desarrollador", codigo = 202 });
+                            ModelState.AddModelError("Login", "No se pudo obtener informacion contacte a su desarrollador");
+                            return View("Login", logindto);
                             break;
                         case "noType":
-                            return new JsonResult(new { estatus = "watning", mensaje = "No se pudo enparejar con un tipo de usuario contacte a TI", codigo = 202 });
+                            //return new JsonResult(new { estatus = "warning", mensaje = "No se pudo enparejar con un tipo de usuario contacte a TI", codigo = 202 });
+                            ModelState.AddModelError("Login", "No se pudo enparejar con un tipo de usuario contacte a TI");
+                            return View("Login", logindto);
                             break;
                         case "noPermice":
-                            return new JsonResult(new { estatus = "watning", mensaje = "No cuenta con los permisos para acceder a la plataforma de administración", codigo = 202 });
+                            //return new JsonResult(new { estatus = "watning", mensaje = "No cuenta con los permisos para acceder a la plataforma de administración", codigo = 202 });
+                            ModelState.AddModelError("Login", "No cuenta con los permisos para acceder a la plataforma de administración");
+                            return View("Login", logindto);
                             break;
                         case null:
-                            return new JsonResult(new { estatus = "warning", mensaje = "No se pudo obtener informacion de usuarios", codigo = 202 });
+                            //return new JsonResult(new { estatus = "warning", mensaje = "No se pudo obtener informacion de usuarios", codigo = 202 });
+                            ModelState.AddModelError("Login", "No se pudo obtener informacion de usuarios");
+                            return View("Login", logindto);
                             break;
                         default:
 
-                            HttpContext.Session.SetString(SessionKeyNombre, elementosLogin.Result.Nombre);
-                            HttpContext.Session.SetInt32(SessionKeyNumero, elementosLogin.Result.iId);
-                            HttpContext.Session.SetInt32(SessionKeyTipo, elementosLogin.Result.iId_TipoUsuario);
+                            //Aqui ya tenemos todos lo datos
+                            var claims = new List<Claim>
+                            {
+                                new Claim(ClaimTypes.Name,elementosLogin.Result.Nombre),
+                                new Claim("apellidoPaterno",elementosLogin.Result.ApellidoMaterno),
+                                new Claim("apellidoMaterno",elementosLogin.Result.ApellidoPaterno),
+                                new Claim("idUsuario", elementosLogin.Result.iId.ToString()),
+                                new Claim("idTipoUsuario",elementosLogin.Result.iId_TipoUsuario.ToString()),
+                            };
+                            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                            string name = HttpContext.Session.GetString(SessionKeyNombre);
-
-                            return new JsonResult(new { estatus = response.Result.estatus, mensaje = response.Result.mensaje + name, codigo = response.Result.codigo, data = response.Result.data });
-
+                            return RedirectToAction("Index", "Home");
                             break;
                     }
                 }
                 else
                 {
-                    return new JsonResult(response.Result);
+                    if(response.Result.mensaje is null)
+                    {
+                        //return new JsonResult(response.Result);
+                        ModelState.AddModelError("Login", "No hay conexion con el API" );
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Login", response.Result.mensaje.ToString());
+                        return View("Login", logindto);
+                    }
+
+                    
                 }
             }
             else
             {
-                return new JsonResult(new { estatus = "warning", mensaje = "informacion incompleta", codigo = 202 });
+                //return new JsonResult(new { estatus = "warning", mensaje = "informacion incompleta", codigo = 202 });
+                ModelState.AddModelError("Login", "informacion incompleta");
+                return View("Login", logindto);
+
             }
 
-            return new JsonResult(new { estatus = "warning", messaje = "Error no castalogado o de llaves de seguridad SSL", codigo = 231 });
+            //return new JsonResult(new { estatus = "warning", messaje = "Error no castalogado o de llaves de seguridad SSL", codigo = 231 });
+            ModelState.AddModelError("Login", "Error no castalogado o de llaves de seguridad SSL");
+            return View("Login", logindto);
+        }
+
+        public async Task<IActionResult> salir()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Login");
         }
     }
 }

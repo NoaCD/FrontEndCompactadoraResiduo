@@ -126,7 +126,7 @@ $(document).ready(function () {
 
 
         $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var date = Date.parse(data[6]); //IMPORTANTE, EL data[posicion de la columna a filtrar, debe ser de tipo fecha la columna]
+            var date = Date.parse(data[5]); //IMPORTANTE, EL data[posicion de la columna a filtrar, debe ser de tipo fecha la columna]
             console.log(date);
             if (
                 (isNaN(minDateFilter) && isNaN(maxDateFilter)) ||
