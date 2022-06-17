@@ -39,8 +39,6 @@ namespace FrontEndCompactadoraResiduos.Controllers
         [HttpPost]
         public async Task<ActionResult> Acceso(LoginerDTO logindto)
         {
-
-
             var host = _configuration.GetValue<string>("HostAPI");
             var respuesta = new LoginBussiness();
             if (logindto.cNombreUsuario != null && logindto.cContrasenia != null)
