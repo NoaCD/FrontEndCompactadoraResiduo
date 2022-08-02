@@ -11,9 +11,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         option.AccessDeniedPath = "/Home/Privacy";
     });
 
-
-
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -37,7 +34,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 
 /// <summary>
