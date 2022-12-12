@@ -54,16 +54,15 @@
                         <table>
                             <tr>
                                 <td class="title">
-                                    <img src="~/assets/img/logo_embarque.png" alt="Company logo" style="width: 20%; max-width: 300px" />
+                                    @*<img src="~/assets/img/logo_embarque.png" alt="Company logo" style="width: 20%; max-width: 300px" />*@
                                 </td>
-
+                                <img src="~/assets/img/header_documentos/header_pase_salida_v2.png" width="710px" />
                                 <td>
                                     Folio: @Model.folioEmbarque<br />
                                     Fecha: @{
                                         var fechaModelo = Model.fechaEmbarque.ToString(); DateTime fecha = DateTime.Parse(fechaModelo);
                                     } @fecha.Day/@fecha.Month/@fecha.Year  <br />
                                     Hora : @fecha.TimeOfDay
-
                                 </td>
                             </tr>
                         </table>
@@ -139,7 +138,7 @@
                         <td>
                             @{
                                 var pesoNeto = detalle.pesoBrutoCarga - detalle.pesoContenedorCarga; pesosNetos.Add((Double)pesoNeto);
-                            } @Math.Round((double)pesoNeto,2) Kg.
+                            } @Math.Round((double)pesoNeto, 2) Kg.
                         </td>
 
                     </tr>
@@ -155,7 +154,7 @@
                     <td>
                         @{
                             var pesoTotal = pesosNetos.Sum();
-                        } <b style="font-family:Arial;">Total Neto: </b> <br />  @Math.Round((double)pesoTotal,2) Kg.
+                        } <b style="font-family:Arial;">Total Neto: </b> <br />  @Math.Round((double)pesoTotal, 2) Kg.
                     </td>
 
                 </tr>
