@@ -25,7 +25,6 @@ namespace FrontEndCompactadoraResiduos.Controllers
         {
             //retorna la vista para observar todas las cargas
             return View();
-
         }
 
         /// <summary>
@@ -81,7 +80,6 @@ namespace FrontEndCompactadoraResiduos.Controllers
             try
             {
                 var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
-
                 var jsonCarga = Request.Form["datos"];
                 var _idObCarga = JsonConvert.DeserializeObject<CargaBinding>(jsonCarga);//Id Objeto Carga
                 var ObjetoCarga = cargaBus.obtenerElementoCarga(host, _idObCarga.iId);
@@ -98,42 +96,29 @@ namespace FrontEndCompactadoraResiduos.Controllers
 
         }
 
-        // POST: CargaController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult<ResponseCargaDTO> ActualizarCarga()
         {
-            try
+            string cargaJson = Request.Form["datos"];
+            var cargaDTO = JsonConvert.DeserializeObject<EditarCargaDTO>(cargaJson);
+            cargaDTO.iId_User = Int32.Parse(User.Claims.Where(x => x.Type == "idUsuario").FirstOrDefault().Value);
+
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+
+            var eliminar = cargaDTO.eliminar;
+            if (eliminar == "checked")
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                //mandar a eliminar
+            };
+
+            //Editamos
+
+            var editarCarga = cargaBus.modificarCarga(host, cargaDTO);
+
+            return editarCarga.Result;
+
         }
 
-        // GET: CargaController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CargaController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+     
         // GET: CargaController/Delete/5
         public ActionResult Delete(int id)
         {

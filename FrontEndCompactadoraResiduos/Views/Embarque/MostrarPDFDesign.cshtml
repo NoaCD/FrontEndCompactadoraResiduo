@@ -5,11 +5,11 @@
 @{
     Layout = null;
 }
+
 @model EmbarqueDTO;
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,152 +39,147 @@
 <body>
     @if (Model is null)
     {
-        <div class="alert alert-danger" role="alert">
-            A simple danger alert—check it out!
-        </div>
+    <div class="alert alert-danger" role="alert">
+        A simple danger alert—check it out!
+    </div>
     }
     else
     {
         var pesosNetos = new List<Double>();
-        <button id="btnCrearPdf" class="boton_personalizado">Descargar PDF </button>
-        <div class="invoice-box">
-            <table>
-                <tr class="top">
-                    <td colspan="4">
-                        <table>
-                            <tr>
-                                <td class="title">
-                                    @*<img src="~/assets/img/logo_embarque.png" alt="Company logo" style="width: 20%; max-width: 300px" />*@
-                                </td>
-                                <img src="~/assets/img/header_documentos/header_pase_salida_v2.png" width="710px" />
-                                <td>
-                                    Folio: @Model.folioEmbarque<br />
-                                    Fecha: @{
+    <button id="btnCrearPdf" class="boton_personalizado">Descargar PDF </button>
+    <div class="invoice-box">
+        <table>
+            <tr class="top">
+                <td colspan="4">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                @*<img src="~/assets/img/logo_embarque.png" alt="Company logo" style="width: 20%; max-width: 300px" />*@
+                            </td>
+                            <img src="~/assets/img/header_documentos/header_pase_salida_v2.png" width="710px" />
+                            <td>
+                                Folio: @Model.folioEmbarque<br />
+                                Fecha: @{
                                         var fechaModelo = Model.fechaEmbarque.ToString(); DateTime fecha = DateTime.Parse(fechaModelo);
-                                    } @fecha.Day/@fecha.Month/@fecha.Year  <br />
-                                    Hora : @fecha.TimeOfDay
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+                                } @fecha.Day/@fecha.Month/@fecha.Year  <br />
+                                Hora : @fecha.TimeOfDay
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="information">
+                <td colspan="4">
+                    <table>
+                        <tr>
+                            <td>
+                                GIOTEX Sustainable Textiles<br />
+                                Calle 18 No 163 Carretera Uman-uxmal<br />
+                                97390 Umán, Yuc.
+                            </td>
 
-                <tr class="information">
-                    <td colspan="4">
-                        <table>
-                            <tr>
-                                <td>
-                                    GIOTEX Sustainable Textiles<br />
-                                    Calle 18 No 163 Carretera Uman-uxmal<br />
-                                    97390 Umán, Yuc.
-                                </td>
+                            <td>
+                                Ing.Alexandra López<br />
+                                Jefe de Gestíon Ambiental<br />
+                                alexandra.l@giotex.com.mx
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="information">
+                <td colspan="4">
+                    <table>
+                        <tr>
+                            <td>
+                                <b> Motivo:</b> <u>Salida de residuos</u><br />
+                            </td>
+                            <td>
+                                <b>Empresa:</b> <u>@Model.informacionEmbarque.FirstOrDefault().nombreProveedorBasura</u> <br />
 
-                                <td>
-                                    Ing.Alexandra López<br />
-                                    Jefe de Gestíon Ambiental<br />
-                                    alexandra.l@giotex.com.mx
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr class="information">
-                    <td colspan="4">
-                        <table>
-                            <tr>
-                                <td>
-                                    <b> Motivo:</b> <u>Salida de residuos</u><br />
-                                </td>
-                                <td>
-                                    <b>Empresa:</b> <u>@Model.informacionEmbarque.FirstOrDefault().nombreProveedorBasura</u> <br />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+            <tr class="heading">
+                <td>Concepto</td>
+                <td> </td>
+                <td>  </td>
 
-                <tr class="heading">
-                    <td>Concepto</td>
-                    <td> </td>
-                    <td>  </td>
+                <td> Cantidad </td>
+            </tr>
 
-                    <td> Cantidad </td>
-                </tr>
+            <tr class="details">
+                <td>Total de Pacas</td>
+                <td></td>
+                <td>  </td>
 
-                <tr class="details">
-                    <td>Total de Pacas</td>
-                    <td></td>
-                    <td>  </td>
+                <td> @Model.informacionEmbarque.Count </td>
+            </tr>
 
-                    <td> @Model.informacionEmbarque.Count </td>
-                </tr>
+            <tr class="heading">
+                <td>Nombre</td>
+                <td>  </td>
 
-                <tr class="heading">
-                    <td>Nombre</td>
-                    <td>  </td>
-
-                    <td style="text-align:left;">Folio Paca</td>
-                    <td style="text-align: start;">Peso Neto Kg.</td>
-                </tr>
-                @foreach (var detalle in Model.informacionEmbarque)
+                <td style="text-align:left;">Folio Paca</td>
+                <td style="text-align: start;">Peso Neto Kg.</td>
+            </tr>
+            @foreach (var detalle in Model.informacionEmbarque)
                 {
-                    <tr class="item">
-                        <td> @detalle.nombreResiduo </td>
-                        <td>  </td>
+            <tr class="item">
+                <td> @detalle.nombreResiduo </td>
+                <td>  </td>
 
-                        <td style="text-align:left;"> @detalle.folioCarga </td>
+                <td style="text-align:left;"> @detalle.folioCarga </td>
 
-                        <td>
-                            @{
+                <td>
+                    @{
                                 var pesoNeto = detalle.pesoBrutoCarga - detalle.pesoContenedorCarga; pesosNetos.Add((Double)pesoNeto);
-                            } @Math.Round((double)pesoNeto, 2) Kg.
-                        </td>
+                    } @Math.Round((double)pesoNeto, 2) Kg.
+                </td>
 
-                    </tr>
+            </tr>
                 }
 
 
-                <tr class="total">
-                    <td></td>
-                    <td></td>
-
-                    <td></td>
-
-                    <td>
-                        @{
+            <tr class="total">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    @{
                             var pesoTotal = pesosNetos.Sum();
-                        } <b style="font-family:Arial;">Total Neto: </b> <br />  @Math.Round((double)pesoTotal, 2) Kg.
-                    </td>
+                    } <b style="font-family:Arial;">Total Neto: </b> <br />  @Math.Round((double)pesoTotal, 2) Kg.
+                </td>
+            </tr>
+            <tr class="information">
+                <td colspan="4">
+                    <table>
+                        <tr>
+                            <td>
+                                <br />
+                                <b>Hora Entrada:</b>__________________________<br /><br /><br />
 
-                </tr>
-                <tr class="information">
-                    <td colspan="4">
-                        <table>
-                            <tr>
-                                <td>
-                                    <br />
-                                    <b>Hora Entrada:</b>__________________________<br /><br /><br />
+                            </td>
+                            <td>
+                                <br />
+                                <b>Hora Salida:</b>__________________________<br /><br /><br />
+                            </td>
+                        </tr>
+                    </table>
 
-                                </td>
-                                <td>
-                                    <br />
-                                    <b>Hora Salida:</b>__________________________<br /><br /><br />
-                                </td>
-
-                            </tr>
-                        </table>
-
-                        <div class="columna" align="center"> _______________________ <br /><b>Empresa</b> <br> (Nombre y Firma) </div>
-                        <div class="columna" align="center">  _______________________<br /><b>Encargado</b> <br> (Nombre y Firma)</div>
-                        <div class="columna" align="center">  _______________________ <br /><b>Gerente</b><br> (Nombre y Firma)</div>
-                    </td>
-                </tr>
-            </table>
-            <footer>
-                <p style="text-align:right"><small> copia </small></p>
-            </footer>
-        </div>
+                    <div class="columna" align="center"> _______________________ <br /><b>Empresa</b> <br> (Nombre y Firma) </div>
+                    <div class="columna" align="center">  _______________________<br /><b>Encargado</b> <br> (Nombre y Firma)</div>
+                    <div class="columna" align="center">  _______________________ <br /><b>Gerente</b><br> (Nombre y Firma)</div>
+                </td>
+            </tr>
+        </table>
+        <footer>
+            <p style="text-align:right"><small> copia </small></p>
+        </footer>
+    </div>
     }
 
 </body>

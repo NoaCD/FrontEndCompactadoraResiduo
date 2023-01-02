@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     init(); //funcion para iniciar le programa
     validarForm('#form-actualizar-carga'); //validamos le formulario
@@ -10,7 +9,7 @@ $(document).ready(function () {
 function init() {
     $("#btn-actualizar-carga").click(function (e) {
         e.preventDefault();
-        if ($("#form-actualizar-usuario").valid() == true) {
+        if ($("#form-actualizar-carga").valid() == true) {
             //Una vez validado enviamos el objeto al controlador
             console.log("Es valido")
             enviarDatos();
@@ -37,8 +36,8 @@ function enviarControlador(cTipo, cUrl, Data, Funcion) {
         type: cTipo,
         url: cUrl,
         async: false,
+        dataType: "json",
         data: Data,
-        dataType: "JSON",
         success: function (response) {
             if (response.estatus == "error") {
                 const Toast = Swal.mixin({
@@ -55,13 +54,12 @@ function enviarControlador(cTipo, cUrl, Data, Funcion) {
                 })
             }
             else {
-
                 Swal.fire(
-                    'Usuario editado correctamente',
+                    'Carga editada correctamente',
                     'Presiona para continuar',
                     'success',
                 ).then(function () {
-                    window.location.replace("/Usuarios/CatalogoUsuarios");
+                    window.location.replace("/Carga/Index");
                 });
             }
             if (Funcion)
@@ -76,24 +74,20 @@ function enviarControlador(cTipo, cUrl, Data, Funcion) {
  * 
  ** */
 function enviarDatos() {
-
     var Data = {};
     var datos = {
-        iId: $("#idUsuario").val(),
-        iId_Estatus: $("#idEstatus").val(),
-        iId_TipoUsuario: $("#idTipoUsuario").val(),
-        iNumeroEmpleado: $("#numeroEmpleado").val(),
-        cNombre: $("#nombre").val(),
-        cApellidoPaterno: $("#apellidoPaterno").val(),
-        cApellidoMaterno: $("#apellidoMaterno").val(),
-
-
+        iId: $("#idCarga").val(),
+        iId_Residuo : $("#idResiduo").val(),
+        iId_User  : $("#idUsuario").val(),
+        dPesoBruto : $("#pesoBruto").val(),
+        dPesoContenedor : $("#pesoContenedor").val(),
+        cComentario: $("#comentarioCarga").val(),
 
     }
 
+    var ruta = "/Carga/ActualizarCarga";
     Data["datos"] = JSON.stringify(datos);
-    var ruta = "/Usuarios/ActualizarUsuario"
-    enviarControlador("POST", ruta, Data, false);
+    enviarControlador("PUT", ruta, Data, false);
 }
 
 
@@ -111,48 +105,32 @@ function validarForm(formulario) {
                 required: true,
                 number: true
             },
-            'idTipoUsuario': {
+            'idCarga': {
                 required: true,
                 number: true
             },
-            'idEstatus': {
+            'idResiduo': {
                 required: true,
                 number: true
             },
-            'nombre': {
+
+            'pesoBruto': {
                 required: true,
-                minlength: 2,
-                maxlength: 30
-            },
-            'apellidoPaterno': {
-                required: true,
-                minlength: 2,
-                maxlength: 30
+                number: true
             },
 
-            'apellidoMaterno': {
-                required: true,
-                minlength: 2,
-                maxlength: 30
-            },
-
-            'numeroEmpleado': {
-                required: true,
-                number: true,
-
-            },
-
+ 
         },
         messages: {
             'idUsuario': {
                 required: 'Es requerido',
                 number: 'Tiene que ser numero'
             },
-            'idTipoUsuario': {
+            'idCarga': {
                 required: 'Es requerido',
                 number: 'Tiene que ser numero'
             },
-            'idEstatus': {
+            'idResiduo': {
                 required: 'Es requerido',
                 number: 'Tiene que ser numero'
             },
@@ -161,24 +139,12 @@ function validarForm(formulario) {
                 minlength: 'Minimo 2 caracteres',
                 maxlength: 'Maximo 30 caracteres'
             },
-            'apellidoPaterno': {
+            'pesoBruto': {
                 required: 'Es requerido',
                 minlength: 'Minimo 2 caracteres',
                 maxlength: 'Maximo 30 caracteres'
             },
 
-            'apellidoMaterno': {
-                required: 'Es requerido',
-                minlength: 'Minimo 2 caracteres',
-                maxlength: 'Maximo 30 caracteres'
-            },
-
-            'numeroEmpleado': {
-                required: 'Este campo es requerido',
-                number: 'Tiene que ser un numero entero',
-
-
-            },
         }
     });
 }

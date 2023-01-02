@@ -83,8 +83,6 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
                         {
                             if (respuesta.estatus == "success")
                             {
-
-
                                 var CargaAMostrar = new ResponseCargaDTO()
                                 {
                                     estatus = respuesta.estatus,
@@ -94,7 +92,7 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
                                     {
                                         idCarga = respuesta.data["idCarga"],
                                         fechaCreacionCarga = respuesta.data["fechaCreacionCarga"],
-                                        fechaModificacion = respuesta.data["fechaModificacion"],
+                                        fechaModificacion = respuesta.data["fechaModificacionCarga"],
                                         fechaEliminacionCarga = respuesta.data["fechaEliminacionCarga"],
                                         pesoBrutoCarga = respuesta.data["pesoBrutoCarga"],
                                         pesoContenedorCarga = respuesta.data["pesoContenedorCarga"],
@@ -150,5 +148,54 @@ namespace FrontEndCompactadoraResiduos.Bussiness.Residuos
 
         }
 
+        public async Task<ResponseCargaDTO> modificarCarga(string host, EditarCargaDTO cargaDTO)
+        {
+                string page = host + "/api/Cargas";
+                var cargaJson = JsonConvert.SerializeObject(cargaDTO);
+                //*****************************************************************
+                //Inicio de la funcion 
+                var handling = new handlingsbussines();
+                var handler = handling.hanlingbusines();
+                //con esta funcion invalidamos las credenciales SSL
+                // FIN DE LA FUNCION 
+                //**********************************************************************
+                using (var client = new HttpClient(handler))
+                {
+                    var content = new StringContent(cargaJson, System.Text.Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync(page, content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var contenido = response.Content.ReadAsStringAsync();
+                        try
+                        {
+                            var respuesta = contenido.Result.ToString();
+                            var apirespuesta = JsonConvert.DeserializeObject<ApiRespuesta>(respuesta);
+
+                            if(apirespuesta.value == "eliminado_enviado")
+                            {
+                                return new ResponseCargaDTO { mensaje = "Esta carga no puede modificarse porque ha sido enviada, o eliminiada", estatus="error" };
+                            }
+
+                            return new ResponseCargaDTO { mensaje = apirespuesta.value, codigo = Int32.Parse(apirespuesta.statusCode) };
+
+
+                        }
+                        catch (Exception)
+                        {
+                            return new ResponseCargaDTO { codigo = 200 , estatus = "error", mensaje = " respuesta no satisfactoria -> no se logro convertir la respuesta en string "};
+                            //return "Intentar convertir la respuesta del API en un string";
+
+                        }
+                }
+                else
+                {
+                    return new ResponseCargaDTO { codigo = 200, estatus = "error", mensaje = "No hay conexcion conn el api" };
+                }
+
+            }
+
+
+        }
     }
 }

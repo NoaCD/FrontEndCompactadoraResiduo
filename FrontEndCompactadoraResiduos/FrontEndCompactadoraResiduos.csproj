@@ -15,6 +15,7 @@
   <ItemGroup>
     <Folder Include="Temp\Residuo\" />
     <Folder Include="wwwroot\assets\datatables\" />
+    <Folder Include="wwwroot\lib\moment-js\" />
   </ItemGroup>
 
   <ItemGroup>

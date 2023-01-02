@@ -5,17 +5,16 @@
 
 
 @section header{
-<link href="~/assets/personal_style/CrearEmpleadoStylesheet.css" rel="stylesheet" />
-
-<h1 class="display-4 float-right">Editar Carga (SOLO DESARROLLADORES) </h1>
+    <link href="~/assets/personal_style/CrearEmpleadoStylesheet.css" rel="stylesheet" />
+    <h1 class="display-4 float-right">Editar Carga</h1>
 }
 
 @if (Model.Carga is not null)
 {
     <form id="form-actualizar-carga">
-        <input type="hidden" id="idCarga" value="@Model.Carga.idCarga" />
-        <input type="hidden" id="idResiduo" value="@Model.Carga.idResiduo" />
-        <input type="hidden" id="idUsuario" value="@Model.Carga.idEmpleado" />
+        <input type="hidden" id="idCarga"   name="idCarga"   value="@Model.Carga.idCarga" />
+        <input type="hidden" id="idResiduo" name="idResiduo" value="@Model.Carga.idResiduo" />
+        <input type="hidden" id="idUsuario" name="idUsuario" value="@Model.Carga.idEmpleado" />
 
         <div class="form-group">
             <label class="bmd-label-floating">
@@ -24,7 +23,7 @@
                 </h5>
             </label>
             <input type="text" class="form-control" id="pesoBruto" name="pesoBruto"
-               value="@Model.Carga.pesoBrutoCarga">
+                   value="@Model.Carga.pesoBrutoCarga">
         </div>
         <div class="form-group">
             <label class="bmd-label-floating">
@@ -33,7 +32,24 @@
                 </h5>
             </label>
             <input type="text" class="form-control" id="pesoContenedor" name="pesoContenedor"
-               value="@Model.Carga.pesoContenedorCarga " />
+                   value="@Model.Carga.pesoContenedorCarga " />
+        </div>
+        <div class="form-group">
+            <label class="bmd-label-floating">
+                <h5>
+                    <span class="tim-note text-dark">Comentario </span>
+                </h5>
+            </label>
+            <input type="text" class="form-control" id="comentarioCarga" name="comentarioCarga"
+                   value="@Model.Carga.comentarioCarga" />
+        </div>
+        <div class="form-group">
+            <input type="checkbox" value="" id="eliminarCheck" name="eliminarCheck" />
+            <label class="bmd-label-floating">
+                <h5>
+                    <span class="tim-note text-dark">¿Desea eliminar esta carga?</span>
+                </h5>
+            </label>
         </div>
 
         <button type="button" class="btn btn-block btn-info" id="btn-actualizar-carga">Guardar cambios</button>
@@ -47,6 +63,7 @@ else
 }
 
 
-@section scripts{
+@section Scripts{
 
+    <script type="text/javascript" src="~/Scripts/CargaController/EditarCarga.js"></script>
 }

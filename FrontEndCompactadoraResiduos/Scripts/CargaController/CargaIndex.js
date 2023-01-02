@@ -45,7 +45,13 @@ $(document).ready(function () {
 
                 }
             },
-            { "data": "fechaCreacionCarga" },
+            {
+                "data": function (data) {
+                    
+                    let fecha = moment(data.fechaCreacionCarga).locale('es-mx').format('LLLL');
+                    return fecha;
+                }
+            },
             {
                 "data": "estadoAlmacenCorto",
                 render: function (data, type, row) {
@@ -60,8 +66,6 @@ $(document).ready(function () {
                     }
                 }
             }
-
-
         ],
         order: [[5, 'desc']],
         //Configuracion de datatables lenguaje
@@ -249,6 +253,6 @@ $(document).ready(function () {
 
 //Esta funcion oculta los botones que no puede hacer el usuario administraador
 function ocultarBoton() {
-    $('#btn-edit-carga').hide();
+  /*  $('#btn-edit-carga').hide();*/
     $('#btn-delete-carga').hide();
 }
