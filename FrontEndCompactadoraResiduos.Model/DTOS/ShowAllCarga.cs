@@ -29,6 +29,8 @@ namespace CompactadoraDeResiduos.Model.DTO
         public string? nombreProveedorBasura { get; set; }
         public string? estadoAlmacenCompleto { get; set; }
         public string? estadoAlmacenCorto { get; set; }
+        public string? comentarioCarga { get; set; }
+
 
 
     }

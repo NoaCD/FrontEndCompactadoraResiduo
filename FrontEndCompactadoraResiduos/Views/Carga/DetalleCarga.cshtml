@@ -84,6 +84,9 @@
                                 <h5 class="card-title text-center text-light">Detalle Envio </h5>
                                 <p class="text-center text-light">   Recojido por: @Model.Carga.nombreProveedorBasura</p>
                                 <p class="text-center text-light">   Fecha de envio: <br> @Model.Carga.fechaEnvio </p>
+                                <p class="text-center text-light">   Folio de embarque : <br> @Model.Carga.folioDocumentoEmbarque </p>
+                               
+                                <p class="text-center text-light">  <a target="_blank" type="button" class="btn btn-secondary text-center" href="/Embarque/MostrarPDFDesign/@Model.Carga.idEmbarque">Ver documento</a></p>
                             </div>
                         </div>
                     </div>
@@ -96,7 +99,7 @@
                             <div class="card-body">
                                 <h5 class="card-title text-center text-light">Detalle Almacenado</h5>
                                 <p class="text-center">   Esta en almacen: @Model.Carga.nombreAlmacen</p>
-                                <p class="text-center">   Fecha de la carga: <br> @Model.Carga.fechaCreacionCarga </p>
+                                <p class="text-center">   Fecha de la carga: <br> @Model.Carga.fechaCreacionCarga rrrr </p>
                             </div>
                         </div>
                     </div>

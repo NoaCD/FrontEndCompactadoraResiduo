@@ -4,9 +4,7 @@
  * **************/
 
 $(document).ready(function () {
-
     ocultarBoton();
-
     var estado = 'almacen';
 
     ///esta funcion es para filtro de mostrar cargas dependiento del estado en que este
@@ -47,7 +45,6 @@ $(document).ready(function () {
             },
             {
                 "data": function (data) {
-                    
                     let fecha = moment(data.fechaCreacionCarga).locale('es-mx').format('LLLL');
                     return fecha;
                 }
@@ -58,11 +55,8 @@ $(document).ready(function () {
                     // esto es lo que se va a renderizar como html
                     if (row.estadoAlmacenCorto == "almacen") {
                         return `<span class="badge badge-pill badge-success">${row.estadoAlmacenCompleto}</span>`;
-
                     } else {
-
                         return `<span class="badge badge-pill badge-danger">${row.estadoAlmacenCompleto}</span>`;
-
                     }
                 }
             }
@@ -207,11 +201,33 @@ $(document).ready(function () {
             var arrayCarga = table.row('.selected').data(); //Solo va a existir el array si se selecciona
             var Data = {};
             var id = arrayCarga["idCarga"];
+            let estado = arrayCarga["estadoAlmacenCorto"];
             var datos = {
                 iId: id
             }
-            Data["datos"] = JSON.stringify(datos);
 
+            if (estado == "enviado") {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'info',
+                    title: '¡Esta carga ha sido enviada no puedes eliminarla o modificarla!'
+                });
+                return;
+            }
+
+            Data["datos"] = JSON.stringify(datos);
+      
             var ruta = "/Carga/EditarCarga";
 
             showModal("POST", ruta, Data, null);//mandamos llamar el modal
@@ -237,17 +253,12 @@ $(document).ready(function () {
 
     });
 
-
-
-
-
     /*Agregamos enumeraciones a la primera columna */
     table.on('order.dt search.dt', function () {
         table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
         });
     }).draw();
-
 
 });
 

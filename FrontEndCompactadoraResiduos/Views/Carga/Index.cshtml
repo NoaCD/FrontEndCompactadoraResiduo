@@ -21,19 +21,22 @@
             <br />
             <br />
             <br />
-
-            <input id="estado" type="checkbox" checked data-toggle="toggle" data-on=" <i class='material-icons'>home</i><br/> Almacen" data-off="<i class='material-icons'>send</i> <br/> Enviado" data-onstyle="info" >
-             &nbsp&nbsp&nbsp
-            <button id="btn-see-carga" type="button" class="btn btn-primary btn-sm ">
+            <input id="estado" type="checkbox" checked data-toggle="toggle" data-on=" <i class='material-icons'>home</i><br/> Almacen" data-off="<i class='material-icons'>send</i> <br/> Enviado" data-onstyle="info">
+            &nbsp&nbsp&nbsp
+            <a asp-controller="Carga" asp-action="CargasEliminadas" type="button" class="btn btn-warning btn-sm float-start">
+                <br />
+                <i class="large material-icons">delete_sweep</i>
+            </a>
+            <button id="btn-see-carga" type="button" class="btn btn-primary btn-sm float-start">
                 <i class="small material-icons">remove_red_eye</i>
             </button>
-            
             <button id="btn-edit-carga" type="button" class="btn btn-info btn-sm">
                 <i class="small material-icons">edit</i>
             </button>
             <button id="btn-delete-carga" type="button" class="btn btn-danger btn-sm">
                 <i class="small material-icons">delete</i>
             </button>
+
         </div>
     </div>
     <div class="container">
@@ -45,7 +48,7 @@
                     <th>Folio Carga</th>
                     <th>Residuo</th>
                     <th>Responsable</th>
-                    <th>Peso Bruto</th>
+                    <th>Peso Neto</th>
                     <th>Fecha</th>
                     <th>Estado</th>
 

@@ -19,7 +19,7 @@ namespace FrontEndCompactadoraResiduos.Model.DTOS
         public double dPesoContenedor { get; set; }
         public string? cNombreMaquina { get; set; }
         public string? cComentario { get; set; }
-        public string? eliminar { get; set; }
+        public string? eliminar { get; set; } = "off";
 
     }
 }

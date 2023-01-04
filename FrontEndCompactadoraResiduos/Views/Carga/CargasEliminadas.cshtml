@@ -1,0 +1,203 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+
+    <link href="~/assets/tabulator-master/dist/css/tabulator_bootstrap4.css" rel="stylesheet" />
+}
+
+<a type="button" class="btn btn-success" onclick="history.go(-1)">
+    <i class="large material-icons">arrow_back</i>
+</a>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="example-table"></div>
+        </div>
+        <div class="col col-lg-3">
+            <div class="col-auto">
+                <button class="btn btn-primary" id="download-csv">Download CSV</button>
+                <button class="btn btn-secondary" id="download-json">Download JSON</button>
+                <button class="btn btn-dark" id="download-xlsx">Download XLSX</button>
+                <button class="btn btn-warning" id="download-pdf">Download PDF</button>
+                <button class="btn btn-success" id="download-html">Download HTML</button>
+
+
+            </div>
+
+            <div class="col-auto form-group">
+                <div class="card">
+                    <select class="form-control text-center" id="filter-field">
+                        <option> Filtro </option>
+                        <option value="folioCarga"> Folio Carga </option>
+                        <option value="nombreResiduo">Nombre residuo</option>
+                        <option value="nombreEmpleado">Nombre empleado</option>
+                        <option value="fechaEliminacionCarga">Fecha eliminacion</option>
+                        <option value="comentarioCarga">Comentario</option>
+                    </select>
+                    <select class="form-control text-center" id="filter-type">
+                        <option value="=">=</option>
+                        <option value="<"><</option>
+                        <option value="<="><=</option>
+                        <option value=">">></option>
+                        <option value=">=">>=</option>
+                        <option value="!=">!=</option>
+                        <option value="like">igual</option>
+                    </select>
+                    <input class="form-control text-center" id="filter-value" type="text" placeholder="Valor para filtrar">
+                    <button class="btn btn-primary" id="filter-clear">Clear Filter</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/assets/tabulator-master/addons/export/xlsx.full.min.js"></script>
+    <script src="~/assets/tabulator-master/addons/export/jspdf.umd.min.js"></script>
+    <script src="~/assets/tabulator-master/addons/export/jspdf.plugin.autotable.min.js"></script>
+    <script src="~/assets/tabulator-master/dist/js/tabulator.js"></script>
+    <script src="~/assets/moment/moment.js"></script>
+    <script src="~/assets/moment/moment-with-locales.js"></script>
+    <script src="~/assets/axios/axios.min.js"></script>
+    <script>
+        var table;
+        getEliminados('/Carga/getCargasEliminadas');
+
+        function getEliminados(url) {
+            axios.get(url).then(response => dibujarTabla(JSON.stringify(response.data["data"]))).catch(response => console.error(response));
+        }
+
+        function imprimir(e) {
+            console.log(e);
+        }
+
+        function dibujarTabla(data = []) {
+            //define data array
+            var tabledata = [];
+            tabledata = data;
+            console.log(data);
+
+            table = new Tabulator("#example-table", {
+                data: tabledata,           //load row data from array
+                layout: "fitColumns",      //fit columns to width of table
+                /*responsiveLayout: "collapse",*/
+                addRowPos: "top",          //when adding a new row, add it to the top of the table
+                history: true,             //allow undo and redo actions on the table
+                pagination: "local",       //paginate the data
+                paginationSize: 7,         //allow 7 rows per page of data
+                paginationCounter: "rows", //display count of paginated rows in footer
+                movableColumns: true,      //allow column order to be changed
+                initialSort: [             //set the initial sort order of the data
+                    { column: "fechaEliminacionCarga", dir: "asc" },
+                ],
+                columnDefaults: {
+                    tooltip: true,         //show tool tips on cells
+                },
+                columns: [                 //define the table columns
+                    { title: "Folio Carga", field: "folioCarga", width: 130},
+                    { title: "Residuo", field: "nombreResiduo", width: 100},
+                    {
+                        title: "Responsable", field: "nombreEmpleado", width: 150,mutator: function (value, data) {
+                            return data.nombreEmpleado + " " + data.apellidoPaterno;
+                        }
+                    },
+                    {
+                        title: "Fecha eliminacion", field: "fechaEliminacionCarga", width: 200 ,mutator: function (value, data) {
+                            moment.locale('es-mx');
+                            return moment(data.fechaEliminacionCarga).format('LTS') + ' ' + moment(data.fechaEliminacionCarga).format('l');
+
+                        }
+                    },
+                    { title: "Comentario", field: "comentarioCarga", width: 250}
+                ],
+            });
+        }
+    </script>
+
+    <script>
+
+        //trigger download of data.csv file
+        document.getElementById("download-csv").addEventListener("click", function () {
+            table.download("csv", "data.csv");
+        });
+
+        //trigger download of data.json file
+        document.getElementById("download-json").addEventListener("click", function () {
+            table.download("json", "data.json");
+        });
+
+        //trigger download of data.xlsx file
+        document.getElementById("download-xlsx").addEventListener("click", function () {
+            table.download("xlsx", "data.xlsx", { sheetName: "My Data" });
+        });
+
+        //trigger download of data.pdf file
+        document.getElementById("download-pdf").addEventListener("click", function () {
+            table.download("pdf", "data.pdf", {
+                orientation: "portrait", //set page orientation to portrait
+                title: "Example Report", //add title to report
+            });
+        });
+
+        //trigger download of data.html file
+        document.getElementById("download-html").addEventListener("click", function () {
+            table.download("html", "data.html", { style: true });
+        });
+    </script>
+    <script>
+        //Define variables for input elements
+        var fieldEl = document.getElementById("filter-field");
+        var typeEl = document.getElementById("filter-type");
+        var valueEl = document.getElementById("filter-value");
+
+        //Custom filter example
+        function customFilter(data) {
+            return data.car && data.rating < 3;
+        }
+
+        //Trigger setFilter function with correct parameters
+        function updateFilter() {
+            var filterVal = fieldEl.options[fieldEl.selectedIndex].value;
+            var typeVal = typeEl.options[typeEl.selectedIndex].value;
+
+            var filter = filterVal == "function" ? customFilter : filterVal;
+
+            if (filterVal == "function") {
+                typeEl.disabled = true;
+                valueEl.disabled = true;
+            } else {
+                typeEl.disabled = false;
+                valueEl.disabled = false;
+            }
+
+            if (filterVal) {
+                table.setFilter(filter, typeVal, valueEl.value);
+            }
+        }
+
+        //Update filters on value change
+        document.getElementById("filter-field").addEventListener("change", updateFilter);
+        document.getElementById("filter-type").addEventListener("change", updateFilter);
+        document.getElementById("filter-value").addEventListener("keyup", updateFilter);
+
+        //Clear filters on "Clear Filters" button click
+        document.getElementById("filter-clear").addEventListener("click", function () {
+            fieldEl.value = "";
+            typeEl.value = "=";
+            valueEl.value = "";
+
+            table.clearFilter();
+        });
+
+    </script>
+
+}

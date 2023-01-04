@@ -82,8 +82,9 @@ function enviarDatos() {
         dPesoBruto : $("#pesoBruto").val(),
         dPesoContenedor : $("#pesoContenedor").val(),
         cComentario: $("#comentarioCarga").val(),
-
+        eliminar: $('input:checkbox[name=eliminarCheck]:checked').val()
     }
+    console.log(datos);
 
     var ruta = "/Carga/ActualizarCarga";
     Data["datos"] = JSON.stringify(datos);

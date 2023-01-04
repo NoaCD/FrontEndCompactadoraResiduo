@@ -24,5 +24,7 @@
         public string? nombreProveedorBasura { get; set; }
         public string? estadoAlmacenCompleto { get; set; }
         public string? estadoAlmacenCorto { get; set; }
+        public string? folioDocumentoEmbarque { get; set; }
+        public string? idEmbarque { get; set; }
     }
 }

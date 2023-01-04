@@ -105,9 +105,12 @@ namespace FrontEndCompactadoraResiduos.Controllers
             var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
 
             var eliminar = cargaDTO.eliminar;
-            if (eliminar == "checked")
+            if (eliminar == "on")
             {
                 //mandar a eliminar
+                EliminarCarga(cargaDTO);
+
+
             };
 
             //Editamos
@@ -118,11 +121,35 @@ namespace FrontEndCompactadoraResiduos.Controllers
 
         }
 
-     
-        // GET: CargaController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult CargasEliminadas()
         {
-            return View();
+            return View("CargasEliminadas");
+        }
+
+
+        /// <summary>
+        /// Retorna todas las cargas eliminadas hasta ahora
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult getCargasEliminadas()
+        {
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+            CargaBussiness CargaBuss = new CargaBussiness();
+            var respuesta = CargaBuss.cargasGetDeleted(host);
+
+            return new JsonResult(new { data = respuesta.Result });
+        }
+
+        //Hace una eliminaci logica
+        public ActionResult<ResponseCargaDTO> EliminarCarga(EditarCargaDTO cargaDTO)
+        {
+            var host = _configuration.GetValue<string>("HostAPI"); //Host del api localhost:8080 | 127.0.0.1:8080
+            cargaDTO.iId_User = Int32.Parse(User.Claims.Where(x => x.Type == "idUsuario").FirstOrDefault().Value);
+            CargaBussiness CargaBuss = new CargaBussiness();
+            var respuesta = CargaBuss.eliminarCarga(host, cargaDTO);
+
+            return new JsonResult(new { data = respuesta.Result });
+
         }
 
         // POST: CargaController/Delete/5
