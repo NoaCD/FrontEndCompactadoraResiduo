@@ -45,7 +45,9 @@ $(document).ready(function () {
             },
             {
                 "data": function (data) {
-                    let fecha = moment(data.fechaCreacionCarga).locale('es-mx').format('LLLL');
+                    //let fecha = moment(data.fechaCreacionCarga).locale('es-mx').format('LLLL');
+                    let fecha = new Date(data.fechaCreacionCarga);
+                    let format = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
                     return fecha;
                 }
             },
@@ -164,8 +166,6 @@ $(document).ready(function () {
             var ruta = "/Carga/DetalleCarga";
             console.log(Data);
             showModal("POST", ruta, Data, null);//mandamos llamar el modal
-
-
         } else {
             const Toast = Swal.mixin({
                 toast: true,
@@ -187,9 +187,6 @@ $(document).ready(function () {
         }
 
     });
-
-
-
     /***********************************************************************************
     *
     * funcion para el boton de editar 
@@ -218,7 +215,6 @@ $(document).ready(function () {
                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
                 })
-
                 Toast.fire({
                     icon: 'info',
                     title: '¡Esta carga ha sido enviada no puedes eliminarla o modificarla!'
