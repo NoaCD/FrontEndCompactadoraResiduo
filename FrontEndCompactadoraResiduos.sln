@@ -9,12 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontEndCompactadoraResiduo
 		{40EC7B53-CC50-4842-BA6B-D54026684E32} = {40EC7B53-CC50-4842-BA6B-D54026684E32}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEndCompactadoraResiduos.Bussiness", "FrontEndCompactadoraResiduos.Bussiness\FrontEndCompactadoraResiduos.Bussiness.csproj", "{45FCBD38-61F5-463C-ACCA-24DE74F2FDA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontEndCompactadoraResiduos.Bussiness", "FrontEndCompactadoraResiduos.Bussiness\FrontEndCompactadoraResiduos.Bussiness.csproj", "{45FCBD38-61F5-463C-ACCA-24DE74F2FDA9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{40EC7B53-CC50-4842-BA6B-D54026684E32} = {40EC7B53-CC50-4842-BA6B-D54026684E32}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEndCompactadoraResiduos.Model", "FrontEndCompactadoraResiduos.Model\FrontEndCompactadoraResiduos.Model.csproj", "{40EC7B53-CC50-4842-BA6B-D54026684E32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontEndCompactadoraResiduos.Model", "FrontEndCompactadoraResiduos.Model\FrontEndCompactadoraResiduos.Model.csproj", "{40EC7B53-CC50-4842-BA6B-D54026684E32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

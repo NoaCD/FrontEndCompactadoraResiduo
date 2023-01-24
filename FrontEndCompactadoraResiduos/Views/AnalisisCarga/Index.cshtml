@@ -1,0 +1,324 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Analisis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles{
+
+    <link href="~/assets/tabulator-master/dist/css/tabulator_bootstrap4.css" rel="stylesheet" />
+}
+    .<div class="container bg-white">
+    <h2 class="text-center">Cálculo</h2>
+    <div class="row row-cols-1">
+        <div class="col">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Fecha Inicio</span>
+                </div>
+                <input type="date" class="form-control" id="dtInicio" aria-describedby="basic-addon3">
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Fecha Fin</span>
+                </div>
+                <input type="date" class="form-control" id="dtFin" aria-describedby="basic-addon3">
+            </div>
+        </div>
+        <div class="col">
+            <input type="button" value="Limpiar" id="btnDateClean" class="btn btn-dark" />
+            <br />
+            <input type="button" value="Iniciar" id="btnDate" class="btn btn-success" />
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div>
+                <button class="btn btn-outline-success" id="download-xlsx">Excell</button>
+            </div>
+            <div id="contenidoTabla">
+                @*<table id="tabla">
+            <tr>
+                <td> celda11 </td>
+                <td> celda21 </td>
+                <td> celda31 </td>
+            </tr>
+            <tr>
+                <td> celda12 </td>
+                <td> celda22 </td>
+                <td> celda32 </td>
+            </tr>
+            <tr>
+                <td> celda13 </td>
+                <td> celda23 </td>
+                <td> celda33 </td>
+            </tr>
+            <tr>
+                <td> celda14 </td>
+                <td> celda24 </td>
+                <td> celda34 </td>
+            </tr>
+            <tr>
+                <td> celda15 </td>
+                <td> celda25 </td>
+                <td> celda35 </td>
+            </tr>
+            <table>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/assets/js/lodash.min.js"></script>
+    <script src="~/assets/tabulator-master/addons/export/xlsx.full.min.js"></script>
+    <script src="~/assets/tabulator-master/addons/export/jspdf.umd.min.js"></script>
+    <script src="~/assets/tabulator-master/addons/export/jspdf.plugin.autotable.min.js"></script>
+    <script src="~/assets/tabulator-master/dist/js/tabulator.js"></script>
+    <script src="~/assets/moment/moment.js"></script>
+    <script src="~/assets/moment/moment-with-locales.js"></script>
+    <script src="~/assets/axios/axios.min.js"></script>
+
+    <script>
+        let mydata = [];
+        let newData = [];
+
+        function dibujarTabla() {
+            //console.log(JSON.stringify(newData));
+            //let table = document.createElement('table');
+
+            //for (let llave in newData) {
+            //    let tr = document.createElement('tr');
+            //    newData[llave].map(item => {
+            //        console.log(llave.pesoBrutoCarga);
+            //        let td = document.createElement('td');
+            //        td.innerHTML = item.nombreResiduo;
+            //        table.appendChild(td);
+            //    });
+            //    table.appendChild(tr);
+            //}
+
+            //document.getElementById('contenidoTabla').appendChild(table);
+
+            let tabla = "";
+            tabla += "<table class= 'table'>";
+
+            tabla += "<thead>";
+            for (let key in newData) {
+                console.log(key);
+                tabla += `<td> ${key} </td>`;
+
+
+            }
+            tabla += "</thead>";
+
+            tabla += "<tbody>";
+            for (let ite in newData) {
+
+                newData[ite].map(item => {
+                    tabla += '<tr>';
+                    tabla += `<td> ${item.nombreResiduo + ' map'}</td>`;
+                    tabla += '</tr>';
+                })
+
+                
+            }
+            tabla += "</tbody>";
+
+            tabla += "</table>";
+
+
+            document.getElementById('contenidoTabla').innerHTML = tabla;
+
+
+
+        }
+
+
+    </script>
+    <script>
+
+        let dtInicio;
+        let dtFin;
+
+        let btnInit = document.getElementById("btnDate");
+        btnInit.addEventListener("click", function (e) {
+            dtInicio = document.getElementById("dtInicio").value;
+            dtFin = document.getElementById("dtFin").value;
+            alert(dtInicio + " " + dtFin);
+            //vaciar array
+            mydata.length = 0;
+            //LAMAR API
+            mydata.push(
+                {
+                    "idCarga": 27,
+                    "fechaCreacionCarga": "2022-09-19T13:01:11.634411",
+                    "fechaModificacionCarga": null,
+                    "fechaEliminacionCarga": null,
+                    "pesoBrutoCarga": 100,
+                    "pesoContenedorCarga": 0,
+                    "folioCarga": "RAF19092227",
+                    "nombreMaquinaCarga": "",
+                    "comentarioCarga": null,
+                    "idResiduo": 10,
+                    "nombreResiduo": "RAFIA",
+                    "descripcionResido": "PACAS DE RAFIA",
+                    "codigoResiduo": "RAF",
+                    "idEmpleado": 5,
+                    "nombreEmpleado": "Misael",
+                    "apellidoPaterno": "Loeza",
+                    "apellidoMaterno": "Loeza",
+                    "numeroEmpleado": 1,
+                    "nombreAlmacen": "SELECCION",
+                    "fechaEnvio": null,
+                    "nombreProveedorBasura": null,
+                    "estadoAlmacenCompleto": "En almacen",
+                    "estadoAlmacenCorto": "almacen",
+                    "folioDocumentoEmbarque": null,
+                    "idEmbarque": 0,
+                    "estatusAlmacen": null
+                },
+                {
+                    "idCarga": 28,
+                    "fechaCreacionCarga": "2022-09-19T16:13:59.240166",
+                    "fechaModificacionCarga": null,
+                    "fechaEliminacionCarga": null,
+                    "pesoBrutoCarga": 205,
+                    "pesoContenedorCarga": 0,
+                    "folioCarga": "RAF19092228",
+                    "nombreMaquinaCarga": "DESKTOP-OTVVJ9C",
+                    "comentarioCarga": null,
+                    "idResiduo": 10,
+                    "nombreResiduo": "RAFIA",
+                    "descripcionResido": "PACAS DE RAFIA",
+                    "codigoResiduo": "RAF",
+                    "idEmpleado": 5,
+                    "nombreEmpleado": "Misael",
+                    "apellidoPaterno": "Loeza",
+                    "apellidoMaterno": "Loeza",
+                    "numeroEmpleado": 1,
+                    "nombreAlmacen": "SELECCION",
+                    "fechaEnvio": "2022-09-19T17:27:36.693033",
+                    "nombreProveedorBasura": "DECOMEX",
+                    "estadoAlmacenCompleto": "Enviado",
+                    "estadoAlmacenCorto": "enviado",
+                    "folioDocumentoEmbarque": "ER-1909222",
+                    "idEmbarque": 2,
+                    "estatusAlmacen": null
+                },
+                {
+                    "idCarga": 29,
+                    "fechaCreacionCarga": "2022-09-19T17:16:29.024691",
+                    "fechaModificacionCarga": null,
+                    "fechaEliminacionCarga": null,
+                    "pesoBrutoCarga": 149,
+                    "pesoContenedorCarga": 0,
+                    "folioCarga": "NYL19092229",
+                    "nombreMaquinaCarga": "DESKTOP-OTVVJ9C",
+                    "comentarioCarga": null,
+                    "idResiduo": 8,
+                    "nombreResiduo": "NYLON ",
+                    "descripcionResido": "PACAS DE NYLON ",
+                    "codigoResiduo": "NYL",
+                    "idEmpleado": 5,
+                    "nombreEmpleado": "Misael",
+                    "apellidoPaterno": "Loeza",
+                    "apellidoMaterno": "Loeza",
+                    "numeroEmpleado": 1,
+                    "nombreAlmacen": "SELECCION",
+                    "fechaEnvio": "2022-09-23T15:01:51.834853",
+                    "nombreProveedorBasura": "DECOMEX",
+                    "estadoAlmacenCompleto": "Enviado",
+                    "estadoAlmacenCorto": "enviado",
+                    "folioDocumentoEmbarque": "ER-2309225",
+                    "idEmbarque": 5,
+                    "estatusAlmacen": null
+                },
+                {
+                    "idCarga": 30,
+                    "fechaCreacionCarga": "2022-09-19T17:35:10.491442",
+                    "fechaModificacionCarga": null,
+                    "fechaEliminacionCarga": null,
+                    "pesoBrutoCarga": 150.5,
+                    "pesoContenedorCarga": 0,
+                    "folioCarga": "CART19092230",
+                    "nombreMaquinaCarga": "",
+                    "comentarioCarga": null,
+                    "idResiduo": 7,
+                    "nombreResiduo": "CARTON",
+                    "descripcionResido": "PACAS DE CARTÓN NACIONAL",
+                    "codigoResiduo": "CART",
+                    "idEmpleado": 7,
+                    "nombreEmpleado": "Victor ",
+                    "apellidoPaterno": "Tamay",
+                    "apellidoMaterno": "Tamay",
+                    "numeroEmpleado": 1,
+                    "nombreAlmacen": "SELECCION",
+                    "fechaEnvio": "2022-09-19T17:48:55.578571",
+                    "nombreProveedorBasura": "DECOMEX",
+                    "estadoAlmacenCompleto": "Enviado",
+                    "estadoAlmacenCorto": "enviado",
+                    "folioDocumentoEmbarque": "ER-1909224",
+                    "idEmbarque": 4,
+                    "estatusAlmacen": null
+                },
+                {
+                    "idCarga": 31,
+                    "fechaCreacionCarga": "2022-09-19T17:45:16.053969",
+                    "fechaModificacionCarga": null,
+                    "fechaEliminacionCarga": null,
+                    "pesoBrutoCarga": 100.5,
+                    "pesoContenedorCarga": 0,
+                    "folioCarga": "RAF19092231",
+                    "nombreMaquinaCarga": "",
+                    "comentarioCarga": null,
+                    "idResiduo": 10,
+                    "nombreResiduo": "RAFIA",
+                    "descripcionResido": "PACAS DE RAFIA",
+                    "codigoResiduo": "RAF",
+                    "idEmpleado": 7,
+                    "nombreEmpleado": "Victor ",
+                    "apellidoPaterno": "Tamay",
+                    "apellidoMaterno": "Tamay",
+                    "numeroEmpleado": 1,
+                    "nombreAlmacen": "SELECCION",
+                    "fechaEnvio": "2022-09-19T17:48:55.60263",
+                    "nombreProveedorBasura": "DECOMEX",
+                    "estadoAlmacenCompleto": "Enviado",
+                    "estadoAlmacenCorto": "enviado",
+                    "folioDocumentoEmbarque": "ER-1909224",
+                    "idEmbarque": 4,
+                    "estatusAlmacen": null
+                }
+            );
+
+            newData = _.groupBy(mydata, 'nombreResiduo');
+
+            dibujarTabla();
+        });
+
+        let btnClean = document.getElementById("btnDateClean");
+        btnClean.addEventListener("click", function (e) {
+            document.getElementById("dtInicio").value = "";
+            document.getElementById("dtFin").value = "";
+            mydata.length = 0;
+            newData.length = 0;
+
+            dibujarTabla();
+
+        });
+
+
+        //trigger download of data.xlsx file
+        document.getElementById("download-xlsx").addEventListener("click", function () {
+            table.download("xlsx", "data.xlsx", { sheetName: "My Data" });
+        });
+
+
+    </script>
+}

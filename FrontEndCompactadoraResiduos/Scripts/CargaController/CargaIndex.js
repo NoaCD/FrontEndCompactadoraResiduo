@@ -47,7 +47,6 @@ $(document).ready(function () {
                 "data": function (data) {
                     //let fecha = moment(data.fechaCreacionCarga).locale('es-mx').format('LLLL');
                     let fecha = new Date(data.fechaCreacionCarga);
-                    let format = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
                     return fecha;
                 }
             },
